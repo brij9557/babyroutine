@@ -1,0 +1,1944 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head> 
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>बेबी केयर प्लानर - बच्चों के लिए व्यक्तिगत देखभाल योजना | Baby Care Planner</title>
+    <meta name="description" content="AI-आधारित बेबी केयर प्लानर जो आपके बच्चे की उम्र, वजन और स्वास्थ्य के अनुसार व्यक्तिगत भोजन, नींद और गतिविधि शेड्यूल बनाता है। AI-powered baby care planner that creates personalized feeding, sleeping and activity schedules based on your child's age, weight and health.">
+    <meta name="keywords" content="बेबी केयर, शिशु देखभाल, बच्चों का खाना, बेबी फूड, बच्चों की गतिविधियाँ, baby care, infant care, baby food, baby activities, parenting tips">
+    <meta name="author" content="Baby Care Planner">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="बेबी केयर प्लानर - बच्चों के लिए व्यक्तिगत देखभाल योजना">
+    <meta property="og:description" content="AI-आधारित बेबी केयर प्लानर जो आपके बच्चे की उम्र, वजन और स्वास्थ्य के अनुसार व्यक्तिगत योजना बनाता है">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.babycareplanner.com">
+    <meta property="og:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <style>
+        :root {
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
+            --danger: #F44336;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #FFF9FB;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Floating Navigation Buttons */
+        .floating-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 99;
+        }
+        
+        .floating-btn {
+            display: flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .floating-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .floating-btn i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 15px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 126, 185, 0.1);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        button i {
+            margin-right: 8px;
+        }
+        
+        .result-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--highlight);
+        }
+        
+        .result-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .schedule-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-card h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .schedule-card h3 i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        .schedule-item {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #FFB6C1;
+            align-items: center;
+        }
+        
+        .schedule-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .time {
+            font-weight: 600;
+            min-width: 70px;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        .activity {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        .food-icon {
+            margin-right: 10px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .health-indicator {
+            margin-left: 10px;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--success);
+            color: white;
+        }
+        
+        .health-excellent {
+            background: var(--success);
+        }
+        
+        .health-good {
+            background: var(--info);
+        }
+        
+        .health-average {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .health-poor {
+            background: var(--danger);
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        .save-btn {
+            background: var(--success);
+        }
+        
+        .save-btn:hover {
+            background: #3d8b40;
+        }
+        
+        .tips-btn {
+            background: var(--warning);
+            grid-column: span 2;
+        }
+        
+        .tips-btn:hover {
+            background: #e68a00;
+        }
+        
+        .pdf-btn {
+            background: #F44336;
+            grid-column: span 2;
+        }
+        
+        .pdf-btn:hover {
+            background: #d32f2f;
+        }
+        
+        .health-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 4px solid var(--info);
+        }
+        
+        .health-info h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .health-info h4 i {
+            margin-right: 8px;
+        }
+        
+        .health-info p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        .modal-title {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        /* ChatGPT Integration Styles */
+        .chatgpt-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .chatgpt-btn:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+        
+        .chatgpt-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            max-height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 101;
+            overflow: hidden;
+        }
+        
+        .chatgpt-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatgpt-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .close-chatgpt {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .chatgpt-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 400px;
+            background: #f9f9f9;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .user-message {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            background: white;
+            color: var(--text);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .chatgpt-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+            background: white;
+        }
+        
+        .chatgpt-input input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 14px;
+        }
+        
+        .chatgpt-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chatgpt-input button:hover {
+            background: var(--secondary);
+        }
+        
+        .typing-indicator {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #888;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            
+            .tips-btn, .pdf-btn {
+                grid-column: auto;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .chatgpt-container {
+                width: 90%;
+                right: 5%;
+                max-height: 70vh;
+            }
+            
+            .chatgpt-btn {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .floating-nav {
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-width: 90%;
+            }
+            
+            .floating-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .floating-btn i {
+                margin-right: 5px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <!-- Floating Navigation Buttons -->
+    <div class="floating-nav">
+        <a href="about.html" class="floating-btn">
+            <i class="fas fa-user"></i>
+            <span class="lang-hi">मेरे बारे में</span>
+            <span class="lang-en" style="display:none">About Me</span>
+        </a>
+        <a href="baby-food-recipes.html" class="floating-btn">
+            <i class="fas fa-utensils"></i>
+            <span class="lang-hi">शिशु आहार व्यंजन</span>
+            <span class="lang-en" style="display:none">Baby Food Recipes</span>
+        </a>
+        <a href="baby-play-activities.html" class="floating-btn">
+            <i class="fas fa-gamepad"></i>
+            <span class="lang-hi">शिशु खेल गतिविधियाँ</span>
+            <span class="lang-en" style="display:none">Baby Play Activities</span>
+        </a>
+    </div>
+    
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="openModal('about')" title="About">
+                <i class="fas fa-info-circle"></i>
+            </button>
+            <button class="nav-btn" onclick="openModal('contact')" title="Contact">
+                <i class="fas fa-envelope"></i>
+            </button>
+        </div>
+        
+        <div class="container">
+            <h1><i class="fas fa-baby"></i> <span class="lang-hi">बेबी केयर प्लानर</span><span class="lang-en" style="display:none">Baby Care Planner</span></h1>
+            <p class="subtitle lang-hi">AI द्वारा बनाया गया व्यक्तिगत भोजन, नींद और गतिविधि शेड्यूल</p>
+            <p class="subtitle lang-en" style="display:none">AI-powered personalized feeding, sleeping and activity schedule</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="form-container" id="formContainer">
+            <div class="form-group">
+                <label for="babyName" class="lang-hi">बच्चे का नाम</label>
+                <label for="babyName" class="lang-en" style="display:none">Baby's Name</label>
+                <input type="text" id="babyName" placeholder="जैसे: आरव" class="lang-hi">
+                <input type="text" id="babyName" placeholder="e.g. Arnav" class="lang-en" style="display:none">
+            </div>
+            
+            <div class="form-group">
+                <label for="babyAge" class="lang-hi">उम्र (महीनों में)</label>
+                <label for="babyAge" class="lang-en" style="display:none">Age (in months)</label>
+                <input type="number" id="babyAge" min="0" max="36" placeholder="जैसे: 18 (1.5 साल)" class="lang-hi">
+                <input type="number" id="babyAge" min="0" max="36" placeholder="e.g. 18 (1.5 years)" class="lang-en" style="display:none">
+            </div>
+            
+            <div class="form-group">
+                <label for="babyWeight" class="lang-hi">वजन (किलो में)</label>
+                <label for="babyWeight" class="lang-en" style="display:none">Weight (in kg)</label>
+                <input type="number" id="babyWeight" min="2" max="25" step="0.1" placeholder="जैसे: 10" class="lang-hi">
+                <input type="number" id="babyWeight" min="2" max="25" step="0.1" placeholder="e.g. 10" class="lang-en" style="display:none">
+            </div>
+            
+            <div class="form-group">
+                <label class="lang-hi">माँ का दूध पीता है?</label>
+                <label class="lang-en" style="display:none">Breastfeeding?</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="breastMilk" value="yes" checked> <span class="lang-hi">हाँ</span><span class="lang-en" style="display:none">Yes</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="breastMilk" value="no"> <span class="lang-hi">नहीं</span><span class="lang-en" style="display:none">No</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="healthStatus" class="lang-hi">बच्चे की स्वास्थ्य स्थिति</label>
+                <label for="healthStatus" class="lang-en" style="display:none">Baby's Health Status</label>
+                <select id="healthStatus" class="lang-hi">
+                    <option value="excellent">उत्तम</option>
+                    <option value="good">अच्छा</option>
+                    <option value="average">सामान्य</option>
+                    <option value="poor">कमजोर</option>
+                </select>
+                <select id="healthStatus" class="lang-en" style="display:none">
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                    <option value="poor">Poor</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="favoriteFood" class="lang-hi">पसंदीदा खाना (वैकल्पिक)</label>
+                <label for="favoriteFood" class="lang-en" style="display:none">Favorite Food (optional)</label>
+                <input type="text" id="favoriteFood" placeholder="जैसे: खिचड़ी, दलिया, केला" class="lang-hi">
+                <input type="text" id="favoriteFood" placeholder="e.g. Khichdi, Daliya, Banana" class="lang-en" style="display:none">
+            </div>
+            
+            <div class="form-group">
+                <label for="allergies" class="lang-hi">एलर्जी या परहेज (वैकल्पिक)</label>
+                <label for="allergies" class="lang-en" style="display:none">Allergies or Restrictions (optional)</label>
+                <input type="text" id="allergies" placeholder="जैसे: दूध, मूंगफली, अंडा" class="lang-hi">
+                <input type="text" id="allergies" placeholder="e.g. Milk, Peanuts, Egg" class="lang-en" style="display:none">
+            </div>
+            
+            <button onclick="generatePlan()" id="generateBtn" class="lang-hi">
+                <i class="fas fa-magic"></i> प्लान जनरेट करें
+            </button>
+            <button onclick="generatePlan()" id="generateBtn" class="lang-en" style="display:none">
+                <i class="fas fa-magic"></i> Generate Plan
+            </button>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="result-header">
+                <h2 class="result-title" id="resultTitle"><span class="lang-hi">आरव (1.5 साल) का दैनिक प्लान</span><span class="lang-en" style="display:none">Arnav (1.5 years) Daily Plan</span></h2>
+            </div>
+            
+            <div class="schedule-card">
+                <h3><i class="fas fa-utensils"></i> <span class="lang-hi">भोजन योजना</span><span class="lang-en" style="display:none">Meal Plan</span></h3>
+                <div id="mealPlan">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="schedule-card">
+                <h3><i class="fas fa-moon"></i> <span class="lang-hi">नींद का समय</span><span class="lang-en" style="display:none">Sleep Schedule</span></h3>
+                <div id="sleepPlan">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="schedule-card">
+                <h3><i class="fas fa-child"></i> <span class="lang-hi">गतिविधियाँ</span><span class="lang-en" style="display:none">Activities</span></h3>
+                <div id="activityPlan">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="health-info" id="healthInfo">
+                <h4><i class="fas fa-heartbeat"></i> <span class="lang-hi">स्वास्थ्य सुझाव</span><span class="lang-en" style="display:none">Health Advice</span></h4>
+                <p id="healthAdvice" class="lang-hi">आपके बच्चे के स्वास्थ्य के लिए विशेष सुझाव यहाँ दिखाई देंगे</p>
+                <p id="healthAdvice" class="lang-en" style="display:none">Special health advice for your child will appear here</p>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="whatsapp-btn" onclick="sendWhatsAppReminder()">
+                    <i class="fab fa-whatsapp"></i> <span class="lang-hi">WhatsApp</span><span class="lang-en" style="display:none">WhatsApp</span>
+                </button>
+                <button class="save-btn" onclick="savePlan()">
+                    <i class="fas fa-save"></i> <span class="lang-hi">सेव करें</span><span class="lang-en" style="display:none">Save</span>
+                </button>
+                <button class="tips-btn" onclick="showTips()">
+                    <i class="fas fa-lightbulb"></i> <span class="lang-hi">विशेष टिप्स</span><span class="lang-en" style="display:none">Special Tips</span>
+                </button>
+                <button class="pdf-btn" onclick="generatePDF()">
+                    <i class="fas fa-file-pdf"></i> <span class="lang-hi">PDF डाउनलोड</span><span class="lang-en" style="display:none">Download PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- About Modal -->
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('about')">&times;</span>
+            <h3 class="modal-title lang-hi">बेबी केयर प्लानर के बारे में</h3>
+            <h3 class="modal-title lang-en" style="display:none">About Baby Care Planner</h3>
+            
+            <div class="lang-hi">
+                <p>यह AI-आधारित बेबी केयर प्लानर आपके बच्चे की उम्र, वजन और स्वास्थ्य स्थिति के आधार पर व्यक्तिगत दिनचर्या योजना बनाता है।</p>
+                <p><strong>विशेषताएँ:</strong></p>
+                <ul>
+                    <li>व्यक्तिगत भोजन योजना</li>
+                    <li>नींद का शेड्यूल</li>
+                    <li>उम्र-उपयुक्त गतिविधियाँ</li>
+                    <li>स्वास्थ्य सुझाव</li>
+                    <li>व्हाट्सएप और PDF साझा करने की सुविधा</li>
+                </ul>
+                <p>यह टूल विशेष रूप से भारतीय बच्चों के लिए डिज़ाइन किया गया है, जिसमें स्थानीय खाद्य पदार्थों और परंपराओं को ध्यान में रखा गया है।</p>
+            </div>
+            
+            <div class="lang-en" style="display:none">
+                <p>This AI-powered Baby Care Planner creates personalized daily routines based on your child's age, weight and health status.</p>
+                <p><strong>Features:</strong></p>
+                <ul>
+                    <li>Personalized meal plans</li>
+                    <li>Sleep schedules</li>
+                    <li>Age-appropriate activities</li>
+                    <li>Health advice</li>
+                    <li>WhatsApp and PDF sharing</li>
+                </ul>
+                <p>This tool is specially designed for Indian babies, taking into account local foods and traditions.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('contact')">&times;</span>
+            <h3 class="modal-title lang-hi">संपर्क करें</h3>
+            <h3 class="modal-title lang-en" style="display:none">Contact Us</h3>
+            
+            <div class="lang-hi">
+                <p>अगर आपके कोई सवाल या सुझाव हैं तो कृपया हमसे संपर्क करें:</p>
+                <p><i class="fas fa-envelope"></i> ईमेल: <a href="mailto:info@babycareplanner.com">info@babycareplanner.com</a></p>
+                <p><i class="fas fa-phone"></i> फोन: +91 9876543210</p>
+                <p><i class="fas fa-map-marker-alt"></i> पता: 123, बेबी केयर सेंटर, मुंबई, भारत</p>
+            </div>
+            
+            <div class="lang-en" style="display:none">
+                <p>If you have any questions or suggestions, please contact us:</p>
+                <p><i class="fas fa-envelope"></i> Email: <a href="mailto:info@babycareplanner.com">info@babycareplanner.com</a></p>
+                <p><i class="fas fa-phone"></i> Phone: +91 9876543210</p>
+                <p><i class="fas fa-map-marker-alt"></i> Address: 123, Baby Care Center, Mumbai, India</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ChatGPT Button -->
+    <div class="chatgpt-btn" onclick="toggleChatGPT()">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    
+    <!-- ChatGPT Container -->
+    <div class="chatgpt-container" id="chatGPTContainer">
+        <div class="chatgpt-header">
+            <h3 class="lang-hi">बेबी केयर सहायक</h3>
+            <h3 class="lang-en" style="display:none">Baby Care Assistant</h3>
+            <button class="close-chatgpt" onclick="toggleChatGPT()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatgpt-messages" id="chatGPTMessages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chatgpt-input">
+            <input type="text" id="chatGPTInput" placeholder="अपना प्रश्न लिखें..." class="lang-hi">
+            <input type="text" id="chatGPTInput" placeholder="Type your question..." class="lang-en" style="display:none">
+            <button onclick="sendChatGPTMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div style="text-align: center; padding: 20px; color: var(--text); font-size: 0.9rem;">
+                <p class="lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
+                <p class="lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize jsPDF
+        const { jsPDF } = window.jspdf;
+        
+        // Food icons mapping
+        const foodIcons = {
+            'दूध': 'fa-glass-water',
+            'फॉर्मूला': 'fa-bottle-water',
+            'सेरेलक': 'fa-bowl-food',
+            'दाल': 'fa-utensils',
+            'चावल': 'fa-rice',
+            'खिचड़ी': 'fa-pot-food',
+            'फल': 'fa-apple-whole',
+            'केला': 'fa-banana',
+            'सेब': 'fa-apple-whole',
+            'उपमा': 'fa-wheat-awn',
+            'पोहा': 'fa-wheat-awn',
+            'इडली': 'fa-cake-candles',
+            'सब्जी': 'fa-carrot',
+            'पनीर': 'fa-cheese',
+            'दही': 'fa-blender',
+            'रोटी': 'fa-bread-slice',
+            'सूप': 'fa-mug-hot',
+            'ब्रेड': 'fa-bread-slice',
+            'अंडा': 'fa-egg',
+            'सैंडविच': 'fa-burger',
+            'स्प्राउट्स': 'fa-seedling',
+            'ड्राई फ्रूट्स': 'fa-peanut',
+            'Milk': 'fa-glass-water',
+            'Formula': 'fa-bottle-water',
+            'Cerelac': 'fa-bowl-food',
+            'Dal': 'fa-utensils',
+            'Rice': 'fa-rice',
+            'Khichdi': 'fa-pot-food',
+            'Fruits': 'fa-apple-whole',
+            'Banana': 'fa-banana',
+            'Apple': 'fa-apple-whole',
+            'Upma': 'fa-wheat-awn',
+            'Poha': 'fa-wheat-awn',
+            'Idli': 'fa-cake-candles',
+            'Vegetables': 'fa-carrot',
+            'Paneer': 'fa-cheese',
+            'Curd': 'fa-blender',
+            'Roti': 'fa-bread-slice',
+            'Soup': 'fa-mug-hot',
+            'Bread': 'fa-bread-slice',
+            'Egg': 'fa-egg',
+            'Sandwich': 'fa-burger',
+            'Sprouts': 'fa-seedling',
+            'Dry Fruits': 'fa-peanut'
+        };
+        
+        // Health advice based on status - Hindi
+        const healthAdviceHi = {
+            'excellent': {
+                text: 'आपके बच्चे का स्वास्थ्य उत्तम स्थिति में है। संतुलित आहार और नियमित गतिविधियों को जारी रखें।',
+                class: 'health-excellent'
+            },
+            'good': {
+                text: 'आपके बच्चे का स्वास्थ्य अच्छा है। पोषक तत्वों से भरपूर आहार दें और नियमित जांच करवाते रहें।',
+                class: 'health-good'
+            },
+            'average': {
+                text: 'आपके बच्चे का स्वास्थ्य सामान्य है। विटामिन और मिनरल युक्त आहार पर विशेष ध्यान दें।',
+                class: 'health-average'
+            },
+            'poor': {
+                text: 'आपके बच्चे का स्वास्थ्य कमजोर है। डॉक्टर से सलाह लें और पौष्टिक आहार का विशेष ध्यान रखें।',
+                class: 'health-poor'
+            }
+        };
+        
+        // Health advice based on status - English
+        const healthAdviceEn = {
+            'excellent': {
+                text: 'Your baby is in excellent health. Continue with balanced diet and regular activities.',
+                class: 'health-excellent'
+            },
+            'good': {
+                text: 'Your baby is in good health. Provide nutritious food and get regular checkups.',
+                class: 'health-good'
+            },
+            'average': {
+                text: 'Your baby is in average health. Pay special attention to vitamin and mineral rich diet.',
+                class: 'health-average'
+            },
+            'poor': {
+                text: 'Your baby is in poor health. Consult a doctor and pay special attention to nutritious diet.',
+                class: 'health-poor'
+            }
+        };
+        
+        // Sample data for different age groups - Hindi
+        const mealPlansHi = {
+            '6-8': [
+                { time: '6:30 AM', activity: 'माँ का दूध / फॉर्मूला दूध', health: 'excellent' },
+                { time: '9:00 AM', activity: 'सेरेलक (चावल/गेहूँ) + दूध', health: 'good' },
+                { time: '12:00 PM', activity: 'दाल का पानी + चावल का पानी', health: 'good' },
+                { time: '3:00 PM', activity: 'फलों की प्यूरी (केला/सेब)', health: 'excellent' },
+                { time: '6:00 PM', activity: 'माँ का दूध / फॉर्मूला दूध', health: 'excellent' },
+                { time: '8:30 PM', activity: 'खिचड़ी (दाल+चावल+सब्जियाँ)', health: 'good' }
+            ],
+            '9-12': [
+                { time: '7:00 AM', activity: 'माँ का दूध / फॉर्मूला दूध', health: 'excellent' },
+                { time: '9:30 AM', activity: 'उपमा/पोहा/इडली', health: 'good' },
+                { time: '12:00 PM', activity: 'दाल-चावल + सब्जी प्यूरी', health: 'good' },
+                { time: '3:30 PM', activity: 'फल + पनीर/दही', health: 'excellent' },
+                { time: '6:30 PM', activity: 'रोटी दूध में भिगोकर', health: 'good' },
+                { time: '8:30 PM', activity: 'खिचड़ी या सूप', health: 'good' }
+            ],
+            '13-18': [
+                { time: '7:00 AM', activity: 'दूध + बिस्कुट/रस्क', health: 'good' },
+                { time: '9:30 AM', activity: 'पराठा/उपमा + फल', health: 'good' },
+                { time: '12:00 PM', activity: 'दाल-चावल-रोटी-सब्जी', health: 'good' },
+                { time: '4:00 PM', activity: 'स्प्राउट्स/पोहा/इडली', health: 'good' },
+                { time: '7:00 PM', activity: 'रोटी-सब्जी/खिचड़ी', health: 'good' },
+                { time: '8:30 PM', activity: 'दूध', health: 'excellent' }
+            ],
+            '19-24': [
+                { time: '7:30 AM', activity: 'दूध + ब्रेड/अंडा', health: 'good' },
+                { time: '10:00 AM', activity: 'फ्रूट चाट/पोहा/उपमा', health: 'excellent' },
+                { time: '1:00 PM', activity: 'रोटी-दाल-चावल-सब्जी', health: 'good' },
+                { time: '4:30 PM', activity: 'सैंडविच/स्प्राउट्स/दही', health: 'good' },
+                { time: '7:30 PM', activity: 'रोटी-सब्जी/खिचड़ी', health: 'good' },
+                { time: '9:00 PM', activity: 'दूध + ड्राई फ्रूट्स', health: 'excellent' }
+            ]
+        };
+        
+        // Sample data for different age groups - English
+        const mealPlansEn = {
+            '6-8': [
+                { time: '6:30 AM', activity: 'Breast milk / Formula milk', health: 'excellent' },
+                { time: '9:00 AM', activity: 'Cerelac (Rice/Wheat) + Milk', health: 'good' },
+                { time: '12:00 PM', activity: 'Dal water + Rice water', health: 'good' },
+                { time: '3:00 PM', activity: 'Fruit puree (Banana/Apple)', health: 'excellent' },
+                { time: '6:00 PM', activity: 'Breast milk / Formula milk', health: 'excellent' },
+                { time: '8:30 PM', activity: 'Khichdi (Dal+Rice+Vegetables)', health: 'good' }
+            ],
+            '9-12': [
+                { time: '7:00 AM', activity: 'Breast milk / Formula milk', health: 'excellent' },
+                { time: '9:30 AM', activity: 'Upma/Poha/Idli', health: 'good' },
+                { time: '12:00 PM', activity: 'Dal-Rice + Vegetable puree', health: 'good' },
+                { time: '3:30 PM', activity: 'Fruits + Paneer/Curd', health: 'excellent' },
+                { time: '6:30 PM', activity: 'Roti soaked in milk', health: 'good' },
+                { time: '8:30 PM', activity: 'Khichdi or Soup', health: 'good' }
+            ],
+            '13-18': [
+                { time: '7:00 AM', activity: 'Milk + Biscuits/Rusk', health: 'good' },
+                { time: '9:30 AM', activity: 'Paratha/Upma + Fruits', health: 'good' },
+                { time: '12:00 PM', activity: 'Dal-Rice-Roti-Vegetables', health: 'good' },
+                { time: '4:00 PM', activity: 'Sprouts/Poha/Idli', health: 'good' },
+                { time: '7:00 PM', activity: 'Roti-Vegetables/Khichdi', health: 'good' },
+                { time: '8:30 PM', activity: 'Milk', health: 'excellent' }
+            ],
+            '19-24': [
+                { time: '7:30 AM', activity: 'Milk + Bread/Egg', health: 'good' },
+                { time: '10:00 AM', activity: 'Fruit chaat/Poha/Upma', health: 'excellent' },
+                { time: '1:00 PM', activity: 'Roti-Dal-Rice-Vegetables', health: 'good' },
+                { time: '4:30 PM', activity: 'Sandwich/Sprouts/Curd', health: 'good' },
+                { time: '7:30 PM', activity: 'Roti-Vegetables/Khichdi', health: 'good' },
+                { time: '9:00 PM', activity: 'Milk + Dry Fruits', health: 'excellent' }
+            ]
+        };
+        
+        const sleepPlansHi = {
+            '6-8': [
+                { time: '7:00 AM', activity: 'जागना' },
+                { time: '9:00 AM', activity: 'झपकी (1 घंटा)' },
+                { time: '1:00 PM', activity: 'झपकी (1-2 घंटे)' },
+                { time: '5:00 PM', activity: 'झपकी (30 मिनट)' },
+                { time: '8:30 PM', activity: 'रात की नींद' }
+            ],
+            '9-12': [
+                { time: '7:00 AM', activity: 'जागना' },
+                { time: '10:00 AM', activity: 'झपकी (1 घंटा)' },
+                { time: '2:00 PM', activity: 'झपकी (1-2 घंटे)' },
+                { time: '8:30 PM', activity: 'रात की नींद' }
+            ],
+            '13-18': [
+                { time: '7:00 AM', activity: 'जागना' },
+                { time: '1:00 PM', activity: 'झपकी (2 घंटे)' },
+                { time: '9:00 PM', activity: 'रात की नींद' }
+            ],
+            '19-24': [
+                { time: '7:30 AM', activity: 'जागना' },
+                { time: '1:30 PM', activity: 'झपकी (1.5-2 घंटे)' },
+                { time: '9:30 PM', activity: 'रात की नींद' }
+            ]
+        };
+        
+        const sleepPlansEn = {
+            '6-8': [
+                { time: '7:00 AM', activity: 'Wake up' },
+                { time: '9:00 AM', activity: 'Nap (1 hour)' },
+                { time: '1:00 PM', activity: 'Nap (1-2 hours)' },
+                { time: '5:00 PM', activity: 'Nap (30 mins)' },
+                { time: '8:30 PM', activity: 'Night sleep' }
+            ],
+            '9-12': [
+                { time: '7:00 AM', activity: 'Wake up' },
+                { time: '10:00 AM', activity: 'Nap (1 hour)' },
+                { time: '2:00 PM', activity: 'Nap (1-2 hours)' },
+                { time: '8:30 PM', activity: 'Night sleep' }
+            ],
+            '13-18': [
+                { time: '7:00 AM', activity: 'Wake up' },
+                { time: '1:00 PM', activity: 'Nap (2 hours)' },
+                { time: '9:00 PM', activity: 'Night sleep' }
+            ],
+            '19-24': [
+                { time: '7:30 AM', activity: 'Wake up' },
+                { time: '1:30 PM', activity: 'Nap (1.5-2 hours)' },
+                { time: '9:30 PM', activity: 'Night sleep' }
+            ]
+        };
+        
+        const activityPlansHi = {
+            '6-8': [
+                { time: 'सुबह', activity: 'टमी टाइम + खिलौनों से खेलना' },
+                { time: 'दोपहर', activity: 'बैठने का अभ्यास + संगीत सुनना' },
+                { time: 'शाम', activity: 'पार्क में घूमना + दूसरे बच्चों से मिलना' }
+            ],
+            '9-12': [
+                { time: 'सुबह', activity: 'क्रॉलिंग/चलने का अभ्यास + ब्लॉक्स से खेलना' },
+                { time: 'दोपहर', activity: 'पिक्चर बुक देखना + गाने गाना' },
+                { time: 'शाम', activity: 'पार्क में खेलना + सैर' }
+            ],
+            '13-18': [
+                { time: 'सुबह', activity: 'चलना/दौड़ना + शेप सॉर्टर खिलौना' },
+                { time: 'दोपहर', activity: 'ड्रॉइंग/कलरिंग + कहानी सुनना' },
+                { time: 'शाम', activity: 'पार्क में दूसरे बच्चों के साथ खेलना' }
+            ],
+            '19-24': [
+                { time: 'सुबह', activity: 'पजल्स + बॉल खेलना + नए शब्द सीखना' },
+                { time: 'दोपहर', activity: 'क्राफ्ट एक्टिविटीज + स्टोरी टाइम' },
+                { time: 'शाम', activity: 'आउटडोर गेम्स + सोशल इंटरैक्शन' }
+            ]
+        };
+        
+        const activityPlansEn = {
+            '6-8': [
+                { time: 'Morning', activity: 'Tummy time + Playing with toys' },
+                { time: 'Afternoon', activity: 'Sitting practice + Listening to music' },
+                { time: 'Evening', activity: 'Walk in park + Meeting other kids' }
+            ],
+            '9-12': [
+                { time: 'Morning', activity: 'Crawling/Walking practice + Playing with blocks' },
+                { time: 'Afternoon', activity: 'Picture book reading + Singing songs' },
+                { time: 'Evening', activity: 'Playing in park + Walk' }
+            ],
+            '13-18': [
+                { time: 'Morning', activity: 'Walking/Running + Shape sorter toy' },
+                { time: 'Afternoon', activity: 'Drawing/Coloring + Story time' },
+                { time: 'Evening', activity: 'Playing with other kids in park' }
+            ],
+            '19-24': [
+                { time: 'Morning', activity: 'Puzzles + Ball games + Learning new words' },
+                { time: 'Afternoon', activity: 'Craft activities + Story time' },
+                { time: 'Evening', activity: 'Outdoor games + Social interaction' }
+            ]
+        };
+        
+        function getAgeGroup(age) {
+            if (age >= 0 && age <= 8) return '6-8';
+            if (age >= 9 && age <= 12) return '9-12';
+            if (age >= 13 && age <= 18) return '13-18';
+            if (age >= 19 && age <= 24) return '19-24';
+            return '19-24'; // default for older babies
+        }
+        
+        function getFoodIcon(foodItem) {
+            for (const [food, icon] of Object.entries(foodIcons)) {
+                if (foodItem.includes(food)) {
+                    return icon;
+                }
+            }
+            return 'fa-utensils'; // default icon
+        }
+        
+        function generatePlan() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const name = document.getElementById('babyName').value.trim() || (isHindi ? 'बच्चा' : 'Baby');
+            const ageInput = document.getElementById('babyAge').value;
+            const age = parseInt(ageInput);
+            
+            // Validate age input
+            if (!ageInput || isNaN(age)) {
+                alert(isHindi ? 'कृपया बच्चे की सही उम्र (0-36 महीने) दर्ज करें' : 'Please enter correct age (0-36 months)');
+                return;
+            }
+            
+            if (age < 0 || age > 36) {
+                alert(isHindi ? 'कृपया बच्चे की सही उम्र (0-36 महीने) दर्ज करें' : 'Please enter age between 0-36 months');
+                return;
+            }
+            
+            const weight = document.getElementById('babyWeight').value;
+            if (!weight || isNaN(parseFloat(weight))) {
+                alert(isHindi ? 'कृपया बच्चे का सही वजन दर्ज करें' : 'Please enter correct weight');
+                return;
+            }
+            
+            const breastMilk = document.querySelector('input[name="breastMilk"]:checked').value;
+            const healthStatus = document.getElementById('healthStatus').value;
+            const favoriteFood = document.getElementById('favoriteFood').value;
+            const allergies = document.getElementById('allergies').value;
+            
+            const ageGroup = getAgeGroup(age);
+            const yearText = isHindi ? 
+                `${Math.floor(age/12)}.${age%12} साल` : 
+                `${Math.floor(age/12)}.${age%12} years`;
+            
+            // Update result title with baby's name
+            document.getElementById('resultTitle').innerHTML = isHindi ?
+                `${name} (${yearText}) का दैनिक प्लान` :
+                `${name} (${yearText}) Daily Plan`;
+            
+            // Get appropriate plans based on language
+            const meals = isHindi ? 
+                JSON.parse(JSON.stringify(mealPlansHi[ageGroup])) : 
+                JSON.parse(JSON.stringify(mealPlansEn[ageGroup]));
+            const sleeps = isHindi ? sleepPlansHi[ageGroup] : sleepPlansEn[ageGroup];
+            const activities = isHindi ? activityPlansHi[ageGroup] : activityPlansEn[ageGroup];
+            
+            // Customize meal plan based on inputs
+            if (breastMilk === 'no') {
+                meals.forEach(item => {
+                    item.activity = isHindi ? 
+                        item.activity.replace('माँ का दूध / फॉर्मूला दूध', 'फॉर्मूला दूध') :
+                        item.activity.replace('Breast milk / Formula milk', 'Formula milk');
+                });
+            }
+            
+            if (favoriteFood) {
+                meals[2].activity += isHindi ? 
+                    ` (${favoriteFood} दे सकते हैं)` : 
+                    ` (can give ${favoriteFood})`;
+            }
+            
+            if (allergies) {
+                meals.forEach(item => {
+                    if (item.activity.includes(allergies)) {
+                        item.health = 'poor';
+                        item.activity += isHindi ? 
+                            ' (एलर्जी हो सकती है)' : 
+                            ' (may cause allergy)';
+                    }
+                });
+            }
+            
+            meals.forEach(item => {
+                if (healthStatus === 'poor' && item.health !== 'poor') {
+                    item.health = healthStatus;
+                } else if (healthStatus === 'average' && item.health === 'excellent') {
+                    item.health = 'good';
+                }
+            });
+            
+            // Generate meal plan HTML with icons
+            let mealHTML = '';
+            meals.forEach(item => {
+                const icon = getFoodIcon(item.activity);
+                const healthText = isHindi ? 
+                    (item.health === 'excellent' ? 'उत्तम' : 
+                     item.health === 'good' ? 'अच्छा' : 
+                     item.health === 'average' ? 'सामान्य' : 'कमजोर') :
+                    (item.health === 'excellent' ? 'Excellent' : 
+                     item.health === 'good' ? 'Good' : 
+                     item.health === 'average' ? 'Average' : 'Poor');
+                
+                mealHTML += `
+                    <div class="schedule-item">
+                        <div class="time">${item.time}</div>
+                        <div class="activity">
+                            <i class="fas ${icon} food-icon"></i>
+                            ${item.activity}
+                            <span class="health-indicator ${item.health}">
+                                ${healthText}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('mealPlan').innerHTML = mealHTML;
+            
+            // Generate sleep plan HTML
+            let sleepHTML = '';
+            sleeps.forEach(item => {
+                sleepHTML += `
+                    <div class="schedule-item">
+                        <div class="time">${item.time}</div>
+                        <div class="activity">${item.activity}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('sleepPlan').innerHTML = sleepHTML;
+            
+            // Generate activity plan HTML
+            let activityHTML = '';
+            activities.forEach(item => {
+                activityHTML += `
+                    <div class="schedule-item">
+                        <div class="time">${item.time}</div>
+                        <div class="activity">${item.activity}</div>
+                    </div>
+                `;
+            });
+            document.getElementById('activityPlan').innerHTML = activityHTML;
+            
+            // Update health advice
+            const advice = isHindi ? healthAdviceHi[healthStatus] : healthAdviceEn[healthStatus];
+            document.querySelector('#healthAdvice.lang-hi').textContent = isHindi ? advice.text : '';
+            document.querySelector('#healthAdvice.lang-en').textContent = isHindi ? '' : advice.text;
+            document.getElementById('healthInfo').style.borderLeftColor = `var(--${healthStatus === 'excellent' ? 'success' : 
+                                                                           healthStatus === 'good' ? 'info' : 
+                                                                           healthStatus === 'average' ? 'warning' : 'danger'})`;
+            
+            // Show result container
+            document.getElementById('resultContainer').style.display = 'block';
+            document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function generatePDF() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            
+            // Check if jsPDF is loaded
+            if (typeof jsPDF === 'undefined') {
+                alert(isHindi ? 'PDF जनरेट करने में त्रुटि: jsPDF लाइब्रेरी लोड नहीं हुई' : 'PDF generation error: jsPDF library not loaded');
+                return;
+            }
+            
+            const doc = new jsPDF();
+            
+            // Set font for Unicode support
+            doc.setFont('helvetica');
+            
+            // Add title
+            const title = document.getElementById('resultTitle').textContent;
+            doc.setFontSize(18);
+            doc.setTextColor(255, 101, 163);
+            doc.text(title, 105, 20, { align: 'center' });
+            
+            // Meal Plan Section
+            doc.setFontSize(14);
+            doc.setTextColor(0, 0, 0);
+            doc.text(isHindi ? 'भोजन योजना' : 'Meal Plan', 14, 35);
+            
+            const mealData = [];
+            document.querySelectorAll('#mealPlan .schedule-item').forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                mealData.push([time, activity]);
+            });
+            
+            doc.autoTable({
+                startY: 40,
+                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'गतिविधि' : 'Activity']],
+                body: mealData,
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3,
+                    valign: 'middle'
+                },
+                columnStyles: {
+                    0: { cellWidth: 25, fontStyle: 'bold', textColor: [255, 101, 163] },
+                    1: { cellWidth: 'auto' }
+                }
+            });
+            
+            // Sleep Plan Section
+            let finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'नींद का समय' : 'Sleep Schedule', 14, finalY);
+            
+            const sleepData = [];
+            document.querySelectorAll('#sleepPlan .schedule-item').forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent;
+                sleepData.push([time, activity]);
+            });
+            
+            doc.autoTable({
+                startY: finalY + 5,
+                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'गतिविधि' : 'Activity']],
+                body: sleepData,
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3
+                },
+                columnStyles: {
+                    0: { cellWidth: 25, fontStyle: 'bold', textColor: [255, 101, 163] },
+                    1: { cellWidth: 'auto' }
+                }
+            });
+            
+            // Activity Plan Section
+            finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'गतिविधियाँ' : 'Activities', 14, finalY);
+            
+            const activityData = [];
+            document.querySelectorAll('#activityPlan .schedule-item').forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent;
+                activityData.push([time, activity]);
+            });
+            
+            doc.autoTable({
+                startY: finalY + 5,
+                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'गतिविधि' : 'Activity']],
+                body: activityData,
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3
+                },
+                columnStyles: {
+                    0: { cellWidth: 25, fontStyle: 'bold', textColor: [255, 101, 163] },
+                    1: { cellWidth: 'auto' }
+                }
+            });
+            
+            // Health Advice Section
+            finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'स्वास्थ्य सुझाव' : 'Health Advice', 14, finalY);
+            
+            const healthAdvice = document.querySelector('#healthAdvice').textContent;
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.text(healthAdvice, 14, finalY + 10, { maxWidth: 180 });
+            
+            // Footer
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(isHindi ? 'Smart Baby Care द्वारा जनरेट किया गया' : 'Generated by Smart Baby Care', 
+                    105, 285, { align: 'center' });
+            
+            // Save the PDF
+            doc.save(isHindi ? 'बेबी_केयर_प्लान.pdf' : 'baby_care_plan.pdf');
+        }
+        
+        function sendWhatsAppReminder() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const planTitle = document.getElementById('resultTitle').textContent;
+            let planText = `*${planTitle}*\n\n`;
+            
+            // Add meal plan
+            planText += isHindi ? '*भोजन योजना:*\n' : '*Meal Plan:*\n';
+            const mealItems = document.querySelectorAll('#mealPlan .schedule-item');
+            mealItems.forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent.replace(/\s+/g, ' ').trim();
+                planText += `${time} - ${activity}\n`;
+            });
+            
+            planText += '\n';
+            
+            // Add sleep plan
+            planText += isHindi ? '*नींद का समय:*\n' : '*Sleep Schedule:*\n';
+            const sleepItems = document.querySelectorAll('#sleepPlan .schedule-item');
+            sleepItems.forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent;
+                planText += `${time} - ${activity}\n`;
+            });
+            
+            planText += '\n';
+            
+            // Add activity plan
+            planText += isHindi ? '*गतिविधियाँ:*\n' : '*Activities:*\n';
+            const activityItems = document.querySelectorAll('#activityPlan .schedule-item');
+            activityItems.forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent;
+                planText += `${time} - ${activity}\n`;
+            });
+            
+            // Encode for WhatsApp URL
+            const encodedText = encodeURIComponent(planText);
+            const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+            
+            // Open in new tab
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        function savePlan() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const printContent = document.getElementById('resultContainer').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = `
+                <style>
+                    body { font-family: Arial; padding: 20px; }
+                    h2 { color: #FF65A3; }
+                    .schedule-card { 
+                        background: #FFF0F5; 
+                        padding: 15px; 
+                        margin-bottom: 15px; 
+                        border-radius: 10px;
+                    }
+                    .schedule-item {
+                        display: flex;
+                        margin-bottom: 10px;
+                    }
+                    .time {
+                        font-weight: bold;
+                        min-width: 80px;
+                        color: #FF65A3;
+                    }
+                    .food-icon {
+                        margin-right: 8px;
+                    }
+                    .health-indicator {
+                        margin-left: 8px;
+                        font-size: 11px;
+                        padding: 2px 6px;
+                        border-radius: 8px;
+                        color: white;
+                    }
+                </style>
+                ${printContent}
+                <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #777;">
+                    ${isHindi ? 'Smart Baby Care द्वारा जनरेट किया गया' : 'Generated by Smart Baby Care'}
+                </div>
+            `;
+            
+            window.print();
+            
+            // Restore original content
+            document.body.innerHTML = originalContent;
+            
+            // Show confirmation
+            alert(isHindi ? 'प्लान सफलतापूर्वक सेव किया गया' : 'Plan saved successfully');
+        }
+        
+        function showTips() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const age = parseInt(document.getElementById('babyAge').value);
+            const ageGroup = getAgeGroup(age);
+            const healthStatus = document.getElementById('healthStatus').value;
+            
+            let tipsHTML = `<h3 style="margin-bottom: 15px; color: #FF65A3;">${isHindi ? 'विशेषज्ञ टिप्स' : 'Expert Tips'}</h3>`;
+            
+            // Age-specific tips
+            tipsHTML += `<h4 style="margin-bottom: 8px; color: #555;">${isHindi ? 'उम्र के अनुसार सुझाव:' : 'Age-specific Tips:'}</h4><ul style="padding-left: 20px; margin-bottom: 15px;">`;
+            
+            const ageTipsHi = {
+                '6-8': [
+                    "भोजन को मसलकर या प्यूरी बनाकर दें",
+                    "एक बार में एक नया भोजन ही शुरू करें",
+                    "दिन में 4-6 बार छोटे-छोटे भोजन दें"
+                ],
+                '9-12': [
+                    "बच्चे को स्वयं खाने के लिए प्रोत्साहित करें",
+                    "विभिन्न बनावट वाले खाद्य पदार्थ दें",
+                    "दिन में 3-4 बार ठोस आहार दें"
+                ],
+                '13-18': [
+                    "परिवार के साथ बैठकर खाने की आदत डालें",
+                    "नए स्वादों को नियमित रूप से पेश करें",
+                    "दिन में 3 बार मुख्य भोजन और 2 बार हल्का नाश्ता दें"
+                ],
+                '19-24': [
+                    "बच्चे को भोजन विकल्पों में भाग लेने दें",
+                    "रचनात्मक तरीके से भोजन परोसें",
+                    "दिन में 3 बार संतुलित भोजन दें"
+                ]
+            };
+            
+            const ageTipsEn = {
+                '6-8': [
+                    "Mash or puree foods before feeding",
+                    "Introduce only one new food at a time",
+                    "Give 4-6 small meals throughout the day"
+                ],
+                '9-12': [
+                    "Encourage self-feeding",
+                    "Offer foods with different textures",
+                    "Provide 3-4 solid meals per day"
+                ],
+                '13-18': [
+                    "Establish family meal times",
+                    "Regularly introduce new flavors",
+                    "3 main meals and 2 snacks per day"
+                ],
+                '19-24': [
+                    "Involve child in food choices",
+                    "Present food in creative ways",
+                    "3 balanced meals per day"
+                ]
+            };
+            
+            const ageTips = isHindi ? ageTipsHi : ageTipsEn;
+            
+            ageTips[ageGroup].forEach(tip => {
+                tipsHTML += `<li style="margin-bottom: 8px;">${tip}</li>`;
+            });
+            
+            tipsHTML += '</ul>';
+            
+            // Health-specific tips
+            tipsHTML += `<h4 style="margin-bottom: 8px; color: #555;">${isHindi ? 'स्वास्थ्य स्थिति के अनुसार सुझाव:' : 'Health-specific Tips:'}</h4><ul style="padding-left: 20px;">`;
+            
+            const healthTipsHi = {
+                'excellent': [
+                    "संतुलित आहार जारी रखें",
+                    "नियमित शारीरिक गतिविधियाँ बनाए रखें",
+                    "मौसमी फल और सब्जियाँ शामिल करें"
+                ],
+                'good': [
+                    "प्रोटीन और कैल्शियम युक्त आहार पर ध्यान दें",
+                    "नियमित स्वास्थ्य जाँच करवाएँ",
+                    "पानी की पर्याप्त मात्रा सुनिश्चित करें"
+                ],
+                'average': [
+                    "आयरन और विटामिन युक्त आहार दें",
+                    "डॉक्टर से नियमित सलाह लें",
+                    "भोजन में हरी पत्तेदार सब्जियाँ शामिल करें"
+                ],
+                'poor': [
+                    "तुरंत डॉक्टर से संपर्क करें",
+                    "ऊर्जा युक्त आहार दें",
+                    "छोटे-छोटे अंतराल पर भोजन दें"
+                ]
+            };
+            
+            const healthTipsEn = {
+                'excellent': [
+                    "Continue balanced diet",
+                    "Maintain regular physical activities",
+                    "Include seasonal fruits and vegetables"
+                ],
+                'good': [
+                    "Focus on protein and calcium rich foods",
+                    "Get regular health checkups",
+                    "Ensure adequate water intake"
+                ],
+                'average': [
+                    "Provide iron and vitamin rich foods",
+                    "Consult doctor regularly",
+                    "Include green leafy vegetables"
+                ],
+                'poor': [
+                    "Consult doctor immediately",
+                    "Provide energy dense foods",
+                    "Give small frequent meals"
+                ]
+            };
+            
+            const healthTips = isHindi ? healthTipsHi : healthTipsEn;
+            
+            healthTips[healthStatus].forEach(tip => {
+                tipsHTML += `<li style="margin-bottom: 8px;">${tip}</li>`;
+            });
+            
+            tipsHTML += '</ul>';
+            
+            // Create modal for tips
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 600px;">
+                    <span class="close-modal" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+                    <div style="padding: 15px; max-height: 70vh; overflow-y: auto;">
+                        ${tipsHTML}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Close when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+        
+        function switchLanguage(lang) {
+            if (lang === 'hi') {
+                // Show Hindi elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'हिंदी') btn.classList.add('active');
+                });
+                
+                // Reset form placeholders in Hindi
+                document.getElementById('babyName').placeholder = "जैसे: आरव";
+                document.getElementById('babyAge').placeholder = "जैसे: 18 (1.5 साल)";
+                document.getElementById('babyWeight').placeholder = "जैसे: 10";
+                document.getElementById('favoriteFood').placeholder = "जैसे: खिचड़ी, दलिया, केला";
+                document.getElementById('allergies').placeholder = "जैसे: दूध, मूंगफली, अंडा";
+                
+                // Update chatbot placeholder
+                document.getElementById('chatGPTInput').placeholder = "अपना प्रश्न लिखें...";
+            } else {
+                // Show English elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'English') btn.classList.add('active');
+                });
+                
+                // Reset form placeholders in English
+                document.getElementById('babyName').placeholder = "e.g. Arnav";
+                document.getElementById('babyAge').placeholder = "e.g. 18 (1.5 years)";
+                document.getElementById('babyWeight').placeholder = "e.g. 10";
+                document.getElementById('favoriteFood').placeholder = "e.g. Khichdi, Daliya, Banana";
+                document.getElementById('allergies').placeholder = "e.g. Milk, Peanuts, Egg";
+                
+                // Update chatbot placeholder
+                document.getElementById('chatGPTInput').placeholder = "Type your question...";
+            }
+        }
+        
+        function openModal(type) {
+            document.getElementById(`${type}Modal`).style.display = 'flex';
+        }
+        
+        function closeModal(type) {
+            document.getElementById(`${type}Modal`).style.display = 'none';
+        }
+        
+        // ChatGPT Integration Functions
+        function toggleChatGPT() {
+            const chatGPT = document.getElementById('chatGPTContainer');
+            if (chatGPT.style.display === 'flex') {
+                chatGPT.style.display = 'none';
+            } else {
+                chatGPT.style.display = 'flex';
+                // Initialize with welcome message
+                if (document.getElementById('chatGPTMessages').children.length === 0) {
+                    sendWelcomeMessage();
+                }
+            }
+        }
+        
+        function sendWelcomeMessage() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const messagesDiv = document.getElementById('chatGPTMessages');
+            
+            const welcomeMessage = isHindi ? 
+                "नमस्ते! मैं आपके बच्चे की देखभाल के बारे में मदद कर सकता हूँ। आप किस बारे में जानना चाहते हैं?" : 
+                "Hello! I can help with your baby care questions. What would you like to know?";
+            
+            addBotMessage(welcomeMessage);
+        }
+        
+        function addBotMessage(text) {
+            const messagesDiv = document.getElementById('chatGPTMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot-message';
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function addUserMessage(text) {
+            const messagesDiv = document.getElementById('chatGPTMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user-message';
+            messageDiv.textContent = text;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            const messagesDiv = document.getElementById('chatGPTMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            messagesDiv.appendChild(typingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function hideTypingIndicator() {
+            const typingDiv = document.getElementById('typingIndicator');
+            if (typingDiv) {
+                typingDiv.remove();
+            }
+        }
+        
+        async function sendChatGPTMessage() {
+            const input = document.getElementById('chatGPTInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            // Add user message to chat
+            addUserMessage(message);
+            input.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            try {
+                // Get baby details for context
+                const babyName = document.getElementById('babyName').value || 'Baby';
+                const babyAge = document.getElementById('babyAge').value || '0';
+                const babyWeight = document.getElementById('babyWeight').value || '0';
+                const healthStatus = document.getElementById('healthStatus').value || 'good';
+                const breastMilk = document.querySelector('input[name="breastMilk"]:checked').value || 'yes';
+                const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                
+                // Create prompt with context
+                const prompt = isHindi ? 
+                    `तुम एक बेबी केयर विशेषज्ञ हो। मेरा बच्चा ${babyName} ${babyAge} महीने का है, वजन ${babyWeight} किलो है, स्वास्थ्य स्थिति ${healthStatus} है, और ${breastMilk === 'yes' ? 'माँ का दूध पीता है' : 'फॉर्मूला दूध पीता है'}। मेरा सवाल: ${message}` :
+                    `You are a baby care expert. My child ${babyName} is ${babyAge} months old, weighs ${babyWeight} kg, health status is ${healthStatus}, and ${breastMilk === 'yes' ? 'is breastfed' : 'is formula fed'}. My question: ${message}`;
+                
+                // Call ChatGPT API (you'll need to replace with your actual API call)
+                const response = await callChatGPTAPI(prompt, isHindi);
+                
+                // Add bot response
+                addBotMessage(response);
+            } catch (error) {
+                const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                addBotMessage(isHindi ? 
+                    "क्षमा करें, मैं आपके प्रश्न का उत्तर नहीं दे पा रहा हूँ। कृपया बाद में पुनः प्रयास करें।" : 
+                    "Sorry, I'm unable to answer your question. Please try again later.");
+                console.error("ChatGPT Error:", error);
+            } finally {
+                hideTypingIndicator();
+            }
+        }
+        
+        // Mock function - replace with actual ChatGPT API call
+        async function callChatGPTAPI(prompt, isHindi) {
+            // In a real implementation, you would call the OpenAI API here
+            // For example:
+            /*
+            const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer YOUR_API_KEY'
+                },
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo",
+                    messages: [{role: "user", content: prompt}],
+                    temperature: 0.7
+                })
+            });
+            
+            const data = await response.json();
+            return data.choices[0].message.content;
+            */
+            
+            // Mock response for demo purposes
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    if (isHindi) {
+                        resolve("यह एक मॉक उत्तर है। वास्तविक कार्यान्वयन में, यह ChatGPT API से प्राप्त वास्तविक प्रतिक्रिया होगी। आपके बच्चे के लिए सुझाव: संतुलित आहार दें और नियमित रूप से डॉक्टर से जांच करवाएं।");
+                    } else {
+                        resolve("This is a mock response. In actual implementation, this would be the real response from ChatGPT API. Advice for your child: Provide balanced diet and get regular checkups from doctor.");
+                    }
+                }, 1500);
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // Add event listener for Enter key
+        document.getElementById('babyAge').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generatePlan();
+            }
+        });
+        
+        // Allow pressing Enter in ChatGPT input
+        document.getElementById('chatGPTInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendChatGPTMessage();
+            }
+        });
+        
+        // Initialize with Hindi language
+        switchLanguage('hi');
+    </script>
+</body>
+</html>
