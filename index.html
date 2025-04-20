@@ -65,33 +65,6 @@
             position: relative;
         }
         
-        .nav-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-        
         .language-switcher {
             position: absolute;
             top: 20px;
@@ -131,40 +104,71 @@
             margin: 0 auto;
         }
         
-        /* Floating Navigation Buttons */
-        .floating-nav {
+        /* New Menu Button Styles */
+        .menu-button {
             position: fixed;
-            bottom: 30px;
             left: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 99;
-        }
-        
-        .floating-btn {
-            display: flex;
-            align-items: center;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
             background: var(--primary);
             color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 99;
+            transition: all 0.3s;
+        }
+        
+        .menu-button:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .menu-items {
+            position: fixed;
+            left: 90px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 98;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            color: var(--secondary);
             border: none;
             padding: 12px 20px;
             border-radius: 30px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: all 0.3s;
             text-decoration: none;
+            white-space: nowrap;
         }
         
-        .floating-btn:hover {
+        .menu-item:hover {
             background: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            color: white;
+            transform: translateX(5px);
         }
         
-        .floating-btn i {
+        .menu-item i {
             margin-right: 10px;
             font-size: 16px;
         }
@@ -657,23 +661,21 @@
                 right: 20px;
             }
             
-            .floating-nav {
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-                max-width: 90%;
+            .menu-button {
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
             }
             
-            .floating-btn {
-                padding: 10px 15px;
+            .menu-items {
+                left: 65px;
+                padding: 10px;
+            }
+            
+            .menu-item {
+                padding: 8px 15px;
                 font-size: 14px;
-            }
-            
-            .floating-btn i {
-                margin-right: 5px;
             }
         }
     </style>
@@ -682,22 +684,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <!-- Floating Navigation Buttons -->
-    <div class="floating-nav">
-        <a href="about.html" class="floating-btn">
+    <!-- New Menu Button -->
+    <div class="menu-button" id="menuButton" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    
+    <!-- Menu Items -->
+    <div class="menu-items" id="menuItems">
+        <a href="about.html" class="menu-item">
             <i class="fas fa-user"></i>
             <span class="lang-hi">मेरे बारे में</span>
             <span class="lang-en" style="display:none">About Me</span>
         </a>
-        <a href="baby-food-recipes.html" class="floating-btn">
+        <a href="baby-food-recipes.html" class="menu-item">
             <i class="fas fa-utensils"></i>
             <span class="lang-hi">शिशु आहार व्यंजन</span>
             <span class="lang-en" style="display:none">Baby Food Recipes</span>
         </a>
-        <a href="baby-play-activities.html" class="floating-btn">
+        <a href="baby-play-activities.html" class="menu-item">
             <i class="fas fa-gamepad"></i>
             <span class="lang-hi">शिशु खेल गतिविधियाँ</span>
             <span class="lang-en" style="display:none">Baby Play Activities</span>
+        </a>
+        <a href="baby-tikakarn.html" class="menu-item">
+            <i class="fas fa-baby-carriage"></i>
+            <span class="lang-hi">बेबी टीकाकरण</span>
+            <span class="lang-en" style="display:none">Baby Vaccination</span>
+        </a>
+        <a href="groth-chart.html" class="menu-item">
+            <i class="fas fa-chart-line"></i>
+            <span class="lang-hi">विकास चार्ट</span>
+            <span class="lang-en" style="display:none">Growth Chart</span>
+        </a>
+        <a href="baby-qa-blog.html" class="menu-item">
+            <i class="fas fa-question-circle"></i>
+            <span class="lang-hi">बेबी Q&A ब्लॉग</span>
+            <span class="lang-en" style="display:none">Baby Q&A Blog</span>
         </a>
     </div>
     
@@ -705,15 +727,6 @@
         <div class="language-switcher">
             <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
             <button class="lang-btn" onclick="switchLanguage('en')">English</button>
-        </div>
-        
-        <div class="nav-buttons">
-            <button class="nav-btn" onclick="openModal('about')" title="About">
-                <i class="fas fa-info-circle"></i>
-            </button>
-            <button class="nav-btn" onclick="openModal('contact')" title="Contact">
-                <i class="fas fa-envelope"></i>
-            </button>
         </div>
         
         <div class="container">
@@ -843,64 +856,6 @@
                 <button class="pdf-btn" onclick="generatePDF()">
                     <i class="fas fa-file-pdf"></i> <span class="lang-hi">PDF डाउनलोड</span><span class="lang-en" style="display:none">Download PDF</span>
                 </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- About Modal -->
-    <div class="modal" id="aboutModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('about')">&times;</span>
-            <h3 class="modal-title lang-hi">बेबी केयर प्लानर के बारे में</h3>
-            <h3 class="modal-title lang-en" style="display:none">About Baby Care Planner</h3>
-            
-            <div class="lang-hi">
-                <p>यह AI-आधारित बेबी केयर प्लानर आपके बच्चे की उम्र, वजन और स्वास्थ्य स्थिति के आधार पर व्यक्तिगत दिनचर्या योजना बनाता है।</p>
-                <p><strong>विशेषताएँ:</strong></p>
-                <ul>
-                    <li>व्यक्तिगत भोजन योजना</li>
-                    <li>नींद का शेड्यूल</li>
-                    <li>उम्र-उपयुक्त गतिविधियाँ</li>
-                    <li>स्वास्थ्य सुझाव</li>
-                    <li>व्हाट्सएप और PDF साझा करने की सुविधा</li>
-                </ul>
-                <p>यह टूल विशेष रूप से भारतीय बच्चों के लिए डिज़ाइन किया गया है, जिसमें स्थानीय खाद्य पदार्थों और परंपराओं को ध्यान में रखा गया है।</p>
-            </div>
-            
-            <div class="lang-en" style="display:none">
-                <p>This AI-powered Baby Care Planner creates personalized daily routines based on your child's age, weight and health status.</p>
-                <p><strong>Features:</strong></p>
-                <ul>
-                    <li>Personalized meal plans</li>
-                    <li>Sleep schedules</li>
-                    <li>Age-appropriate activities</li>
-                    <li>Health advice</li>
-                    <li>WhatsApp and PDF sharing</li>
-                </ul>
-                <p>This tool is specially designed for Indian babies, taking into account local foods and traditions.</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Contact Modal -->
-    <div class="modal" id="contactModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('contact')">&times;</span>
-            <h3 class="modal-title lang-hi">संपर्क करें</h3>
-            <h3 class="modal-title lang-en" style="display:none">Contact Us</h3>
-            
-            <div class="lang-hi">
-                <p>अगर आपके कोई सवाल या सुझाव हैं तो कृपया हमसे संपर्क करें:</p>
-                <p><i class="fas fa-envelope"></i> ईमेल: <a href="mailto:info@babycareplanner.com">info@babycareplanner.com</a></p>
-                <p><i class="fas fa-phone"></i> फोन: +91 9876543210</p>
-                <p><i class="fas fa-map-marker-alt"></i> पता: 123, बेबी केयर सेंटर, मुंबई, भारत</p>
-            </div>
-            
-            <div class="lang-en" style="display:none">
-                <p>If you have any questions or suggestions, please contact us:</p>
-                <p><i class="fas fa-envelope"></i> Email: <a href="mailto:info@babycareplanner.com">info@babycareplanner.com</a></p>
-                <p><i class="fas fa-phone"></i> Phone: +91 9876543210</p>
-                <p><i class="fas fa-map-marker-alt"></i> Address: 123, Baby Care Center, Mumbai, India</p>
             </div>
         </div>
     </div>
@@ -1217,6 +1172,15 @@
                 }
             }
             return 'fa-utensils'; // default icon
+        }
+        
+        function toggleMenu() {
+            const menuItems = document.getElementById('menuItems');
+            if (menuItems.style.display === 'flex') {
+                menuItems.style.display = 'none';
+            } else {
+                menuItems.style.display = 'flex';
+            }
         }
         
         function generatePlan() {
@@ -1767,15 +1731,6 @@
             }
         }
         
-        function openModal(type) {
-            document.getElementById(`${type}Modal`).style.display = 'flex';
-        }
-        
-        function closeModal(type) {
-            document.getElementById(`${type}Modal`).style.display = 'none';
-        }
-        
-        // ChatGPT Integration Functions
         function toggleChatGPT() {
             const chatGPT = document.getElementById('chatGPTContainer');
             if (chatGPT.style.display === 'flex') {
