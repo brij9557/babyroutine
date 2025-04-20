@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Best Indian Baby Food Recipes (8-15 Months) | Baby Care Planner</title>
+    <meta name="description" content="Healthy and easy Indian baby food recipes for 8-15-month-old babies. Nutritious homemade khichdi, dalia, fruit puree, and more for your toddler.">
+    <meta name="keywords" content="Indian baby food recipes, homemade baby food, 8-15 month baby food, khichdi for baby, dalia recipe for baby, healthy baby food, Indian toddler food">
+    
+    <style>
+        :root {
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #FFF9FB;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 25px 0 15px;
+            border-bottom: 2px solid var(--highlight);
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin: 20px 0 10px;
+        }
+        
+        .recipe-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+        
+        .recipe-intro {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .recipe-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text);
+        }
+        
+        .meta-item i {
+            color: var(--primary);
+        }
+        
+        .ingredients-list, .instructions-list {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .ingredients-list li, .instructions-list li {
+            margin-bottom: 8px;
+        }
+        
+        .tips-box {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .tips-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-box h4 i {
+            margin-right: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .recipe-card {
+                padding: 25px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn" title="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="about.html" class="nav-btn" title="About">
+                <i class="fas fa-info-circle"></i>
+            </a>
+        </div>
+        
+        <div class="container">
+            <h1><i class="fas fa-utensils"></i> <span class="lang-hi">8-15 महीने के बच्चों के लिए 5 बेस्ट इंडियन बेबी फूड रेसिपी</span><span class="lang-en" style="display:none">5 Best Indian Baby Food Recipes (8-15 Months)</span></h1>
+            <p class="lang-hi">पौष्टिक, स्वादिष्ट और आसान घर पर बनने वाले भारतीय शिशु आहार</p>
+            <p class="lang-en" style="display:none">Nutritious, tasty and easy homemade Indian baby food</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="recipe-intro lang-hi">
+            <p>जब आपका बच्चा 8-15 महीने का होता है, तो उसे ठोस आहार की शुरुआत करनी चाहिए। यहाँ <strong>5 आसान और पौष्टिक भारतीय बेबी फूड रेसिपी</strong> दी गई हैं जो आपके बच्चे को पसंद आएंगी और उसके विकास में मदद करेंगी।</p>
+        </div>
+        <div class="recipe-intro lang-en" style="display:none">
+            <p>When your baby is 8-15 months old, it's time to introduce solid foods. Here are <strong>5 easy and nutritious Indian baby food recipes</strong> that your baby will love and help in their growth.</p>
+        </div>
+        
+        <!-- Recipe 1: Dal Khichdi -->
+        <div class="recipe-card">
+            <h2><span class="lang-hi">1. दाल खिचड़ी</span><span class="lang-en" style="display:none">1. Dal Khichdi</span></h2>
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> <span class="lang-hi">समय: 20 मिनट</span><span class="lang-en" style="display:none">Time: 20 mins</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 8+ महीने</span><span class="lang-en" style="display:none">Age: 8+ months</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-heart"></i> <span class="lang-hi">पौष्टिक तत्व: प्रोटीन, आयरन</span><span class="lang-en" style="display:none">Nutrients: Protein, Iron</span>
+                </div>
+            </div>
+            
+            <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Ingredients</span></h3>
+            <ul class="ingredients-list">
+                <li class="lang-hi">1/4 कप चावल</li>
+                <li class="lang-en" style="display:none">1/4 cup rice</li>
+                <li class="lang-hi">1/4 कप मूंग दाल</li>
+                <li class="lang-en" style="display:none">1/4 cup moong dal</li>
+                <li class="lang-hi">1 कप पानी</li>
+                <li class="lang-en" style="display:none">1 cup water</li>
+                <li class="lang-hi">1/2 छोटा चम्मच घी</li>
+                <li class="lang-en" style="display:none">1/2 tsp ghee</li>
+                <li class="lang-hi">1/4 छोटा चम्मच हल्दी</li>
+                <li class="lang-en" style="display:none">1/4 tsp turmeric</li>
+                <li class="lang-hi">1 छोटा चम्मच गाजर (कद्दूकस की हुई)</li>
+                <li class="lang-en" style="display:none">1 tsp grated carrot</li>
+            </ul>
+            
+            <h3><span class="lang-hi">बनाने की विधि</span><span class="lang-en" style="display:none">Instructions</span></h3>
+            <ol class="instructions-list">
+                <li class="lang-hi">चावल और दाल को अच्छी तरह धोकर 15 मिनट के लिए भिगो दें।</li>
+                <li class="lang-en" style="display:none">Wash rice and dal thoroughly and soak for 15 minutes.</li>
+                <li class="lang-hi">प्रेशर कुकर में घी गर्म करें, हल्दी डालें और गाजर को हल्का सा भूनें।</li>
+                <li class="lang-en" style="display:none">Heat ghee in a pressure cooker, add turmeric and lightly sauté the carrot.</li>
+                <li class="lang-hi">भीगे हुए चावल-दाल डालकर 1 कप पानी मिलाएँ।</li>
+                <li class="lang-en" style="display:none">Add soaked rice-dal and 1 cup water.</li>
+                <li class="lang-hi">3-4 सीटी आने तक पकाएँ और मसलकर बच्चे को परोसें।</li>
+                <li class="lang-en" style="display:none">Cook for 3-4 whistles, mash and serve to baby.</li>
+            </ol>
+            
+            <div class="tips-box">
+                <h4><i class="fas fa-lightbulb"></i> <span class="lang-hi">टिप्स</span><span class="lang-en" style="display:none">Tips</span></h4>
+                <p class="lang-hi">पहली बार में पतली खिचड़ी बनाएँ। धीरे-धीरे गाढ़ी बनाएँ और सब्जियाँ बढ़ाएँ।</p>
+                <p class="lang-en" style="display:none">Make thin khichdi first time. Gradually make it thicker and add more vegetables.</p>
+            </div>
+        </div>
+        
+        <!-- Recipe 2: Apple Dalia -->
+        <div class="recipe-card">
+            <h2><span class="lang-hi">2. सेब दलिया</span><span class="lang-en" style="display:none">2. Apple Dalia</span></h2>
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> <span class="lang-hi">समय: 15 मिनट</span><span class="lang-en" style="display:none">Time: 15 mins</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 9+ महीने</span><span class="lang-en" style="display:none">Age: 9+ months</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-heart"></i> <span class="lang-hi">पौष्टिक तत्व: फाइबर, विटामिन</span><span class="lang-en" style="display:none">Nutrients: Fiber, Vitamins</span>
+                </div>
+            </div>
+            
+            <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Ingredients</span></h3>
+            <ul class="ingredients-list">
+                <li class="lang-hi">2 बड़े चम्मच दलिया (गेहूँ या सूजी)</li>
+                <li class="lang-en" style="display:none">2 tbsp dalia (broken wheat or semolina)</li>
+                <li class="lang-hi">1/2 कप दूध (माँ का दूध/फॉर्मूला)</li>
+                <li class="lang-en" style="display:none">1/2 cup milk (breast milk/formula)</li>
+                <li class="lang-hi">1/2 सेब (छिलका उतारकर कद्दूकस किया हुआ)</li>
+                <li class="lang-en" style="display:none">1/2 apple (peeled and grated)</li>
+                <li class="lang-hi">1 छोटा चम्मच घी</li>
+                <li class="lang-en" style="display:none">1 tsp ghee</li>
+            </ul>
+            
+            <h3><span class="lang-hi">बनाने की विधि</span><span class="lang-en" style="display:none">Instructions</span></h3>
+            <ol class="instructions-list">
+                <li class="lang-hi">कढ़ाही में घी गर्म करके दलिया को हल्का भूनें।</li>
+                <li class="lang-en" style="display:none">Heat ghee in a pan and lightly roast the dalia.</li>
+                <li class="lang-hi">दूध और 1/4 कप पानी डालकर मध्यम आँच पर पकाएँ।</li>
+                <li class="lang-en" style="display:none">Add milk and 1/4 cup water, cook on medium flame.</li>
+                <li class="lang-hi">जब दलिया नरम हो जाए, तो कद्दूकस किया हुआ सेब मिलाएँ।</li>
+                <li class="lang-en" style="display:none">When dalia softens, add grated apple.</li>
+                <li class="lang-hi">2 मिनट और पकाकर गुनगुना परोसें।</li>
+                <li class="lang-en" style="display:none">Cook for 2 more minutes and serve warm.</li>
+            </ol>
+            
+            <div class="tips-box">
+                <h4><i class="fas fa-lightbulb"></i> <span class="lang-hi">टिप्स</span><span class="lang-en" style="display:none">Tips</span></h4>
+                <p class="lang-hi">सेब की जगह केला या पपीता भी मिला सकते हैं।</p>
+                <p class="lang-en" style="display:none">You can use banana or papaya instead of apple.</p>
+            </div>
+        </div>
+        
+        <!-- Recipe 3: Vegetable Poha -->
+        <div class="recipe-card">
+            <h2><span class="lang-hi">3. वेजिटेबल पोहा</span><span class="lang-en" style="display:none">3. Vegetable Poha</span></h2>
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> <span class="lang-hi">समय: 15 मिनट</span><span class="lang-en" style="display:none">Time: 15 mins</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 10+ महीने</span><span class="lang-en" style="display:none">Age: 10+ months</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-heart"></i> <span class="lang-hi">पौष्टिक तत्व: कार्बोहाइड्रेट, विटामिन</span><span class="lang-en" style="display:none">Nutrients: Carbs, Vitamins</span>
+                </div>
+            </div>
+            
+            <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Ingredients</span></h3>
+            <ul class="ingredients-list">
+                <li class="lang-hi">1/2 कप पोहा (मोटा)</li>
+                <li class="lang-en" style="display:none">1/2 cup thick poha (flattened rice)</li>
+                <li class="lang-hi">1 छोटा चम्मच घी</li>
+                <li class="lang-en" style="display:none">1 tsp ghee</li>
+                <li class="lang-hi">1/4 छोटा चम्मच जीरा</li>
+                <li class="lang-en" style="display:none">1/4 tsp cumin seeds</li>
+                <li class="lang-hi">1 बड़ा चम्मच गाजर (कद्दूकस की हुई)</li>
+                <li class="lang-en" style="display:none">1 tbsp grated carrot</li>
+                <li class="lang-hi">1 बड़ा चम्मच पालक (बारीक कटी हुई)</li>
+                <li class="lang-en" style="display:none">1 tbsp finely chopped spinach</li>
+                <li class="lang-hi">1/4 छोटा चम्मच हल्दी</li>
+                <li class="lang-en" style="display:none">1/4 tsp turmeric</li>
+            </ul>
+            
+            <h3><span class="lang-hi">बनाने की विधि</span><span class="lang-en" style="display:none">Instructions</span></h3>
+            <ol class="instructions-list">
+                <li class="lang-hi">पोहा को धोकर 5 मिनट के लिए भिगो दें और पानी निथार लें।</li>
+                <li class="lang-en" style="display:none">Wash poha and soak for 5 minutes, then drain water.</li>
+                <li class="lang-hi">कढ़ाही में घी गर्म करके जीरा और हल्दी डालें।</li>
+                <li class="lang-en" style="display:none">Heat ghee in a pan, add cumin and turmeric.</li>
+                <li class="lang-hi">गाजर और पालक डालकर 2 मिनट भूनें।</li>
+                <li class="lang-en" style="display:none">Add carrot and spinach, sauté for 2 minutes.</li>
+                <li class="lang-hi">पोहा डालकर 3-4 मिनट पकाएँ और मसलकर परोसें।</li>
+                <li class="lang-en" style="display:none">Add poha, cook for 3-4 minutes, mash and serve.</li>
+            </ol>
+            
+            <div class="tips-box">
+                <h4><i class="fas fa-lightbulb"></i> <span class="lang-hi">टिप्स</span><span class="lang-en" style="display:none">Tips</span></h4>
+                <p class="lang-hi">बच्चे को पहली बार पोहा देते समय बिना मसाले का सादा पोहा दें।</p>
+                <p class="lang-en" style="display:none">When introducing poha first time, serve it plain without spices.</p>
+            </div>
+        </div>
+        
+        <!-- Recipe 4: Moong Dal Halwa -->
+        <div class="recipe-card">
+            <h2><span class="lang-hi">4. मूंग दल हलवा</span><span class="lang-en" style="display:none">4. Moong Dal Halwa</span></h2>
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> <span class="lang-hi">समय: 25 मिनट</span><span class="lang-en" style="display:none">Time: 25 mins</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 12+ महीने</span><span class="lang-en" style="display:none">Age: 12+ months</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-heart"></i> <span class="lang-hi">पौष्टिक तत्व: प्रोटीन, कैल्शियम</span><span class="lang-en" style="display:none">Nutrients: Protein, Calcium</span>
+                </div>
+            </div>
+            
+            <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Ingredients</span></h3>
+            <ul class="ingredients-list">
+                <li class="lang-hi">1/4 कप मूंग दल (पीली)</li>
+                <li class="lang-en" style="display:none">1/4 cup yellow moong dal</li>
+                <li class="lang-hi">1 कप दूध</li>
+                <li class="lang-en" style="display:none">1 cup milk</li>
+                <li class="lang-hi">1 छोटा चम्मच घी</li>
+                <li class="lang-en" style="display:none">1 tsp ghee</li>
+                <li class="lang-hi">1 छोटा चम्मच गुड़ (पाउडर)</li>
+                <li class="lang-en" style="display:none">1 tsp jaggery powder</li>
+                <li class="lang-hi">1/4 छोटा चम्मच इलायची पाउडर</li>
+                <li class="lang-en" style="display:none">1/4 tsp cardamom powder</li>
+            </ul>
+            
+            <h3><span class="lang-hi">बनाने की विधि</span><span class="lang-en" style="display:none">Instructions</span></h3>
+            <ol class="instructions-list">
+                <li class="lang-hi">दल को 2 घंटे भिगोकर पीस लें (पेस्ट बनाएँ)।</li>
+                <li class="lang-en" style="display:none">Soak dal for 2 hours and grind to make a paste.</li>
+                <li class="lang-hi">कढ़ाही में घी गर्म करके दल का पेस्ट डालें और भूनें।</li>
+                <li class="lang-en" style="display:none">Heat ghee in a pan, add dal paste and roast.</li>
+                <li class="lang-hi">दूध धीरे-धीरे डालकर लगातार चलाते रहें।</li>
+                <li class="lang-en" style="display:none">Add milk slowly while stirring continuously.</li>
+                <li class="lang-hi">गाढ़ा होने पर गुड़ और इलायची मिलाएँ और 2 मिनट पकाएँ।</li>
+                <li class="lang-en" style="display:none">When thick, add jaggery and cardamom, cook for 2 minutes.</li>
+                <li class="lang-hi">थोड़ा ठंडा करके परोसें।</li>
+                <li class="lang-en" style="display:none">Let it cool slightly before serving.</li>
+            </ol>
+            
+            <div class="tips-box">
+                <h4><i class="fas fa-lightbulb"></i> <span class="lang-hi">टिप्स</span><span class="lang-en" style="display:none">Tips</span></h4>
+                <p class="lang-hi">12 महीने से कम उम्र के बच्चों को गुड़ न दें, इसकी जगह केला मिला सकते हैं।</p>
+                <p class="lang-en" style="display:none">Don't give jaggery to babies under 12 months, you can use banana instead.</p>
+            </div>
+        </div>
+        
+        <!-- Recipe 5: Ragi Porridge -->
+        <div class="recipe-card">
+            <h2><span class="lang-hi">5. रागी पोरिज</span><span class="lang-en" style="display:none">5. Ragi Porridge</span></h2>
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10 मिनट</span><span class="lang-en" style="display:none">Time: 10 mins</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 8+ महीने</span><span class="lang-en" style="display:none">Age: 8+ months</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-heart"></i> <span class="lang-hi">पौष्टिक तत्व: कैल्शियम, आयरन</span><span class="lang-en" style="display:none">Nutrients: Calcium, Iron</span>
+                </div>
+            </div>
+            
+            <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Ingredients</span></h3>
+            <ul class="ingredients-list">
+                <li class="lang-hi">2 बड़े चम्मच रागी पाउडर</li>
+                <li class="lang-en" style="display:none">2 tbsp ragi (finger millet) powder</li>
+                <li class="lang-hi">1 कप पानी</li>
+                <li class="lang-en" style="display:none">1 cup water</li>
+                <li class="lang-hi">1/2 कप दूध (माँ का दूध/फॉर्मूला)</li>
+                <li class="lang-en" style="display:none">1/2 cup milk (breast milk/formula)</li>
+                <li class="lang-hi">1 छोटा चम्मच गुड़ (वैकल्पिक)</li>
+                <li class="lang-en" style="display:none">1 tsp jaggery (optional)</li>
+            </ul>
+            
+            <h3><span class="lang-hi">बनाने की विधि</span><span class="lang-en" style="display:none">Instructions</span></h3>
+            <ol class="instructions-list">
+                <li class="lang-hi">रागी पाउडर को 1/4 कप पानी में घोल लें (गांठें न बनें)।</li>
+                <li class="lang-en" style="display:none">Mix ragi powder in 1/4 cup water (no lumps).</li>
+                <li class="lang-hi">बाकी पानी उबालें और रागी मिश्रण धीरे-धीरे डालें।</li>
+                <li class="lang-en" style="display:none">Boil remaining water and slowly add ragi mixture.</li>
+                <li class="lang-hi">लगातार चलाते हुए 5-7 मिनट पकाएँ।</li>
+                <li class="lang-en" style="display:none">Cook for 5-7 minutes while stirring continuously.</li>
+                <li class="lang-hi">गैस बंद करके दूध मिलाएँ (और गुड़ अगर देना हो)।</li>
+                <li class="lang-en" style="display:none">Turn off heat, add milk (and jaggery if using).</li>
+                <li class="lang-hi">गुनगुना होने पर परोसें।</li>
+                <li class="lang-en" style="display:none">Serve when lukewarm.</li>
+            </ol>
+            
+            <div class="tips-box">
+                <h4><i class="fas fa-lightbulb"></i> <span class="lang-hi">टिप्स</span><span class="lang-en" style="display:none">Tips</span></h4>
+                <p class="lang-hi">पहली बार थोड़ी मात्रा में दें क्योंकि रागी भारी होती है।</p>
+                <p class="lang-en" style="display:none">Start with small quantity as ragi is heavy to digest.</p>
+            </div>
+        </div>
+        
+        <div class="lang-hi" style="text-align: center; margin: 30px 0;">
+            <a href="index.html" class="btn"><i class="fas fa-baby"></i> बेबी केयर प्लानर टूल आज़माएं</a>
+            <p style="margin-top: 15px;">अपने बच्चे की उम्र और वजन के हिसाब से <strong>पर्सनलाइज्ड मील प्लान</strong> जनरेट करें!</p>
+        </div>
+        <div class="lang-en" style="text-align: center; margin: 30px 0; display: none;">
+            <a href="index.html" class="btn"><i class="fas fa-baby"></i> Try Baby Care Planner Tool</a>
+            <p style="margin-top: 15px;">Generate a <strong>personalized meal plan</strong> based on your child's age and weight!</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p class="footer-text lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
+            <p class="footer-text lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'hi') {
+                // Show Hindi elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'हिंदी') btn.classList.add('active');
+                });
+            } else {
+                // Show English elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'English') btn.classList.add('active');
+                });
+            }
+        }
+        
+        // Initialize with Hindi language
+        switchLanguage('hi');
+    </script>
+</body>
+</html>

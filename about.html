@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Baby Care Planner - AI-Powered Child Care Schedule Tool</title>
+    <meta name="description" content="Discover how our AI-powered Baby Care Planner helps parents create perfect feeding, sleeping and activity schedules for infants and toddlers. Expert-approved child care solutions.">
+    <meta name="keywords" content="baby care planner, infant schedule, toddler routine, baby feeding schedule, baby sleep schedule, child care app, parenting tool, Indian baby care, newborn care, baby development">
+    <meta name="author" content="Baby Care Planner">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="About Baby Care Planner - AI-Powered Child Care Schedule Tool">
+    <meta property="og:description" content="AI-powered personalized feeding, sleeping and activity schedules for your baby">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://babycareplanner.com/about">
+    <meta property="og:image" content="https://babycareplanner.com/images/baby-care-planner-social.jpg">
+    
+    <style>
+        :root {
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
+            --danger: #F44336;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #FFF9FB;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        h1, h2, h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            border-bottom: 2px solid var(--highlight);
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 25px;
+            color: var(--primary);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 126, 185, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 101, 163, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .team-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--highlight);
+            margin: 0 auto 15px;
+        }
+        
+        .testimonial {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .testimonial:before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255, 101, 163, 0.1);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 15px;
+            text-align: right;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(255, 101, 163, 0.3);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(255, 126, 185, 0.1), rgba(255, 101, 163, 0.1));
+            border-radius: 10px;
+            margin: 40px 0;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-column h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons, .language-switcher {
+                position: static;
+                justify-content: center;
+                margin: 15px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn" title="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="contact.html" class="nav-btn" title="Contact">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <div class="container">
+            <h1><i class="fas fa-baby"></i> <span class="lang-hi">बेबी केयर प्लानर के बारे में</span><span class="lang-en" style="display:none">About Baby Care Planner</span></h1>
+            <p class="subtitle lang-hi">AI-आधारित बच्चों की देखभाल के लिए स्मार्ट समाधान</p>
+            <p class="subtitle lang-en" style="display:none">AI-powered smart solutions for child care</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content-card">
+            <div class="lang-hi">
+                <h2>हमारी कहानी</h2>
+                <p>बेबी केयर प्लानर की शुरुआत 2020 में नए माता-पिता के रूप में हमारे अपने संघर्षों से हुई। हमने महसूस किया कि भारतीय माता-पिता के लिए एक व्यक्तिगत, सांस्कृतिक रूप से प्रासंगिक बच्चे की देखभाल योजनाकार की कमी है जो विज्ञान और स्थानीय प्रथाओं को जोड़ती है।</p>
+                <p>हमारा मिशन माता-पिता को एक सहज उपकरण प्रदान करना है जो उनके बच्चे की विशिष्ट आवश्यकताओं के अनुरूप हो, चाहे वह भोजन का समय हो, नींद का कार्यक्रम हो, या विकासात्मक गतिविधियाँ हों।</p>
+                
+                <h2>हमारा दृष्टिकोण</h2>
+                <p>हम मानते हैं कि प्रत्येक बच्चा अद्वितीय है, और उनकी देखभाल भी वैयक्तिकृत होनी चाहिए। हमारा AI-आधारित सिस्टम:</p>
+                <ul>
+                    <li>बच्चे की उम्र, वजन और स्वास्थ्य स्थिति के आधार पर अनुशंसाएँ प्रदान करता है</li>
+                    <li>भारतीय आहार पद्धतियों और स्थानीय उपलब्ध खाद्य पदार्थों को ध्यान में रखता है</li>
+                    <li>बाल रोग विशेषज्ञों और पोषण विशेषज्ञों के साथ विकसित किया गया है</li>
+                    <li>समय के साथ आपके बच्चे की प्रगति के अनुसार अनुकूलित होता है</li>
+                </ul>
+            </div>
+            
+            <div class="lang-en" style="display:none">
+                <h2>Our Story</h2>
+                <p>Baby Care Planner was born in 2020 from our own struggles as new parents. We realized there was a lack of personalized, culturally relevant baby care planners for Indian parents that combine science with local practices.</p>
+                <p>Our mission is to provide parents with an intuitive tool tailored to their child's specific needs, whether it's feeding times, sleep schedules, or developmental activities.</p>
+                
+                <h2>Our Approach</h2>
+                <p>We believe every child is unique, and their care should be personalized too. Our AI-based system:</p>
+                <ul>
+                    <li>Provides recommendations based on child's age, weight and health status</li>
+                    <li>Takes into account Indian dietary practices and locally available foods</li>
+                    <li>Developed with pediatricians and nutrition experts</li>
+                    <li>Adapts over time as your child progresses</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <h2 class="lang-hi">हमारी विशेषताएँ</h2>
+            <h2 class="lang-en" style="display:none">Our Features</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+                    <h3 class="lang-hi">व्यक्तिगत भोजन योजना</h3>
+                    <h3 class="lang-en" style="display:none">Personalized Meal Plans</h3>
+                    <p class="lang-hi">उम्र-उपयुक्त पोषण संबंधी सिफारिशें</p>
+                    <p class="lang-en" style="display:none">Age-appropriate nutritional recommendations</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-moon"></i></div>
+                    <h3 class="lang-hi">नींद अनुसूची</h3>
+                    <h3 class="lang-en" style="display:none">Sleep Schedule</h3>
+                    <p class="lang-hi">विकासात्मक चरणों के अनुरूप नींद पैटर्न</p>
+                    <p class="lang-en" style="display:none">Sleep patterns aligned with developmental stages</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-child"></i></div>
+                    <h3 class="lang-hi">गतिविधि सुझाव</h3>
+                    <h3 class="lang-en" style="display:none">Activity Suggestions</h3>
+                    <p class="lang-hi">मोटर कौशल और संज्ञानात्मक विकास को बढ़ावा देना</p>
+                    <p class="lang-en" style="display:none">Promoting motor skills and cognitive development</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3 class="lang-hi">स्वास्थ्य सलाह</h3>
+                    <h3 class="lang-en" style="display:none">Health Advice</h3>
+                    <p class="lang-hi">विशेषज्ञ-सत्यापित स्वास्थ्य युक्तियाँ</p>
+                    <p class="lang-en" style="display:none">Expert-verified health tips</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <h2 class="lang-hi">हमारी टीम</h2>
+            <h2 class="lang-en" style="display:none">Our Team</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Dr. Priya Sharma" class="team-img">
+                    <h3>डॉ. प्रिया शर्मा</h3>
+                    <p class="lang-hi">बाल रोग विशेषज्ञ</p>
+                    <p class="lang-en" style="display:none">Pediatrician</p>
+                </div>
+                
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Ananya Patel" class="team-img">
+                    <h3>अनन्या पटेल</h3>
+                    <p class="lang-hi">पोषण विशेषज्ञ</p>
+                    <p class="lang-en" style="display:none">Nutrition Specialist</p>
+                </div>
+                
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Rahul Gupta" class="team-img">
+                    <h3>राहुल गुप्ता</h3>
+                    <p class="lang-hi">एआई विशेषज्ञ</p>
+                    <p class="lang-en" style="display:none">AI Expert</p>
+                </div>
+                
+                <div class="team-card">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Neha Kapoor" class="team-img">
+                    <h3>नेहा कपूर</h3>
+                    <p class="lang-hi">माता-पिता समर्थन</p>
+                    <p class="lang-en" style="display:none">Parent Support</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-card">
+            <h2 class="lang-hi">माता-पिता क्या कहते हैं</h2>
+            <h2 class="lang-en" style="display:none">What Parents Say</h2>
+            
+            <div class="testimonial">
+                <p class="lang-hi">"बेबी केयर प्लानर ने मेरे 8 महीने के बच्चे के लिए भोजन और नींद की दिनचर्या स्थापित करने में मदद की। अब वह बेहतर सोता है और खुश रहता है!"</p>
+                <p class="lang-en" style="display:none">"Baby Care Planner helped establish a feeding and sleep routine for my 8-month-old. Now he sleeps better and is happier!"</p>
+                <div class="testimonial-author">- सुमन मेहता, मुंबई</div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="lang-hi">"एक कामकाजी माँ के रूप में, यह ऐप मेरे लिए वरदान है। मुझे पता चलता है कि मेरे बच्चे को कब खिलाना है, सुलाना है या उसके साथ खेलना है।"</p>
+                <p class="lang-en" style="display:none">"As a working mom, this app is a blessing. I know when to feed, put to sleep or play with my baby."</p>
+                <div class="testimonial-author">- रीना जोशी, दिल्ली</div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="lang-hi">"मुझे भारतीय खाद्य पदार्थों पर ध्यान केंद्रित करने वाला एक ऐप चाहिए था। यह सही है! मेरा बच्चा अब खिचड़ी और दलिया पसंद करता है।"</p>
+                <p class="lang-en" style="display:none">"I wanted an app focused on Indian foods. This is perfect! My baby now loves khichdi and daliya."</p>
+                <div class="testimonial-author">- अरुण सिंह, बैंगलोर</div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2 class="lang-hi">अपने बच्चे के लिए सही योजना बनाएं</h2>
+            <h2 class="lang-en" style="display:none">Create the Right Plan for Your Child</h2>
+            
+            <p class="lang-hi">आज ही अपना निजीकृत बेबी केयर प्लान प्राप्त करें</p>
+            <p class="lang-en" style="display:none">Get your personalized baby care plan today</p>
+            
+            <a href="index.html" class="btn">
+                <i class="fas fa-magic"></i> <span class="lang-hi">अभी आज़माएं</span><span class="lang-en" style="display:none">Try Now</span>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4 class="lang-hi">बेबी केयर प्लानर</h4>
+                <h4 class="lang-en" style="display:none">Baby Care Planner</h4>
+                <p class="lang-hi">AI-आधारित बच्चों की देखभाल के लिए स्मार्ट समाधान</p>
+                <p class="lang-en" style="display:none">AI-powered smart solutions for child care</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="lang-hi">लिंक</h4>
+                <h4 class="lang-en" style="display:none">Links</h4>
+                <ul>
+                    <li><a href="index.html" class="lang-hi">होम</a><a href="index.html" class="lang-en" style="display:none">Home</a></li>
+                    <li><a href="about.html" class="lang-hi">हमारे बारे में</a><a href="about.html" class="lang-en" style="display:none">About</a></li>
+                    <li><a href="contact.html" class="lang-hi">संपर्क करें</a><a href="contact.html" class="lang-en" style="display:none">Contact</a></li>
+                    <li><a href="privacy.html" class="lang-hi">गोपनीयता नीति</a><a href="privacy.html" class="lang-en" style="display:none">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="lang-hi">संसाधन</h4>
+                <h4 class="lang-en" style="display:none">Resources</h4>
+                <ul>
+                    <li><a href="blog.html" class="lang-hi">ब्लॉग</a><a href="blog.html" class="lang-en" style="display:none">Blog</a></li>
+                    <li><a href="faq.html" class="lang-hi">सामान्य प्रश्न</a><a href="faq.html" class="lang-en" style="display:none">FAQ</a></li>
+                    <li><a href="tips.html" class="lang-hi">पेरेंटिंग टिप्स</a><a href="tips.html" class="lang-en" style="display:none">Parenting Tips</a></li>
+                    <li><a href="recipes.html" class="lang-hi">बेबी फूड रेसिपी</a><a href="recipes.html" class="lang-en" style="display:none">Baby Food Recipes</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4 class="lang-hi">संपर्क करें</h4>
+                <h4 class="lang-en" style="display:none">Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@babycareplanner.com</li>
+                    <li><i class="fas fa-phone"></i> +91 9876543210</li>
+                    <li><i class="fas fa-map-marker-alt"></i> <span class="lang-hi">मुंबई, भारत</span><span class="lang-en" style="display:none">Mumbai, India</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p class="lang-hi">© 2023 बेबी केयर प्लानर. सर्वाधिकार सुरक्षित।</p>
+            <p class="lang-en" style="display:none">© 2023 Baby Care Planner. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'hi') {
+                // Show Hindi elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'हिंदी') btn.classList.add('active');
+                });
+            } else {
+                // Show English elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'English') btn.classList.add('active');
+                });
+            }
+        }
+        
+        // Initialize with Hindi language
+        switchLanguage('hi');
+    </script>
+</body>
+</html>
