@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>भारतीय बच्चों का टीकाकरण चार्ट | Baby Care Planner</title>
+    <meta name="description" content="भारतीय बच्चों के लिए पूर्ण टीकाकरण शेड्यूल। जन्म से 15 वर्ष तक के सभी आवश्यक टीकों की जानकारी।">
+    <meta name="keywords" content="भारतीय टीकाकरण चार्ट, शिशु टीकाकरण, बच्चों के टीके, टीकाकरण शेड्यूल, बेबी वैक्सीनेशन">
+    
+    <style>
+        :root {
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #FFF9FB;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 25px 0 15px;
+            border-bottom: 2px solid var(--highlight);
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin: 20px 0 10px;
+        }
+        
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .vaccine-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .vaccine-table th, .vaccine-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .vaccine-table th {
+            background-color: var(--light);
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .vaccine-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .vaccine-table tr:hover {
+            background-color: var(--light);
+        }
+        
+        .age-group {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .vaccine-name {
+            font-weight: 500;
+        }
+        
+        .important {
+            color: #e63946;
+            font-weight: 600;
+        }
+        
+        .tips-box {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .tips-box h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-box h4 i {
+            margin-right: 8px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+        
+        .search-box {
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--highlight);
+            border-radius: 30px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 126, 185, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .info-card {
+                padding: 25px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
+            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn" title="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="about.html" class="nav-btn" title="About">
+                <i class="fas fa-info-circle"></i>
+            </a>
+        </div>
+        
+        <div class="container">
+            <h1><i class="fas fa-syringe"></i> <span class="lang-hi">भारतीय बच्चों का पूरा टीकाकरण चार्ट (जन्म से 15 वर्ष)</span><span class="lang-en" style="display:none">Complete Indian Vaccination Chart (Birth to 15 Years)</span></h1>
+            <p class="lang-hi">आपके बच्चे के स्वास्थ्य के लिए सभी आवश्यक टीकों की जानकारी</p>
+            <p class="lang-en" style="display:none">All essential vaccine information for your child's health</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="info-card">
+            <div class="intro-text lang-hi">
+                <p>टीकाकरण आपके बच्चे को गंभीर बीमारियों से बचाने का सबसे प्रभावी तरीका है। यहाँ भारत सरकार द्वारा अनुशंसित <strong>पूरा टीकाकरण शेड्यूल</strong> दिया गया है जो आपके बच्चे को सही समय पर सही टीका लगवाने में मदद करेगा।</p>
+            </div>
+            <div class="intro-text lang-en" style="display:none">
+                <p>Vaccination is the most effective way to protect your child from serious diseases. Here is the <strong>complete vaccination schedule</strong> recommended by the Indian government that will help you get your child vaccinated at the right time.</p>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" class="search-input lang-hi" placeholder="टीके या बीमारी के नाम से खोजें...">
+                <input type="text" class="search-input lang-en" style="display:none" placeholder="Search by vaccine or disease name...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <h2 class="lang-hi">भारतीय टीकाकरण शेड्यूल</h2>
+            <h2 class="lang-en" style="display:none">Indian Vaccination Schedule</h2>
+            
+            <table class="vaccine-table">
+                <thead>
+                    <tr>
+                        <th class="lang-hi">उम्र</th>
+                        <th class="lang-en" style="display:none">Age</th>
+                        <th class="lang-hi">टीके का नाम</th>
+                        <th class="lang-en" style="display:none">Vaccine Name</th>
+                        <th class="lang-hi">बीमारियों से सुरक्षा</th>
+                        <th class="lang-en" style="display:none">Protects Against</th>
+                        <th class="lang-hi">महत्वपूर्ण नोट्स</th>
+                        <th class="lang-en" style="display:none">Important Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Birth -->
+                    <tr>
+                        <td class="age-group lang-hi">जन्म</td>
+                        <td class="age-group lang-en" style="display:none">Birth</td>
+                        <td class="vaccine-name lang-hi">BCG, OPV-0, हेपेटाइटिस B-1</td>
+                        <td class="vaccine-name lang-en" style="display:none">BCG, OPV-0, Hepatitis B-1</td>
+                        <td class="lang-hi">तपेदिक, पोलियो, हेपेटाइटिस B</td>
+                        <td class="lang-en" style="display:none">Tuberculosis, Polio, Hepatitis B</td>
+                        <td class="lang-hi important">अत्यंत महत्वपूर्ण</td>
+                        <td class="lang-en important" style="display:none">Very important</td>
+                    </tr>
+                    
+                    <!-- 6 Weeks -->
+                    <tr>
+                        <td class="age-group lang-hi">6 सप्ताह</td>
+                        <td class="age-group lang-en" style="display:none">6 Weeks</td>
+                        <td class="vaccine-name lang-hi">DTwP / DTaP-1, IPV-1, हेपेटाइटिस B-2, Hib-1, PCV-1, रोटावायरस-1</td>
+                        <td class="vaccine-name lang-en" style="display:none">DTwP / DTaP-1, IPV-1, Hepatitis B-2, Hib-1, PCV-1, Rotavirus-1</td>
+                        <td class="lang-hi">डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हेपेटाइटिस B, हीमोफिलस इन्फ्लुएंजा, न्यूमोकोकल, रोटावायरस</td>
+                        <td class="lang-en" style="display:none">Diphtheria, Tetanus, Whooping cough, Polio, Hepatitis B, Hib, Pneumococcal, Rotavirus</td>
+                        <td class="lang-hi">पहला बूस्टर डोज</td>
+                        <td class="lang-en" style="display:none">First booster dose</td>
+                    </tr>
+                    
+                    <!-- 10 Weeks -->
+                    <tr>
+                        <td class="age-group lang-hi">10 सप्ताह</td>
+                        <td class="age-group lang-en" style="display:none">10 Weeks</td>
+                        <td class="vaccine-name lang-hi">DTwP / DTaP-2, IPV-2, Hib-2, PCV-2, रोटावायरस-2</td>
+                        <td class="vaccine-name lang-en" style="display:none">DTwP / DTaP-2, IPV-2, Hib-2, PCV-2, Rotavirus-2</td>
+                        <td class="lang-hi">डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हीमोफिलस इन्फ्लुएंजा, न्यूमोकोकल, रोटावायरस</td>
+                        <td class="lang-en" style="display:none">Diphtheria, Tetanus, Whooping cough, Polio, Hib, Pneumococcal, Rotavirus</td>
+                        <td class="lang-hi">दूसरा डोज</td>
+                        <td class="lang-en" style="display:none">Second dose</td>
+                    </tr>
+                    
+                    <!-- 14 Weeks -->
+                    <tr>
+                        <td class="age-group lang-hi">14 सप्ताह</td>
+                        <td class="age-group lang-en" style="display:none">14 Weeks</td>
+                        <td class="vaccine-name lang-hi">DTwP / DTaP-3, IPV-3, Hib-3, PCV-3, रोटावायरस-3</td>
+                        <td class="vaccine-name lang-en" style="display:none">DTwP / DTaP-3, IPV-3, Hib-3, PCV-3, Rotavirus-3</td>
+                        <td class="lang-hi">डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हीमोफिलस इन्फ्लुएंजा, न्यूमोकोकल, रोटावायरस</td>
+                        <td class="lang-en" style="display:none">Diphtheria, Tetanus, Whooping cough, Polio, Hib, Pneumococcal, Rotavirus</td>
+                        <td class="lang-hi">तीसरा डोज</td>
+                        <td class="lang-en" style="display:none">Third dose</td>
+                    </tr>
+                    
+                    <!-- 6 Months -->
+                    <tr>
+                        <td class="age-group lang-hi">6 महीने</td>
+                        <td class="age-group lang-en" style="display:none">6 Months</td>
+                        <td class="vaccine-name lang-hi">इन्फ्लुएंजा (पहली बार)</td>
+                        <td class="vaccine-name lang-en" style="display:none">Influenza (First time)</td>
+                        <td class="lang-hi">फ्लू</td>
+                        <td class="lang-en" style="display:none">Flu</td>
+                        <td class="lang-hi">वार्षिक टीकाकरण</td>
+                        <td class="lang-en" style="display:none">Annual vaccination</td>
+                    </tr>
+                    
+                    <!-- 9 Months -->
+                    <tr>
+                        <td class="age-group lang-hi">9 महीने</td>
+                        <td class="age-group lang-en" style="display:none">9 Months</td>
+                        <td class="vaccine-name lang-hi">MMR-1</td>
+                        <td class="vaccine-name lang-en" style="display:none">MMR-1</td>
+                        <td class="lang-hi">खसरा, कण्ठमाला, रूबेला</td>
+                        <td class="lang-en" style="display:none">Measles, Mumps, Rubella</td>
+                        <td class="lang-hi important">अत्यंत महत्वपूर्ण</td>
+                        <td class="lang-en important" style="display:none">Very important</td>
+                    </tr>
+                    
+                    <!-- 12 Months -->
+                    <tr>
+                        <td class="age-group lang-hi">12 महीने</td>
+                        <td class="age-group lang-en" style="display:none">12 Months</td>
+                        <td class="vaccine-name lang-hi">हेपेटाइटिस A-1</td>
+                        <td class="vaccine-name lang-en" style="display:none">Hepatitis A-1</td>
+                        <td class="lang-hi">हेपेटाइटिस A</td>
+                        <td class="lang-en" style="display:none">Hepatitis A</td>
+                        <td class="lang-hi">6 महीने बाद दूसरा डोज</td>
+                        <td class="lang-en" style="display:none">Second dose after 6 months</td>
+                    </tr>
+                    
+                    <!-- 15 Months -->
+                    <tr>
+                        <td class="age-group lang-hi">15 महीने</td>
+                        <td class="age-group lang-en" style="display:none">15 Months</td>
+                        <td class="vaccine-name lang-hi">MMR-2, PCV बूस्टर</td>
+                        <td class="vaccine-name lang-en" style="display:none">MMR-2, PCV Booster</td>
+                        <td class="lang-hi">खसरा, कण्ठमाला, रूबेला, न्यूमोकोकल</td>
+                        <td class="lang-en" style="display:none">Measles, Mumps, Rubella, Pneumococcal</td>
+                        <td class="lang-hi">बूस्टर डोज</td>
+                        <td class="lang-en" style="display:none">Booster dose</td>
+                    </tr>
+                    
+                    <!-- 18 Months -->
+                    <tr>
+                        <td class="age-group lang-hi">18 महीने</td>
+                        <td class="age-group lang-en" style="display:none">18 Months</td>
+                        <td class="vaccine-name lang-hi">DTwP / DTaP बूस्टर-1, IPV बूस्टर-1, Hib बूस्टर-1</td>
+                        <td class="vaccine-name lang-en" style="display:none">DTwP / DTaP Booster-1, IPV Booster-1, Hib Booster-1</td>
+                        <td class="lang-hi">डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हीमोफिलस इन्फ्लुएंजा</td>
+                        <td class="lang-en" style="display:none">Diphtheria, Tetanus, Whooping cough, Polio, Hib</td>
+                        <td class="lang-hi">बूस्टर डोज</td>
+                        <td class="lang-en" style="display:none">Booster dose</td>
+                    </tr>
+                    
+                    <!-- 2 Years -->
+                    <tr>
+                        <td class="age-group lang-hi">2 वर्ष</td>
+                        <td class="age-group lang-en" style="display:none">2 Years</td>
+                        <td class="vaccine-name lang-hi">टाइफाइड कंजुगेट वैक्सीन</td>
+                        <td class="vaccine-name lang-en" style="display:none">Typhoid Conjugate Vaccine</td>
+                        <td class="lang-hi">टाइफाइड</td>
+                        <td class="lang-en" style="display:none">Typhoid</td>
+                        <td class="lang-hi">हर 3 साल पर बूस्टर</td>
+                        <td class="lang-en" style="display:none">Booster every 3 years</td>
+                    </tr>
+                    
+                    <!-- 4-6 Years -->
+                    <tr>
+                        <td class="age-group lang-hi">4-6 वर्ष</td>
+                        <td class="age-group lang-en" style="display:none">4-6 Years</td>
+                        <td class="vaccine-name lang-hi">DTwP / DTaP बूस्टर-2, MMR-3</td>
+                        <td class="vaccine-name lang-en" style="display:none">DTwP / DTaP Booster-2, MMR-3</td>
+                        <td class="lang-hi">डिफ्थीरिया, टिटनेस, काली खांसी, खसरा, कण्ठमाला, रूबेला</td>
+                        <td class="lang-en" style="display:none">Diphtheria, Tetanus, Whooping cough, Measles, Mumps, Rubella</td>
+                        <td class="lang-hi">स्कूल जाने से पहले</td>
+                        <td class="lang-en" style="display:none">Before starting school</td>
+                    </tr>
+                    
+                    <!-- 10-12 Years -->
+                    <tr>
+                        <td class="age-group lang-hi">10-12 वर्ष</td>
+                        <td class="age-group lang-en" style="display:none">10-12 Years</td>
+                        <td class="vaccine-name lang-hi">Tdap / Td, HPV (2 डोज)</td>
+                        <td class="vaccine-name lang-en" style="display:none">Tdap / Td, HPV (2 doses)</td>
+                        <td class="lang-hi">टिटनेस, डिफ्थीरिया, काली खांसी, ह्यूमन पेपिलोमा वायरस</td>
+                        <td class="lang-en" style="display:none">Tetanus, Diphtheria, Whooping cough, HPV</td>
+                        <td class="lang-hi">HPV लड़कियों के लिए विशेष रूप से महत्वपूर्ण</td>
+                        <td class="lang-en" style="display:none">HPV especially important for girls</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="tips-box">
+                <h4><i class="fas fa-lightbulb"></i> <span class="lang-hi">टीकाकरण के बारे में महत्वपूर्ण टिप्स</span><span class="lang-en" style="display:none">Important Vaccination Tips</span></h4>
+                <ul class="lang-hi">
+                    <li>टीकाकरण कार्ड हमेशा सुरक्षित रखें और हर टीके के बाद अपडेट करें</li>
+                    <li>टीकाकरण से पहले बच्चे को हल्का भोजन दें</li>
+                    <li>टीकाकरण के बाद बच्चे को अधिक तरल पदार्थ दें</li>
+                    <li>किसी भी गंभीर प्रतिक्रिया (बुखार, चकत्ते) होने पर डॉक्टर से संपर्क करें</li>
+                    <li>सरकारी स्वास्थ्य केंद्रों पर कई टीके निःशुल्क उपलब्ध हैं</li>
+                </ul>
+                <ul class="lang-en" style="display:none">
+                    <li>Always keep vaccination card safe and update after every vaccine</li>
+                    <li>Give light meal to child before vaccination</li>
+                    <li>Give more fluids to child after vaccination</li>
+                    <li>Contact doctor if any serious reaction (fever, rashes) occurs</li>
+                    <li>Many vaccines are available free at government health centers</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h2 class="lang-hi">अक्सर पूछे जाने वाले प्रश्न</h2>
+            <h2 class="lang-en" style="display:none">Frequently Asked Questions</h2>
+            
+            <h3 class="lang-hi">1. टीकाकरण के बाद बुखार आना सामान्य है?</h3>
+            <h3 class="lang-en" style="display:none">1. Is fever after vaccination normal?</h3>
+            <p class="lang-hi">हाँ, कुछ टीकों के बाद हल्का बुखार (100-101°F) आना सामान्य है। यह शरीर की प्रतिरक्षा प्रतिक्रिया का संकेत है। डॉक्टर की सलाह से पैरासिटामोल दिया जा सकता है।</p>
+            <p class="lang-en" style="display:none">Yes, mild fever (100-101°F) after some vaccines is normal. It indicates body's immune response. Paracetamol can be given as per doctor's advice.</p>
+            
+            <h3 class="lang-hi">2. टीकाकरण में देरी हो जाए तो क्या करें?</h3>
+            <h3 class="lang-en" style="display:none">2. What if vaccination gets delayed?</h3>
+            <p class="lang-hi">टीकाकरण शेड्यूल में देरी होने पर जल्द से जल्द अपने डॉक्टर से संपर्क करें। अधिकांश टीके देरी से भी दिए जा सकते हैं, लेकिन यह बच्चे को बीमारियों से असुरक्षित रखता है।</p>
+            <p class="lang-en" style="display:none">If vaccination schedule is delayed, contact your doctor as soon as possible. Most vaccines can be given later, but it keeps child unprotected from diseases.</p>
+            
+            <h3 class="lang-hi">3. क्या बीमार बच्चे को टीका लगवाना चाहिए?</h3>
+            <h3 class="lang-en" style="display:none">3. Should a sick child be vaccinated?</h3>
+            <p class="lang-hi">हल्की सर्दी-खांसी में टीकाकरण करवाया जा सकता है, लेकिन तेज बुखार या गंभीर बीमारी की स्थिति में डॉक्टर से सलाह लें।</p>
+            <p class="lang-en" style="display:none">Vaccination can be done during mild cold-cough, but consult doctor in case of high fever or serious illness.</p>
+        </div>
+        
+        <div class="lang-hi" style="text-align: center; margin: 30px 0;">
+            <a href="index.html" class="btn"><i class="fas fa-baby"></i> बेबी केयर प्लानर टूल आज़माएं</a>
+            <p style="margin-top: 15px;">अपने बच्चे की उम्र के हिसाब से <strong>पर्सनलाइज्ड टीकाकरण शेड्यूल</strong> जनरेट करें!</p>
+        </div>
+        <div class="lang-en" style="text-align: center; margin: 30px 0; display: none;">
+            <a href="index.html" class="btn"><i class="fas fa-baby"></i> Try Baby Care Planner Tool</a>
+            <p style="margin-top: 15px;">Generate a <strong>personalized vaccination schedule</strong> based on your child's age!</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p class="footer-text lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
+            <p class="footer-text lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'hi') {
+                // Show Hindi elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'हिंदी') btn.classList.add('active');
+                });
+            } else {
+                // Show English elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'English') btn.classList.add('active');
+                });
+            }
+        }
+        
+        // Initialize with Hindi language
+        switchLanguage('hi');
+        
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('.vaccine-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
