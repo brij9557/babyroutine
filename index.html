@@ -9,11 +9,23 @@
     <meta name="keywords" content="बेबी केयर, शिशु देखभाल, बच्चों का खाना, बेबी फूड, बच्चों की गतिविधियाँ, baby care, infant care, baby food, baby activities, parenting tips">
     <meta name="author" content="Baby Care Planner">
     <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.babycareplanner.com" />
+    
+    <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="बेबी केयर प्लानर - बच्चों के लिए व्यक्तिगत देखभाल योजना">
     <meta property="og:description" content="AI-आधारित बेबी केयर प्लानर जो आपके बच्चे की उम्र, वजन और स्वास्थ्य के अनुसार व्यक्तिगत योजना बनाता है">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.babycareplanner.com">
     <meta property="og:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg">
+    <meta property="og:site_name" content="Baby Care Planner">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="बेबी केयर प्लानर - बच्चों के लिए व्यक्तिगत देखभाल योजना">
+    <meta name="twitter:description" content="AI-आधारित बेबी केयर प्लानर जो आपके बच्चे की उम्र, वजन और स्वास्थ्य के अनुसार व्यक्तिगत योजना बनाता है">
+    <meta name="twitter:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg">
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -21,6 +33,32 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Structured Data / Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Baby Care Planner",
+      "alternateName": "बेबी केयर प्लानर",
+      "description": "AI-powered personalized baby care planner for feeding, sleeping and activity schedules",
+      "url": "https://www.babycareplanner.com",
+      "applicationCategory": "ParentingApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Baby Care Solutions"
+      }
+    }
+    </script>
     
     <style>
         :root {
@@ -50,10 +88,105 @@
             font-size: 16px;
         }
         
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .menu-item:hover {
+            background: var(--light);
+            color: var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: var(--highlight);
+            color: var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 15px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
         }
         
         header {
@@ -68,7 +201,7 @@
         .language-switcher {
             position: absolute;
             top: 20px;
-            left: 20px;
+            right: 20px;
         }
         
         .lang-btn {
@@ -91,6 +224,32 @@
             color: var(--secondary);
         }
         
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
         h1 {
             font-size: 1.8rem;
             margin-bottom: 10px;
@@ -102,75 +261,6 @@
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto;
-        }
-        
-        /* New Menu Button Styles */
-        .menu-button {
-            position: fixed;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            z-index: 99;
-            transition: all 0.3s;
-        }
-        
-        .menu-button:hover {
-            background: var(--secondary);
-            transform: translateY(-50%) scale(1.1);
-        }
-        
-        .menu-items {
-            position: fixed;
-            left: 90px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 98;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
-        .menu-item {
-            display: flex;
-            align-items: center;
-            background: var(--light);
-            color: var(--secondary);
-            border: none;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-        
-        .menu-item:hover {
-            background: var(--secondary);
-            color: white;
-            transform: translateX(5px);
-        }
-        
-        .menu-item i {
-            margin-right: 10px;
-            font-size: 16px;
         }
         
         .form-container {
@@ -626,6 +716,25 @@
             30% { transform: translateY(-5px); }
         }
         
+        /* Ad Container Styles */
+        .ad-container {
+            width: 100%;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .ad-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
         /* Responsive adjustments */
         @media (min-width: 768px) {
             .container {
@@ -649,6 +758,24 @@
             }
         }
         
+        @media (max-width: 768px) {
+            .container.sidebar-open {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .menu-btn {
+                left: 10px;
+                top: 50%;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+        
         @media (max-width: 480px) {
             .chatgpt-container {
                 width: 90%;
@@ -661,21 +788,31 @@
                 right: 20px;
             }
             
-            .menu-button {
-                left: 15px;
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
+            .sidebar {
+                width: 80%;
             }
             
-            .menu-items {
-                left: 65px;
-                padding: 10px;
+            .language-switcher {
+                position: static;
+                margin-top: 10px;
             }
             
-            .menu-item {
-                padding: 8px 15px;
-                font-size: 14px;
+            header {
+                padding: 15px 0;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            
+            .menu-btn:hover {
+                transform: scale(1.1);
             }
         }
     </style>
@@ -684,49 +821,61 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <!-- New Menu Button -->
-    <div class="menu-button" id="menuButton" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
+            <button class="close-sidebar" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="about.html" class="menu-item">
+                <i class="fas fa-user"></i>
+                <span class="lang-hi">मेरे बारे में</span>
+                <span class="lang-en" style="display:none">About Me</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item">
+                <i class="fas fa-utensils"></i>
+                <span class="lang-hi">शिशु आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Baby Food Recipes</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item">
+                <i class="fas fa-gamepad"></i>
+                <span class="lang-hi">शिशु खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Baby Play Activities</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-baby-carriage"></i>
+                <span class="lang-hi">बेबी टीकाकरण</span>
+                <span class="lang-en" style="display:none">Baby Vaccination</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item">
+                <i class="fas fa-baby"></i>
+                <span class="lang-hi">बेबी ग्रोथ कार्ड</span>
+                <span class="lang-en" style="display:none">Baby Growth Card</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-baby-crying"></i>
+                <span class="lang-hi">बेबी क्राइंग AI टूल</span>
+                <span class="lang-en" style="display:none">Baby Crying AI Tool</span>
+            </a>
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-question-circle"></i>
+                <span class="lang-hi">बेबी Q&A ब्लॉग</span>
+                <span class="lang-en" style="display:none">Baby Q&A Blog</span>
+            </a>
+        </div>
     </div>
     
-    <!-- Menu Items -->
-    <div class="menu-items" id="menuItems">
-        <a href="about.html" class="menu-item">
-            <i class="fas fa-user"></i>
-            <span class="lang-hi">मेरे बारे में</span>
-            <span class="lang-en" style="display:none">About Me</span>
-        </a>
-        <a href="baby-food-recipes.html" class="menu-item">
-            <i class="fas fa-utensils"></i>
-            <span class="lang-hi">शिशु आहार व्यंजन</span>
-            <span class="lang-en" style="display:none">Baby Food Recipes</span>
-        </a>
-        <a href="baby-play-activities.html" class="menu-item">
-            <i class="fas fa-gamepad"></i>
-            <span class="lang-hi">शिशु खेल गतिविधियाँ</span>
-            <span class="lang-en" style="display:none">Baby Play Activities</span>
-        </a>
-        <a href="baby-tikakarn.html" class="menu-item">
-            <i class="fas fa-baby-carriage"></i>
-            <span class="lang-hi">बेबी टीकाकरण</span>
-            <span class="lang-en" style="display:none">Baby Vaccination</span>
-        </a>
-        <a href="baby-growth-card.html" class="menu-item">
-            <i class="fas fa-baby"></i>
-            <span class="lang-hi">बेबी ग्रोथ कार्ड</span>
-            <span class="lang-en" style="display:none">Baby Growth Card</span>
-        </a>
-        <a href="baby-crying-ai-tool.html" class="menu-item">
-            <i class="fas fa-baby-crying"></i>
-            <span class="lang-hi">बेबी क्राइंग AI टूल</span>
-            <span class="lang-en" style="display:none">Baby Crying AI Tool</span>
-        </a>
-        <a href="baby-qa-blog.html" class="menu-item">
-            <i class="fas fa-question-circle"></i>
-            <span class="lang-hi">बेबी Q&A ब्लॉग</span>
-            <span class="lang-en" style="display:none">Baby Q&A Blog</span>
-        </a>
-    </div>
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()">
+        <i class="fas fa-baby"></i>
+    </button>
     
     <header>
         <div class="language-switcher">
@@ -734,14 +883,16 @@
             <button class="lang-btn" onclick="switchLanguage('en')">English</button>
         </div>
         
-        <div class="container">
+        <div>
             <h1><i class="fas fa-baby"></i> <span class="lang-hi">बेबी केयर प्लानर</span><span class="lang-en" style="display:none">Baby Care Planner</span></h1>
             <p class="subtitle lang-hi">AI द्वारा बनाया गया व्यक्तिगत भोजन, नींद और गतिविधि शेड्यूल</p>
             <p class="subtitle lang-en" style="display:none">AI-powered personalized feeding, sleeping and activity schedule</p>
         </div>
     </header>
     
-    <div class="container">
+    <div class="container" id="mainContainer">
+        <!-- Removed the top Ad Container as requested -->
+        
         <div class="form-container" id="formContainer">
             <div class="form-group">
                 <label for="babyName" class="lang-hi">बच्चे का नाम</label>
@@ -816,6 +967,21 @@
             </button>
         </div>
         
+        <!-- Ad Container - Middle -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
         <div class="result-container" id="resultContainer">
             <div class="result-header">
                 <h2 class="result-title" id="resultTitle"><span class="lang-hi">आरव (1.5 साल) का दैनिक प्लान</span><span class="lang-en" style="display:none">Arnav (1.5 years) Daily Plan</span></h2>
@@ -863,6 +1029,21 @@
                 </button>
             </div>
         </div>
+        
+        <!-- Ad Container - Bottom -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </div>
     
     <!-- ChatGPT Button -->
@@ -896,6 +1077,7 @@
             <div style="text-align: center; padding: 20px; color: var(--text); font-size: 0.9rem;">
                 <p class="lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
                 <p class="lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+                <p style="margin-top: 10px;"><a href="privacy-policy.html" style="color: var(--secondary);">Privacy Policy</a> | <a href="terms-of-service.html" style="color: var(--secondary);">Terms of Service</a></p>
             </div>
         </div>
     </footer>
@@ -1179,13 +1361,14 @@
             return 'fa-utensils'; // default icon
         }
         
-        function toggleMenu() {
-            const menuItems = document.getElementById('menuItems');
-            if (menuItems.style.display === 'flex') {
-                menuItems.style.display = 'none';
-            } else {
-                menuItems.style.display = 'flex';
-            }
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('mainContainer');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
         }
         
         function generatePlan() {
@@ -1733,6 +1916,12 @@
                 
                 // Update chatbot placeholder
                 document.getElementById('chatGPTInput').placeholder = "Type your question...";
+            }
+            
+            // Close sidebar when switching language
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('open')) {
+                toggleSidebar();
             }
         }
         
