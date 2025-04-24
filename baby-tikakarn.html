@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>भारतीय बच्चों का टीकाकरण चार्ट | Baby Care Planner</title>
-    <meta name="description" content="भारतीय बच्चों के लिए पूर्ण टीकाकरण शेड्यूल। जन्म से 15 वर्ष तक के सभी आवश्यक टीकों की जानकारी।">
-    <meta name="keywords" content="भारतीय टीकाकरण चार्ट, शिशु टीकाकरण, बच्चों के टीके, टीकाकरण शेड्यूल, बेबी वैक्सीनेशन">
+    <title>भारतीय बच्चों का टीकाकरण चार्ट | जन्म से 15 वर्ष तक का पूरा शेड्यूल</title>
+    <meta name="description" content="भारतीय बच्चों के लिए पूर्ण टीकाकरण शेड्यूल कैलकुलेटर। अपने बच्चे की उम्र डालें और आने वाले टीकों की जानकारी पाएं। जन्म से 15 वर्ष तक के सभी आवश्यक टीकों की विस्तृत जानकारी।">
+    <meta name="keywords" content="भारतीय टीकाकरण चार्ट, शिशु टीकाकरण, बच्चों के टीके, टीकाकरण शेड्यूल, बेबी वैक्सीनेशन, टीका कैलकुलेटर, आयु अनुसार टीके">
+    <meta name="author" content="Baby Care Planner">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/vaccination-chart">
+    <meta property="og:title" content="भारतीय बच्चों का पूरा टीकाकरण चार्ट | जन्म से 15 वर्ष">
+    <meta property="og:description" content="अपने बच्चे की उम्र डालें और आने वाले टीकों की जानकारी पाएं। भारत सरकार द्वारा अनुशंसित पूरा टीकाकरण शेड्यूल।">
+    <meta property="og:image" content="https://example.com/images/vaccination-chart-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://example.com/vaccination-chart">
+    <meta property="twitter:title" content="भारतीय बच्चों का पूरा टीकाकरण चार्ट | जन्म से 15 वर्ष">
+    <meta property="twitter:description" content="अपने बच्चे की उम्र डालें और आने वाले टीकों की जानकारी पाएं। भारत सरकार द्वारा अनुशंसित पूरा टीकाकरण शेड्यूल।">
+    <meta property="twitter:image" content="https://example.com/images/vaccination-chart-og.jpg">
+    
+    <link rel="canonical" href="https://example.com/vaccination-chart" />
     
     <style>
         :root {
@@ -259,6 +276,99 @@
             color: var(--primary);
         }
         
+        /* Vaccine Calculator Styles */
+        .calculator-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+        
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        label {
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        input, select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .calculate-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .calculate-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .results-container {
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .upcoming-vaccines {
+            margin-top: 15px;
+        }
+        
+        .vaccine-item {
+            background: var(--light);
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .vaccine-item .vaccine-info {
+            flex: 1;
+        }
+        
+        .vaccine-item .vaccine-age {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .no-vaccines {
+            text-align: center;
+            padding: 15px;
+            color: #666;
+        }
+        
         @media (min-width: 768px) {
             .container {
                 padding: 20px;
@@ -270,6 +380,15 @@
             
             .info-card {
                 padding: 25px;
+            }
+            
+            .calculator-form {
+                flex-direction: row;
+                align-items: flex-end;
+            }
+            
+            .form-group {
+                flex: 1;
             }
         }
     </style>
@@ -299,6 +418,47 @@
     </header>
     
     <div class="container">
+        <!-- Vaccine Calculator Card -->
+        <div class="calculator-card">
+            <h2><i class="fas fa-calculator"></i> <span class="lang-hi">टीकाकरण कैलकुलेटर</span><span class="lang-en" style="display:none">Vaccination Calculator</span></h2>
+            <p class="lang-hi">अपने बच्चे की उम्र डालें और आने वाले टीकों की जानकारी पाएं</p>
+            <p class="lang-en" style="display:none">Enter your child's age to find upcoming vaccines</p>
+            
+            <form class="calculator-form" id="vaccineCalculator">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ageValue" class="lang-hi">उम्र</label>
+                        <label for="ageValue" class="lang-en" style="display:none">Age</label>
+                        <input type="number" id="ageValue" min="0" max="15" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageUnit" class="lang-hi">इकाई</label>
+                        <label for="ageUnit" class="lang-en" style="display:none">Unit</label>
+                        <select id="ageUnit" required>
+                            <option value="days" class="lang-hi">दिन</option>
+                            <option value="weeks" class="lang-hi">सप्ताह</option>
+                            <option value="months" class="lang-hi">महीने</option>
+                            <option value="years" class="lang-hi">वर्ष</option>
+                            <option value="days" class="lang-en" style="display:none">Days</option>
+                            <option value="weeks" class="lang-en" style="display:none">Weeks</option>
+                            <option value="months" class="lang-en" style="display:none">Months</option>
+                            <option value="years" class="lang-en" style="display:none">Years</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="calculate-btn lang-hi"><i class="fas fa-search"></i> टीके खोजें</button>
+                <button type="submit" class="calculate-btn lang-en" style="display:none"><i class="fas fa-search"></i> Find Vaccines</button>
+            </form>
+            
+            <div class="results-container" id="resultsContainer">
+                <h3 class="lang-hi">आपके बच्चे के लिए आने वाले टीके</h3>
+                <h3 class="lang-en" style="display:none">Upcoming Vaccines for Your Child</h3>
+                <div class="upcoming-vaccines" id="upcomingVaccines">
+                    <!-- Results will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
         <div class="info-card">
             <div class="intro-text lang-hi">
                 <p>टीकाकरण आपके बच्चे को गंभीर बीमारियों से बचाने का सबसे प्रभावी तरीका है। यहाँ भारत सरकार द्वारा अनुशंसित <strong>पूरा टीकाकरण शेड्यूल</strong> दिया गया है जो आपके बच्चे को सही समय पर सही टीका लगवाने में मदद करेगा।</p>
@@ -533,6 +693,7 @@
     </footer>
 
     <script>
+        // Language switching function
         function switchLanguage(lang) {
             if (lang === 'hi') {
                 // Show Hindi elements
@@ -573,6 +734,112 @@
                     row.style.display = 'none';
                 }
             });
+        });
+        
+        // Vaccine Calculator Functionality
+        document.getElementById('vaccineCalculator').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const ageValue = parseInt(document.getElementById('ageValue').value);
+            const ageUnit = document.getElementById('ageUnit').value;
+            
+            // Convert all ages to days for easier comparison
+            let ageInDays;
+            
+            switch(ageUnit) {
+                case 'days':
+                    ageInDays = ageValue;
+                    break;
+                case 'weeks':
+                    ageInDays = ageValue * 7;
+                    break;
+                case 'months':
+                    ageInDays = ageValue * 30; // Approximation
+                    break;
+                case 'years':
+                    ageInDays = ageValue * 365; // Approximation
+                    break;
+            }
+            
+            // Define all vaccine milestones in days
+            const vaccineSchedule = [
+                { age: 0, name: 'BCG, OPV-0, हेपेटाइटिस B-1', diseases: 'तपेदिक, पोलियो, हेपेटाइटिस B', notes: 'अत्यंत महत्वपूर्ण' },
+                { age: 42, name: 'DTwP / DTaP-1, IPV-1, हेपेटाइटिस B-2, Hib-1, PCV-1, रोटावायरस-1', diseases: 'डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हेपेटाइटिस B, हीमोफिलस इन्फ्लुएंजा, न्यूमोकोकल, रोटावायरस', notes: 'पहला बूस्टर डोज' },
+                { age: 70, name: 'DTwP / DTaP-2, IPV-2, Hib-2, PCV-2, रोटावायरस-2', diseases: 'डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हीमोफिलस इन्फ्लुएंजा, न्यूमोकोकल, रोटावायरस', notes: 'दूसरा डोज' },
+                { age: 98, name: 'DTwP / DTaP-3, IPV-3, Hib-3, PCV-3, रोटावायरस-3', diseases: 'डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हीमोफिलस इन्फ्लुएंजा, न्यूमोकोकल, रोटावायरस', notes: 'तीसरा डोज' },
+                { age: 180, name: 'इन्फ्लुएंजा (पहली बार)', diseases: 'फ्लू', notes: 'वार्षिक टीकाकरण' },
+                { age: 270, name: 'MMR-1', diseases: 'खसरा, कण्ठमाला, रूबेला', notes: 'अत्यंत महत्वपूर्ण' },
+                { age: 365, name: 'हेपेटाइटिस A-1', diseases: 'हेपेटाइटिस A', notes: '6 महीने बाद दूसरा डोज' },
+                { age: 450, name: 'MMR-2, PCV बूस्टर', diseases: 'खसरा, कण्ठमाला, रूबेला, न्यूमोकोकल', notes: 'बूस्टर डोज' },
+                { age: 540, name: 'DTwP / DTaP बूस्टर-1, IPV बूस्टर-1, Hib बूस्टर-1', diseases: 'डिफ्थीरिया, टिटनेस, काली खांसी, पोलियो, हीमोफिलस इन्फ्लुएंजा', notes: 'बूस्टर डोज' },
+                { age: 730, name: 'टाइफाइड कंजुगेट वैक्सीन', diseases: 'टाइफाइड', notes: 'हर 3 साल पर बूस्टर' },
+                { age: 1460, name: 'DTwP / DTaP बूस्टर-2, MMR-3', diseases: 'डिफ्थीरिया, टिटनेस, काली खांसी, खसरा, कण्ठमाला, रूबेला', notes: 'स्कूल जाने से पहले' },
+                { age: 3650, name: 'Tdap / Td, HPV (2 डोज)', diseases: 'टिटनेस, डिफ्थीरिया, काली खांसी, ह्यूमन पेपिलोमा वायरस', notes: 'HPV लड़कियों के लिए विशेष रूप से महत्वपूर्ण' }
+            ];
+            
+            // Find upcoming vaccines (those with age > current age)
+            const upcomingVaccines = vaccineSchedule.filter(vaccine => vaccine.age > ageInDays);
+            
+            // Display results
+            const resultsContainer = document.getElementById('resultsContainer');
+            const upcomingVaccinesContainer = document.getElementById('upcomingVaccines');
+            
+            upcomingVaccinesContainer.innerHTML = '';
+            
+            if (upcomingVaccines.length > 0) {
+                // Show only the next 3 vaccines
+                const vaccinesToShow = upcomingVaccines.slice(0, 3);
+                
+                vaccinesToShow.forEach(vaccine => {
+                    // Calculate age in appropriate units
+                    let displayAge, displayUnit;
+                    
+                    if (vaccine.age < 30) {
+                        displayAge = vaccine.age;
+                        displayUnit = 'दिन';
+                    } else if (vaccine.age < 365) {
+                        displayAge = Math.round(vaccine.age / 30);
+                        displayUnit = 'महीने';
+                    } else {
+                        displayAge = Math.round(vaccine.age / 365);
+                        displayUnit = 'वर्ष';
+                    }
+                    
+                    const vaccineItem = document.createElement('div');
+                    vaccineItem.className = 'vaccine-item';
+                    
+                    vaccineItem.innerHTML = `
+                        <div class="vaccine-info">
+                            <div class="vaccine-name"><strong>${vaccine.name}</strong></div>
+                            <div class="vaccine-diseases">${vaccine.diseases}</div>
+                            <div class="vaccine-notes"><small>${vaccine.notes}</small></div>
+                        </div>
+                        <div class="vaccine-age">${displayAge} ${displayUnit}</div>
+                    `;
+                    
+                    upcomingVaccinesContainer.appendChild(vaccineItem);
+                });
+                
+                // Show more vaccines message if there are more
+                if (upcomingVaccines.length > 3) {
+                    const moreItem = document.createElement('div');
+                    moreItem.className = 'no-vaccines';
+                    moreItem.textContent = `+ ${upcomingVaccines.length - 3} और टीके...`;
+                    upcomingVaccinesContainer.appendChild(moreItem);
+                }
+                
+                resultsContainer.style.display = 'block';
+            } else {
+                // No upcoming vaccines
+                const noVaccines = document.createElement('div');
+                noVaccines.className = 'no-vaccines';
+                noVaccines.textContent = 'आपके बच्चे ने सभी आयु-उपयुक्त टीके प्राप्त कर लिए हैं!';
+                upcomingVaccinesContainer.appendChild(noVaccines);
+                resultsContainer.style.display = 'block';
+            }
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
         });
     </script>
 </body>
