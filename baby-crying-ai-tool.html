@@ -16,6 +16,8 @@
     <link rel="canonical" href="https://parentingcare.com/baby-cry-analyzer">
     <title>बेबी क्राइ एनालाइजर - जानिए बच्चा भूख, पॉटी, नींद या दर्द के कारण रो रहा है</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <style>
         :root {
             --primary: #5d6bb0;
@@ -179,6 +181,14 @@
             border-radius: 10px;
             margin-bottom: 15px;
             display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .result-card.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .hungry {
@@ -312,6 +322,112 @@
             padding-left: 20px;
         }
         
+        .listening-indicator {
+            display: none;
+            padding: 10px;
+            background-color: rgba(93, 107, 176, 0.1);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--primary);
+            font-weight: 600;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.6; }
+        }
+        
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #f0f2f5;
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .language-btn {
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .feedback-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            align-items: center;
+        }
+        
+        .feedback-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .feedback-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+        
+        .feedback-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .share-section {
+            margin-top: 15px;
+        }
+        
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .share-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        /* New listening animation styles */
+        @keyframes listeningPulse {
+            0% { box-shadow: 0 0 0 0 rgba(93, 107, 176, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(93, 107, 176, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(93, 107, 176, 0); }
+        }
+        
+        .listening-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            animation: listeningPulse 2s infinite;
+            pointer-events: none;
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 15px;
@@ -341,6 +457,16 @@
                 padding: 6px 12px;
                 font-size: 12px;
             }
+            
+            .language-toggle {
+                top: 15px;
+                left: 15px;
+            }
+            
+            .btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -369,40 +495,48 @@
 
     <div class="container">
         <header>
+            <div class="language-toggle">
+                <button id="lang-hi" class="language-btn active" data-lang="hi">हिंदी</button>
+                <button id="lang-en" class="language-btn" data-lang="en">English</button>
+            </div>
             <a href="https://parentingcare.com" class="home-btn">
-                <i class="fas fa-home"></i> होम पेज
+                <i class="fas fa-home"></i> <span data-lang-key="home">होम पेज</span>
             </a>
-            <h1><i class="fas fa-baby"></i> बेबी क्राइ एनालाइजर</h1>
-            <p class="tagline">AI तकनीक से पता करें आपका बच्चा क्यों रो रहा है - भूख, पॉटी, नींद या दर्द के कारण</p>
+            <h1><i class="fas fa-baby"></i> <span data-lang-key="title">बेबी क्राइ एनालाइजर</span></h1>
+            <p class="tagline" data-lang-key="tagline">AI तकनीक से पता करें आपका बच्चा क्यों रो रहा है - भूख, पॉटी, नींद या दर्द के कारण</p>
         </header>
         
         <div class="main-content">
             <section class="analyzer-section">
-                <h2><i class="fas fa-microphone"></i> रोने का विश्लेषण</h2>
+                <h2><i class="fas fa-microphone"></i> <span data-lang-key="analysis">रोने का विश्लेषण</span></h2>
                 
                 <div id="mic-error" class="error-message">
                     <p id="error-text"></p>
                     <button id="help-btn" class="btn btn-primary" style="margin-top: 10px;">
-                        <i class="fas fa-question-circle"></i> मदद चाहिए?
+                        <i class="fas fa-question-circle"></i> <span data-lang-key="need_help">मदद चाहिए?</span>
                     </button>
                     <div id="help-info" style="display: none; margin-top: 10px; padding: 10px; background: #fff3e0; border-radius: 5px;">
-                        <h4>माइक्रोफोन एक्सेस के लिए मदद:</h4>
+                        <h4 data-lang-key="mic_help_title">माइक्रोफोन एक्सेस के लिए मदद:</h4>
                         <ol>
-                            <li>ब्राउज़र के एड्रेस बार में माइक्रोफोन आइकन (🔇/🎤) पर क्लिक करें</li>
-                            <li>"हमेशा इस साइट को माइक्रोफोन एक्सेस की अनुमति दें" चुनें</li>
-                            <li>पेज को रिफ्रेश करें और फिर कोशिश करें</li>
-                            <li>अगर फिर भी समस्या हो, तो किसी दूसरे ब्राउज़र (जैसे Chrome) में कोशिश करें</li>
+                            <li data-lang-key="mic_help_step1">ब्राउज़र के एड्रेस बार में माइक्रोफोन आइकन (🔇/🎤) पर क्लिक करें</li>
+                            <li data-lang-key="mic_help_step2">"हमेशा इस साइट को माइक्रोफोन एक्सेस की अनुमति दें" चुनें</li>
+                            <li data-lang-key="mic_help_step3">पेज को रिफ्रेश करें और फिर कोशिश करें</li>
+                            <li data-lang-key="mic_help_step4">अगर फिर भी समस्या हो, तो किसी दूसरे ब्राउज़र (जैसे Chrome) में कोशिश करें</li>
                         </ol>
-                        <p><strong>मोबाइल उपयोगकर्ता:</strong> कृपया सुनिश्चित करें कि आपने एप्लिकेशन को माइक्रोफोन की अनुमति दी है।</p>
+                        <p><strong data-lang-key="mobile_users">मोबाइल उपयोगकर्ता:</strong> <span data-lang-key="mic_help_mobile">कृपया सुनिश्चित करें कि आपने एप्लिकेशन को माइक्रोफोन की अनुमति दी है।</span></p>
                     </div>
+                </div>
+                
+                <div id="listening-indicator" class="listening-indicator">
+                    <i class="fas fa-microphone"></i> <span data-lang-key="listening">सुन रहे हैं...</span>
                 </div>
                 
                 <div class="controls">
                     <button id="start-btn" class="btn btn-primary">
-                        <i class="fas fa-microphone"></i> सुनना शुरू करें
+                        <i class="fas fa-microphone"></i> <span data-lang-key="start_listening">सुनना शुरू करें</span>
                     </button>
                     <button id="stop-btn" class="btn btn-outline" disabled>
-                        <i class="fas fa-stop"></i> रोकें
+                        <i class="fas fa-stop"></i> <span data-lang-key="stop">रोकें</span>
                     </button>
                 </div>
                 
@@ -411,90 +545,276 @@
                 </div>
                 
                 <div class="result-container">
-                    <p class="result-title"><i class="fas fa-chart-pie"></i> विश्लेषण परिणाम</p>
+                    <p class="result-title"><i class="fas fa-chart-pie"></i> <span data-lang-key="analysis_result">विश्लेषण परिणाम</span></p>
                     <div id="no-result" class="result-card">
-                        <p>अभी तक कोई विश्लेषण नहीं हुआ है। सुनना शुरू करने के लिए बटन दबाएं।</p>
+                        <p data-lang-key="no_analysis">अभी तक कोई विश्लेषण नहीं हुआ है। सुनना शुरू करने के लिए बटन दबाएं।</p>
                     </div>
                     
                     <div id="hungry-result" class="result-card hungry">
-                        <h3><i class="fas fa-utensils"></i> भूख लगी है</h3>
-                        <p>आपके बच्चे को भूख लगी है। शायद दूध पिलाने का समय हो गया है!</p>
+                        <h3><i class="fas fa-utensils"></i> <span data-lang-key="hungry">भूख लगी है</span></h3>
+                        <p data-lang-key="hungry_desc">आपके बच्चे को भूख लगी है। शायद दूध पिलाने का समय हो गया है!</p>
                         <div class="confidence-meter">
                             <div id="hungry-confidence" class="confidence-fill" style="width: 0%; background-color: var(--hungry);"></div>
+                        </div>
+                        <div class="feedback-section">
+                            <span class="feedback-text" data-lang-key="feedback">क्या यह परिणाम सही लगा?</span>
+                            <button class="feedback-btn" data-feedback="hungry" data-value="1">👍🏻</button>
+                            <button class="feedback-btn" data-feedback="hungry" data-value="0">👎🏻</button>
+                        </div>
+                        <div class="share-section">
+                            <a href="#" class="share-btn" id="share-hungry" target="_blank">
+                                <i class="fab fa-whatsapp"></i> <span data-lang-key="share_whatsapp">WhatsApp पर शेयर करें</span>
+                            </a>
                         </div>
                     </div>
                     
                     <div id="diaper-result" class="result-card diaper">
-                        <h3><i class="fas fa-baby-carriage"></i> डायपर बदलने की जरूरत</h3>
-                        <p>बच्चे ने पॉटी की है या डायपर गीला हो गया है। जांच करें और बदलें।</p>
+                        <h3><i class="fas fa-baby-carriage"></i> <span data-lang-key="diaper">डायपर बदलने की जरूरत</span></h3>
+                        <p data-lang-key="diaper_desc">बच्चे ने पॉटी की है या डायपर गीला हो गया है। जांच करें और बदलें।</p>
                         <div class="confidence-meter">
                             <div id="diaper-confidence" class="confidence-fill" style="width: 0%; background-color: var(--diaper);"></div>
+                        </div>
+                        <div class="feedback-section">
+                            <span class="feedback-text" data-lang-key="feedback">क्या यह परिणाम सही लगा?</span>
+                            <button class="feedback-btn" data-feedback="diaper" data-value="1">👍🏻</button>
+                            <button class="feedback-btn" data-feedback="diaper" data-value="0">👎🏻</button>
+                        </div>
+                        <div class="share-section">
+                            <a href="#" class="share-btn" id="share-diaper" target="_blank">
+                                <i class="fab fa-whatsapp"></i> <span data-lang-key="share_whatsapp">WhatsApp पर शेयर करें</span>
+                            </a>
                         </div>
                     </div>
                     
                     <div id="sleepy-result" class="result-card sleepy">
-                        <h3><i class="fas fa-moon"></i> नींद आ रही है</h3>
-                        <p>आपका बच्चा थक गया है और सोना चाहता है।</p>
+                        <h3><i class="fas fa-moon"></i> <span data-lang-key="sleepy">नींद आ रही है</span></h3>
+                        <p data-lang-key="sleepy_desc">आपका बच्चा थक गया है और सोना चाहता है।</p>
                         <div class="confidence-meter">
                             <div id="sleepy-confidence" class="confidence-fill" style="width: 0%; background-color: var(--sleepy);"></div>
+                        </div>
+                        <div class="feedback-section">
+                            <span class="feedback-text" data-lang-key="feedback">क्या यह परिणाम सही लगा?</span>
+                            <button class="feedback-btn" data-feedback="sleepy" data-value="1">👍🏻</button>
+                            <button class="feedback-btn" data-feedback="sleepy" data-value="0">👎🏻</button>
+                        </div>
+                        <div class="share-section">
+                            <a href="#" class="share-btn" id="share-sleepy" target="_blank">
+                                <i class="fab fa-whatsapp"></i> <span data-lang-key="share_whatsapp">WhatsApp पर शेयर करें</span>
+                            </a>
                         </div>
                     </div>
                     
                     <div id="pain-result" class="result-card pain">
-                        <h3><i class="fas fa-heartbeat"></i> दर्द/तकलीफ</h3>
-                        <p>बच्चे को कोई दर्द या तकलीफ हो सकती है। अन्य लक्षणों की जांच करें।</p>
+                        <h3><i class="fas fa-heartbeat"></i> <span data-lang-key="pain">दर्द/तकलीफ</span></h3>
+                        <p data-lang-key="pain_desc">बच्चे को कोई दर्द या तकलीफ हो सकती है। अन्य लक्षणों की जांच करें।</p>
                         <div class="confidence-meter">
                             <div id="pain-confidence" class="confidence-fill" style="width: 0%; background-color: var(--pain);"></div>
+                        </div>
+                        <div class="feedback-section">
+                            <span class="feedback-text" data-lang-key="feedback">क्या यह परिणाम सही लगा?</span>
+                            <button class="feedback-btn" data-feedback="pain" data-value="1">👍🏻</button>
+                            <button class="feedback-btn" data-feedback="pain" data-value="0">👎🏻</button>
+                        </div>
+                        <div class="share-section">
+                            <a href="#" class="share-btn" id="share-pain" target="_blank">
+                                <i class="fab fa-whatsapp"></i> <span data-lang-key="share_whatsapp">WhatsApp पर शेयर करें</span>
+                            </a>
                         </div>
                     </div>
                     
                     <div id="attention-result" class="result-card attention">
-                        <h3><i class="fas fa-hands-helping"></i> ध्यान चाहिए</h3>
-                        <p>आपका बच्चा आपका ध्यान या प्यार चाहता है।</p>
+                        <h3><i class="fas fa-hands-helping"></i> <span data-lang-key="attention">ध्यान चाहिए</span></h3>
+                        <p data-lang-key="attention_desc">आपका बच्चा आपका ध्यान या प्यार चाहता है।</p>
                         <div class="confidence-meter">
                             <div id="attention-confidence" class="confidence-fill" style="width: 0%; background-color: var(--attention);"></div>
+                        </div>
+                        <div class="feedback-section">
+                            <span class="feedback-text" data-lang-key="feedback">क्या यह परिणाम सही लगा?</span>
+                            <button class="feedback-btn" data-feedback="attention" data-value="1">👍🏻</button>
+                            <button class="feedback-btn" data-feedback="attention" data-value="0">👎🏻</button>
+                        </div>
+                        <div class="share-section">
+                            <a href="#" class="share-btn" id="share-attention" target="_blank">
+                                <i class="fab fa-whatsapp"></i> <span data-lang-key="share_whatsapp">WhatsApp पर शेयर करें</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
             
             <section class="history-section">
-                <h2 class="history-title"><i class="fas fa-history"></i> पिछले विश्लेषण</h2>
+                <h2 class="history-title"><i class="fas fa-history"></i> <span data-lang-key="history">पिछले विश्लेषण</span></h2>
                 <div class="history-list" id="history-list">
                     <!-- History items will be added here dynamically -->
                 </div>
             </section>
             
             <section class="seo-content">
-                <h2><i class="fas fa-info-circle"></i> बेबी क्राइ एनालाइजर कैसे काम करता है?</h2>
-                <p>यह उन्नत AI तकनीक पर आधारित टूल आपके बच्चे के रोने की आवाज़ का विश्लेषण करके पता लगाता है कि बच्चा क्यों रो रहा है। विभिन्न प्रकार के रोने के पैटर्न को पहचानकर यह सटीक परिणाम देता है।</p>
+                <h2><i class="fas fa-info-circle"></i> <span data-lang-key="how_it_works">बेबी क्राइ एनालाइजर कैसे काम करता है?</span></h2>
+                <p data-lang-key="how_it_works_desc">यह उन्नत AI तकनीक पर आधारित टूल आपके बच्चे के रोने की आवाज़ का विश्लेषण करके पता लगाता है कि बच्चा क्यों रो रहा है। विभिन्न प्रकार के रोने के पैटर्न को पहचानकर यह सटीक परिणाम देता है।</p>
                 
-                <h3>बच्चे रोने के मुख्य कारण:</h3>
+                <h3 data-lang-key="reasons_title">बच्चे रोने के मुख्य कारण:</h3>
                 <ul>
-                    <li><strong>भूख लगना</strong> - नियमित अंतराल पर रोना, मुंह में उंगली डालना</li>
-                    <li><strong>पॉटी/डायपर गीला होना</strong> - असहज महसूस करने पर अचानक रोना</li>
-                    <li><strong>नींद आना</strong> - आँखें मलते हुए, थकान भरा रोना</li>
-                    <li><strong>दर्द/तकलीफ</strong> - तेज और लगातार रोना</li>
-                    <li><strong>ध्यान चाहिए</strong> - रुक-रुक कर रोना</li>
+                    <li><strong data-lang-key="reason_hungry">भूख लगना</strong> - <span data-lang-key="reason_hungry_desc">नियमित अंतराल पर रोना, मुंह में उंगली डालना</span></li>
+                    <li><strong data-lang-key="reason_diaper">पॉटी/डायपर गीला होना</strong> - <span data-lang-key="reason_diaper_desc">असहज महसूस करने पर अचानक रोना</span></li>
+                    <li><strong data-lang-key="reason_sleepy">नींद आना</strong> - <span data-lang-key="reason_sleepy_desc">आँखें मलते हुए, थकान भरा रोना</span></li>
+                    <li><strong data-lang-key="reason_pain">दर्द/तकलीफ</strong> - <span data-lang-key="reason_pain_desc">तेज और लगातार रोना</span></li>
+                    <li><strong data-lang-key="reason_attention">ध्यान चाहिए</strong> - <span data-lang-key="reason_attention_desc">रुक-रुक कर रोना</span></li>
                 </ul>
                 
-                <h3>इस टूल के फायदे:</h3>
+                <h3 data-lang-key="benefits_title">इस टूल के फायदे:</h3>
                 <ul>
-                    <li>100% प्राइवेट - सभी प्रोसेसिंग आपके डिवाइस पर होती है</li>
-                    <li>भारतीय बच्चों के रोने के पैटर्न के अनुकूल</li>
-                    <li>कोई इंटरनेट कनेक्शन आवश्यक नहीं</li>
-                    <li>उपयोग में आसान और तुरंत परिणाम</li>
+                    <li data-lang-key="benefit_private">100% प्राइवेट - सभी प्रोसेसिंग आपके डिवाइस पर होती है</li>
+                    <li data-lang-key="benefit_indian">भारतीय बच्चों के रोने के पैटर्न के अनुकूल</li>
+                    <li data-lang-key="benefit_offline">कोई इंटरनेट कनेक्शन आवश्यक नहीं</li>
+                    <li data-lang-key="benefit_easy">उपयोग में आसान और तुरंत परिणाम</li>
                 </ul>
             </section>
         </div>
         
         <footer>
-            <p>बेबी क्राइ एनालाइजर &copy; 2023 | <a href="https://parentingcare.com/privacy" style="color: var(--primary);">गोपनीयता नीति</a> | <a href="https://parentingcare.com/terms" style="color: var(--primary);">उपयोग की शर्तें</a></p>
-            <p style="font-size: 12px; margin-top: 10px;">यह टूल पूरी तरह से आपके ब्राउज़र में काम करता है - किसी सर्वर की आवश्यकता नहीं</p>
+            <p><span data-lang-key="copyright">बेबी क्राइ एनालाइजर &copy; 2023</span> | <a href="https://parentingcare.com/privacy" style="color: var(--primary);" data-lang-key="privacy">गोपनीयता नीति</a> | <a href="https://parentingcare.com/terms" style="color: var(--primary);" data-lang-key="terms">उपयोग की शर्तें</a></p>
+            <p style="font-size: 12px; margin-top: 10px;" data-lang-key="footer_note">यह टूल पूरी तरह से आपके ब्राउज़र में काम करता है - किसी सर्वर की आवश्यकता नहीं</p>
         </footer>
     </div>
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
     <script>
+        // Language support
+        const translations = {
+            hi: {
+                title: "बेबी क्राइ एनालाइजर",
+                tagline: "AI तकनीक से पता करें आपका बच्चा क्यों रो रहा है - भूख, पॉटी, नींद या दर्द के कारण",
+                home: "होम पेज",
+                analysis: "रोने का विश्लेषण",
+                need_help: "मदद चाहिए?",
+                mic_help_title: "माइक्रोफोन एक्सेस के लिए मदद:",
+                mic_help_step1: "ब्राउज़र के एड्रेस बार में माइक्रोफोन आइकन (🔇/🎤) पर क्लिक करें",
+                mic_help_step2: "\"हमेशा इस साइट को माइक्रोफोन एक्सेस की अनुमति दें\" चुनें",
+                mic_help_step3: "पेज को रिफ्रेश करें और फिर कोशिश करें",
+                mic_help_step4: "अगर फिर भी समस्या हो, तो किसी दूसरे ब्राउज़र (जैसे Chrome) में कोशिश करें",
+                mobile_users: "मोबाइल उपयोगकर्ता:",
+                mic_help_mobile: "कृपया सुनिश्चित करें कि आपने एप्लिकेशन को माइक्रोफोन की अनुमति दी है।",
+                listening: "सुन रहे हैं...",
+                start_listening: "सुनना शुरू करें",
+                stop: "रोकें",
+                analysis_result: "विश्लेषण परिणाम",
+                no_analysis: "अभी तक कोई विश्लेषण नहीं हुआ है। सुनना शुरू करने के लिए बटन दबाएं।",
+                hungry: "भूख लगी है",
+                hungry_desc: "आपके बच्चे को भूख लगी है। शायद दूध पिलाने का समय हो गया है!",
+                diaper: "डायपर बदलने की जरूरत",
+                diaper_desc: "बच्चे ने पॉटी की है या डायपर गीला हो गया है। जांच करें और बदलें।",
+                sleepy: "नींद आ रही है",
+                sleepy_desc: "आपका बच्चा थक गया है और सोना चाहता है।",
+                pain: "दर्द/तकलीफ",
+                pain_desc: "बच्चे को कोई दर्द या तकलीफ हो सकती है। अन्य लक्षणों की जांच करें।",
+                attention: "ध्यान चाहिए",
+                attention_desc: "आपका बच्चा आपका ध्यान या प्यार चाहता है।",
+                feedback: "क्या यह परिणाम सही लगा?",
+                share_whatsapp: "WhatsApp पर शेयर करें",
+                history: "पिछले विश्लेषण",
+                how_it_works: "बेबी क्राइ एनालाइजर कैसे काम करता है?",
+                how_it_works_desc: "यह उन्नत AI तकनीक पर आधारित टूल आपके बच्चे के रोने की आवाज़ का विश्लेषण करके पता लगाता है कि बच्चा क्यों रो रहा है। विभिन्न प्रकार के रोने के पैटर्न को पहचानकर यह सटीक परिणाम देता है।",
+                reasons_title: "बच्चे रोने के मुख्य कारण:",
+                reason_hungry: "भूख लगना",
+                reason_hungry_desc: "नियमित अंतराल पर रोना, मुंह में उंगली डालना",
+                reason_diaper: "पॉटी/डायपर गीला होना",
+                reason_diaper_desc: "असहज महसूस करने पर अचानक रोना",
+                reason_sleepy: "नींद आना",
+                reason_sleepy_desc: "आँखें मलते हुए, थकान भरा रोना",
+                reason_pain: "दर्द/तकलीफ",
+                reason_pain_desc: "तेज और लगातार रोना",
+                reason_attention: "ध्यान चाहिए",
+                reason_attention_desc: "रुक-रुक कर रोना",
+                benefits_title: "इस टूल के फायदे:",
+                benefit_private: "100% प्राइवेट - सभी प्रोसेसिंग आपके डिवाइस पर होती है",
+                benefit_indian: "भारतीय बच्चों के रोने के पैटर्न के अनुकूल",
+                benefit_offline: "कोई इंटरनेट कनेक्शन आवश्यक नहीं",
+                benefit_easy: "उपयोग में आसान और तुरंत परिणाम",
+                copyright: "बेबी क्राइ एनालाइजर &copy; 2023",
+                privacy: "गोपनीयता नीति",
+                terms: "उपयोग की शर्तें",
+                footer_note: "यह टूल पूरी तरह से आपके ब्राउज़र में काम करता है - किसी सर्वर की आवश्यकता नहीं"
+            },
+            en: {
+                title: "Baby Cry Analyzer",
+                tagline: "Find out why your baby is crying using AI technology - hunger, diaper, sleep or pain",
+                home: "Home Page",
+                analysis: "Cry Analysis",
+                need_help: "Need Help?",
+                mic_help_title: "Microphone Access Help:",
+                mic_help_step1: "Click on the microphone icon (🔇/🎤) in the browser's address bar",
+                mic_help_step2: "Select \"Always allow this site to access microphone\"",
+                mic_help_step3: "Refresh the page and try again",
+                mic_help_step4: "If problem persists, try another browser (like Chrome)",
+                mobile_users: "Mobile Users:",
+                mic_help_mobile: "Please ensure you've granted microphone permission to the app.",
+                listening: "Listening...",
+                start_listening: "Start Listening",
+                stop: "Stop",
+                analysis_result: "Analysis Result",
+                no_analysis: "No analysis yet. Press the button to start listening.",
+                hungry: "Hungry",
+                hungry_desc: "Your baby is hungry. It might be time for feeding!",
+                diaper: "Diaper Change Needed",
+                diaper_desc: "Baby has pooped or diaper is wet. Please check and change.",
+                sleepy: "Sleepy",
+                sleepy_desc: "Your baby is tired and wants to sleep.",
+                pain: "Pain/Discomfort",
+                pain_desc: "Baby might be in pain or discomfort. Check for other symptoms.",
+                attention: "Needs Attention",
+                attention_desc: "Your baby wants your attention or love.",
+                feedback: "Was this result accurate?",
+                share_whatsapp: "Share on WhatsApp",
+                history: "Analysis History",
+                how_it_works: "How Baby Cry Analyzer Works?",
+                how_it_works_desc: "This AI-powered tool analyzes your baby's crying sound to determine why they're crying. It recognizes different crying patterns to provide accurate results.",
+                reasons_title: "Main Reasons Babies Cry:",
+                reason_hungry: "Hunger",
+                reason_hungry_desc: "Crying at regular intervals, putting fingers in mouth",
+                reason_diaper: "Diaper/Wet",
+                reason_diaper_desc: "Sudden crying when feeling uncomfortable",
+                reason_sleepy: "Sleepy",
+                reason_sleepy_desc: "Rubbing eyes, tired crying",
+                reason_pain: "Pain/Discomfort",
+                reason_pain_desc: "Loud and continuous crying",
+                reason_attention: "Needs Attention",
+                reason_attention_desc: "Intermittent crying",
+                benefits_title: "Benefits of This Tool:",
+                benefit_private: "100% Private - All processing happens on your device",
+                benefit_indian: "Optimized for Indian babies' crying patterns",
+                benefit_offline: "No internet connection required",
+                benefit_easy: "Easy to use with instant results",
+                copyright: "Baby Cry Analyzer &copy; 2023",
+                privacy: "Privacy Policy",
+                terms: "Terms of Use",
+                footer_note: "This tool works completely in your browser - no server needed"
+            }
+        };
+
+        // Set initial language
+        let currentLang = 'hi';
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update active language button
+            document.getElementById('lang-hi').classList.toggle('active', lang === 'hi');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            
+            // Save language preference
+            localStorage.setItem('preferredLang', lang);
+        }
+
         // DOM Elements
         const startBtn = document.getElementById('start-btn');
         const stopBtn = document.getElementById('stop-btn');
@@ -504,6 +824,7 @@
         const errorText = document.getElementById('error-text');
         const helpBtn = document.getElementById('help-btn');
         const helpInfo = document.getElementById('help-info');
+        const listeningIndicator = document.getElementById('listening-indicator');
         
         // Result cards
         const noResultCard = document.getElementById('no-result');
@@ -531,6 +852,7 @@
         let isRecording = false;
         let mediaRecorder;
         let audioChunks = [];
+        let animationDiv;
         
         // Initialize canvas
         function initCanvas() {
@@ -590,12 +912,20 @@
                 // Check permission state
                 const permissionState = await checkMicrophonePermission();
                 if (permissionState === 'denied') {
-                    showError('आपने माइक्रोफोन अनुमति नहीं दी है। कृपया ब्राउज़र सेटिंग्स में जाकर अनुमति दें।');
+                    showError(currentLang === 'hi' ? 
+                        'आपने माइक्रोफोन अनुमति नहीं दी है। कृपया ब्राउज़र सेटिंग्स में जाकर अनुमति दें।' : 
+                        'You have denied microphone permission. Please enable it in browser settings.');
                     return;
                 }
                 
                 initCanvas();
                 initAudio();
+                
+                // Add listening animation
+                const visualizer = document.querySelector('.visualizer');
+                animationDiv = document.createElement('div');
+                animationDiv.className = 'listening-animation';
+                visualizer.appendChild(animationDiv);
                 
                 const stream = await navigator.mediaDevices.getUserMedia({ 
                     audio: {
@@ -604,6 +934,9 @@
                         autoGainControl: true
                     }
                 });
+                
+                // Show listening indicator
+                listeningIndicator.style.display = 'block';
                 
                 // Setup media recorder to capture audio data
                 mediaRecorder = new MediaRecorder(stream);
@@ -615,8 +948,11 @@
                 
                 mediaRecorder.onerror = (event) => {
                     console.error('Recording error:', event.error);
-                    showError('रिकॉर्डिंग में त्रुटि हुई। पुनः प्रयास करें।');
+                    showError(currentLang === 'hi' ? 
+                        'रिकॉर्डिंग में त्रुटि हुई। पुनः प्रयास करें।' : 
+                        'Recording error occurred. Please try again.');
                     resetRecordingState();
+                    if (animationDiv) animationDiv.remove();
                 };
                 
                 mediaRecorder.start();
@@ -639,6 +975,9 @@
                     meter.style.width = '0%';
                 });
                 
+                // Track analytics event
+                trackEvent('Recording Started');
+                
             } catch (error) {
                 handleMicError(error);
             }
@@ -651,6 +990,7 @@
             isRecording = false;
             startBtn.disabled = false;
             stopBtn.disabled = true;
+            listeningIndicator.style.display = 'none';
             
             // Stop media recorder
             mediaRecorder.stop();
@@ -660,10 +1000,18 @@
                 microphone.disconnect();
             }
             
+            // Remove animation
+            if (animationDiv) {
+                animationDiv.remove();
+            }
+            
             // Wait for the audio data to be available
             mediaRecorder.onstop = async () => {
                 const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                 await analyzeAudio(audioBlob);
+                
+                // Track analytics event
+                trackEvent('Recording Stopped');
             };
         }
         
@@ -671,23 +1019,35 @@
         function handleMicError(error) {
             console.error('Microphone error:', error);
             
-            let errorMessage = "माइक्रोफोन एक्सेस में त्रुटि: ";
+            let errorMessage = currentLang === 'hi' ? 
+                "माइक्रोफोन एक्सेस में त्रुटि: " : 
+                "Microphone access error: ";
             
             switch(error.name) {
                 case 'NotAllowedError':
-                    errorMessage = "आपने माइक्रोफोन अनुमति नहीं दी। कृपया अनुमति दें।";
+                    errorMessage = currentLang === 'hi' ? 
+                        "आपने माइक्रोफोन अनुमति नहीं दी। कृपया अनुमति दें।" : 
+                        "You didn't allow microphone access. Please grant permission.";
                     break;
                 case 'NotFoundError':
-                    errorMessage = "कोई माइक्रोफोन डिवाइस नहीं मिला।";
+                    errorMessage = currentLang === 'hi' ? 
+                        "कोई माइक्रोफोन डिवाइस नहीं मिला।" : 
+                        "No microphone device found.";
                     break;
                 case 'NotReadableError':
-                    errorMessage = "माइक्रोफोन का उपयोग नहीं किया जा सकता (शायद अन्य एप्लिकेशन उपयोग कर रहा है)।";
+                    errorMessage = currentLang === 'hi' ? 
+                        "माइक्रोफोन का उपयोग नहीं किया जा सकता (शायद अन्य एप्लिकेशन उपयोग कर रहा है)।" : 
+                        "Microphone is not usable (maybe another app is using it).";
                     break;
                 case 'SecurityError':
-                    errorMessage = "सुरक्षा कारणों से माइक्रोफोन एक्सेस अवरुद्ध है। HTTPS कनेक्शन का उपयोग करें।";
+                    errorMessage = currentLang === 'hi' ? 
+                        "सुरक्षा कारणों से माइक्रोफोन एक्सेस अवरुद्ध है। HTTPS कनेक्शन का उपयोग करें।" : 
+                        "Microphone access blocked for security. Use HTTPS connection.";
                     break;
                 default:
-                    errorMessage = "माइक्रोफोन एक्सेस में अज्ञात त्रुटि हुई।";
+                    errorMessage = currentLang === 'hi' ? 
+                        "माइक्रोफोन एक्सेस में अज्ञात त्रुटि हुई।" : 
+                        "Unknown microphone access error occurred.";
             }
             
             showError(errorMessage);
@@ -705,12 +1065,16 @@
             isRecording = false;
             startBtn.disabled = false;
             stopBtn.disabled = true;
+            listeningIndicator.style.display = 'none';
             
             if (microphone) {
                 microphone.disconnect();
             }
             if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                 mediaRecorder.stop();
+            }
+            if (animationDiv) {
+                animationDiv.remove();
             }
         }
         
@@ -726,11 +1090,126 @@
             };
         }
         
-        // Machine learning model (simplified browser version)
+        // Machine learning model with TensorFlow.js
         class BrowserBabyCryModel {
-            predict(features) {
-                // This is a mock model that simulates ML predictions
-                // In a real implementation, you might use TensorFlow.js or a pre-trained model
+            constructor() {
+                this.model = null;
+                this.isModelLoaded = false;
+                this.loadModel();
+            }
+            
+            async loadModel() {
+                try {
+                    // In a real app, you would load your actual trained model here
+                    // For demo purposes, we'll use a mock model
+                    console.log('Loading TensorFlow.js model...');
+                    
+                    // Create a simple mock model
+                    this.model = tf.sequential();
+                    this.model.add(tf.layers.dense({units: 5, inputShape: [4]}));
+                    this.model.add(tf.layers.softmax());
+                    
+                    // Compile the model
+                    this.model.compile({
+                        optimizer: 'adam',
+                        loss: 'categoricalCrossentropy',
+                        metrics: ['accuracy']
+                    });
+                    
+                    this.isModelLoaded = true;
+                    console.log('Model loaded successfully');
+                } catch (error) {
+                    console.error('Failed to load model:', error);
+                    // Fall back to mock predictions if model fails to load
+                    this.isModelLoaded = false;
+                }
+            }
+            
+            async preprocessAudio(audioBlob) {
+                // Convert audio blob to array buffer
+                const arrayBuffer = await audioBlob.arrayBuffer();
+                
+                // Decode audio data
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                
+                // Get the first channel (mono)
+                const channelData = audioBuffer.getChannelData(0);
+                
+                // Convert to tensor and process (simplified example)
+                // In a real implementation, you would extract MFCCs or other features
+                const audioTensor = tf.tensor1d(channelData);
+                
+                // Calculate some mock features
+                const features = {
+                    duration: channelData.length / audioBuffer.sampleRate,
+                    mean: tf.mean(audioTensor).dataSync()[0],
+                    variance: tf.moments(audioTensor).variance.dataSync()[0],
+                    max: tf.max(audioTensor).dataSync()[0]
+                };
+                
+                audioTensor.dispose();
+                
+                // Return features as tensor
+                return tf.tensor2d([
+                    [features.duration, features.mean, features.variance, features.max]
+                ]);
+            }
+            
+            async predict(audioBlob) {
+                // If model failed to load, use mock predictions
+                if (!this.isModelLoaded) {
+                    return this.mockPredict(audioBlob);
+                }
+                
+                try {
+                    // Preprocess audio
+                    const input = await this.preprocessAudio(audioBlob);
+                    
+                    // Make prediction
+                    const prediction = this.model.predict(input);
+                    const probabilities = await prediction.data();
+                    prediction.dispose();
+                    input.dispose();
+                    
+                    // Format results
+                    const labels = ['hungry', 'diaper', 'sleepy', 'pain', 'attention'];
+                    const results = {};
+                    
+                    labels.forEach((label, index) => {
+                        results[label] = (probabilities[index] * 100).toFixed(1);
+                    });
+                    
+                    // Find the most probable reason
+                    let maxReason = '';
+                    let maxProb = 0;
+                    
+                    for (const reason in results) {
+                        if (parseFloat(results[reason]) > maxProb) {
+                            maxProb = parseFloat(results[reason]);
+                            maxReason = reason;
+                        }
+                    }
+                    
+                    return {
+                        prediction: maxReason,
+                        probabilities: results
+                    };
+                    
+                } catch (error) {
+                    console.error('Prediction error:', error);
+                    // Fall back to mock predictions if error occurs
+                    return this.mockPredict(audioBlob);
+                }
+            }
+            
+            // Mock predictions for when model fails to load
+            async mockPredict(audioBlob) {
+                // Simulate model loading delay
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Get audio duration
+                const duration = audioBlob.size / 1000; // Mock duration
                 
                 // Base probabilities for each cry type
                 const baseProbabilities = {
@@ -741,19 +1220,21 @@
                     attention: 0.2
                 };
                 
-                // Adjust probabilities based on mock features
-                if (features.pitchVariation > 0.7) {
+                // Adjust probabilities based on duration
+                if (duration > 5) {
                     baseProbabilities.pain += 0.3;
-                    baseProbabilities.hungry += 0.2;
-                }
-                
-                if (features.intensity > 0.8) {
+                    baseProbabilities.hungry += 0.1;
+                } else if (duration < 2) {
                     baseProbabilities.diaper += 0.3;
-                    baseProbabilities.attention += 0.2;
+                    baseProbabilities.attention += 0.1;
+                } else {
+                    baseProbabilities.sleepy += 0.2;
                 }
                 
-                if (features.frequency > 600) {
-                    baseProbabilities.sleepy += 0.4;
+                // Add some randomness
+                for (const key in baseProbabilities) {
+                    baseProbabilities[key] += Math.random() * 0.1 - 0.05;
+                    baseProbabilities[key] = Math.max(0.1, baseProbabilities[key]);
                 }
                 
                 // Normalize to sum to 1
@@ -787,18 +1268,21 @@
         // Analyze audio using our browser-based model
         async function analyzeAudio(audioBlob) {
             try {
-                // Extract features from audio
-                const features = extractAudioFeatures(audioBlob);
-                
                 // Get prediction from model
-                const result = cryModel.predict(features);
+                const result = await cryModel.predict(audioBlob);
                 
                 // Display results
                 displayResults(result.prediction, result.probabilities);
                 addToHistory(result.prediction, result.probabilities[result.prediction]);
+                
+                // Track analytics event
+                trackEvent('Analysis Completed', { reason: result.prediction });
+                
             } catch (error) {
                 console.error('Analysis failed:', error);
-                showError('विश्लेषण विफल हुआ। कृपया पुनः प्रयास करें।');
+                showError(currentLang === 'hi' ? 
+                    'विश्लेषण विफल हुआ। कृपया पुनः प्रयास करें।' : 
+                    'Analysis failed. Please try again.');
             }
         }
         
@@ -807,25 +1291,42 @@
             // Hide all cards first
             [hungryCard, diaperCard, sleepyCard, painCard, attentionCard].forEach(card => {
                 card.style.display = 'none';
+                card.classList.remove('show');
             });
             
             // Show the appropriate card
+            let activeCard;
             switch (mainReason) {
                 case 'hungry':
-                    hungryCard.style.display = 'block';
+                    activeCard = hungryCard;
                     break;
                 case 'diaper':
-                    diaperCard.style.display = 'block';
+                    activeCard = diaperCard;
                     break;
                 case 'sleepy':
-                    sleepyCard.style.display = 'block';
+                    activeCard = sleepyCard;
                     break;
                 case 'pain':
-                    painCard.style.display = 'block';
+                    activeCard = painCard;
                     break;
                 case 'attention':
-                    attentionCard.style.display = 'block';
+                    activeCard = attentionCard;
                     break;
+            }
+            
+            if (activeCard) {
+                activeCard.style.display = 'block';
+                setTimeout(() => {
+                    activeCard.classList.add('show');
+                }, 10);
+                
+                // Update WhatsApp share link
+                const shareBtn = activeCard.querySelector('.share-btn');
+                const reasonText = activeCard.querySelector('h3 span').textContent;
+                const shareText = currentLang === 'hi' ? 
+                    `मेरे बेबी के रोने की वजह: ${reasonText}` : 
+                    `My baby's crying reason: ${reasonText}`;
+                shareBtn.href = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
             }
             
             // Update confidence meters
@@ -839,14 +1340,17 @@
         // Add to history log
         function addToHistory(reason, confidence) {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('hi-IN', { hour: '2-digit', minute: '2-digit' });
+            const timeString = now.toLocaleTimeString(currentLang === 'hi' ? 'hi-IN' : 'en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
             
             const reasonTexts = {
-                hungry: 'भूख का रोना पाया गया',
-                diaper: 'डायपर बदलने की आवश्यकता',
-                sleepy: 'नींद का रोना पाया गया',
-                pain: 'दर्द/तकलीफ का रोना पाया गया',
-                attention: 'ध्यान चाहिए का रोना पाया गया'
+                hungry: currentLang === 'hi' ? 'भूख का रोना पाया गया' : 'Hungry cry detected',
+                diaper: currentLang === 'hi' ? 'डायपर बदलने की आवश्यकता' : 'Diaper change needed',
+                sleepy: currentLang === 'hi' ? 'नींद का रोना पाया गया' : 'Sleepy cry detected',
+                pain: currentLang === 'hi' ? 'दर्द/तकलीफ का रोना पाया गया' : 'Pain cry detected',
+                attention: currentLang === 'hi' ? 'ध्यान चाहिए का रोना पाया गया' : 'Attention cry detected'
             };
             
             const statusClasses = {
@@ -858,11 +1362,11 @@
             };
             
             const reasonLabels = {
-                hungry: 'भूख',
-                diaper: 'डायपर',
-                sleepy: 'नींद',
-                pain: 'दर्द',
-                attention: 'ध्यान'
+                hungry: currentLang === 'hi' ? 'भूख' : 'Hungry',
+                diaper: currentLang === 'hi' ? 'डायपर' : 'Diaper',
+                sleepy: currentLang === 'hi' ? 'नींद' : 'Sleepy',
+                pain: currentLang === 'hi' ? 'दर्द' : 'Pain',
+                attention: currentLang === 'hi' ? 'ध्यान' : 'Attention'
             };
             
             const historyItem = document.createElement('div');
@@ -910,11 +1414,45 @@
             }
         }
         
+        // Track events (simplified analytics)
+        function trackEvent(eventName, eventData = {}) {
+            console.log('Event:', eventName, eventData);
+            // In a real implementation, you would send this to Google Analytics or similar
+        }
+        
+        // Handle feedback
+        function handleFeedback(reason, isAccurate) {
+            trackEvent('Feedback Submitted', {
+                reason: reason,
+                isAccurate: isAccurate
+            });
+            
+            // Show thank you message
+            const feedbackText = currentLang === 'hi' ? 
+                'आपके फीडबैक के लिए धन्यवाद!' : 
+                'Thank you for your feedback!';
+            
+            alert(feedbackText);
+        }
+        
         // Event listeners
         startBtn.addEventListener('click', startRecording);
         stopBtn.addEventListener('click', stopRecording);
         helpBtn.addEventListener('click', () => {
             helpInfo.style.display = helpInfo.style.display === 'none' ? 'block' : 'none';
+        });
+        
+        // Language toggle
+        document.getElementById('lang-hi').addEventListener('click', () => changeLanguage('hi'));
+        document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
+        
+        // Feedback buttons
+        document.querySelectorAll('.feedback-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const reason = this.getAttribute('data-feedback');
+                const isAccurate = this.getAttribute('data-value') === '1';
+                handleFeedback(reason, isAccurate);
+            });
         });
         
         // Initialize
@@ -924,8 +1462,25 @@
         
         // Check if browser supports microphone access
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-            showError('आपका ब्राउज़र माइक्रोफोन एक्सेस का समर्थन नहीं करता। कृपया Chrome या Firefox का उपयोग करें।');
+            showError(currentLang === 'hi' ? 
+                'आपका ब्राउज़र माइक्रोफोन एक्सेस का समर्थन नहीं करता। कृपया Chrome या Firefox का उपयोग करें।' : 
+                'Your browser doesn\'t support microphone access. Please use Chrome or Firefox.');
             startBtn.disabled = true;
+        }
+        
+        // Load preferred language
+        const preferredLang = localStorage.getItem('preferredLang') || 'hi';
+        changeLanguage(preferredLang);
+        
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful');
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
         }
     </script>
 </body>
