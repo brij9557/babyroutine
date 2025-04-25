@@ -18,21 +18,21 @@
     <meta property="og:description" content="AI-आधारित बेबी केयर प्लानर जो आपके बच्चे की उम्र, वजन और स्वास्थ्य के अनुसार व्यक्तिगत योजना बनाता है">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.babycareplanner.com">
-    <meta property="og:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg">
+    <meta property="og:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg" alt="Baby Care Planner App Screenshot">
     <meta property="og:site_name" content="Baby Care Planner">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="बेबी केयर प्लानर - बच्चों के लिए व्यक्तिगत देखभाल योजना">
     <meta name="twitter:description" content="AI-आधारित बेबी केयर प्लानर जो आपके बच्चे की उम्र, वजन और स्वास्थ्य के अनुसार व्यक्तिगत योजना बनाता है">
-    <meta name="twitter:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg">
+    <meta name="twitter:image" content="https://www.babycareplanner.com/images/baby-care-planner-og.jpg" alt="Baby Care Planner App Screenshot">
     
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <!-- Favicon with ALT -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" alt="Baby Care Planner Favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" alt="Baby Care Planner App Icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" alt="Baby Care Planner Favicon 32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" alt="Baby Care Planner Favicon 16x16">
+    <link rel="manifest" href="/site.webmanifest" alt="Web App Manifest">
     
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
@@ -59,6 +59,9 @@
       }
     }
     </script>
+    
+    <!-- Sitemap and Robots Link -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
     
     <style>
         :root {
@@ -828,44 +831,44 @@
         <div class="sidebar-header">
             <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
             <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
-            <button class="close-sidebar" onclick="toggleSidebar()">
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         
         <div class="sidebar-menu">
             <a href="about.html" class="menu-item">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user" aria-hidden="true"></i>
                 <span class="lang-hi">मेरे बारे में</span>
                 <span class="lang-en" style="display:none">About Me</span>
             </a>
             <a href="baby-food-recipes.html" class="menu-item">
-                <i class="fas fa-utensils"></i>
+                <i class="fas fa-utensils" aria-hidden="true"></i>
                 <span class="lang-hi">शिशु आहार व्यंजन</span>
                 <span class="lang-en" style="display:none">Baby Food Recipes</span>
             </a>
             <a href="baby-play-activities.html" class="menu-item">
-                <i class="fas fa-gamepad"></i>
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
                 <span class="lang-hi">शिशु खेल गतिविधियाँ</span>
                 <span class="lang-en" style="display:none">Baby Play Activities</span>
             </a>
             <a href="baby-tikakarn.html" class="menu-item">
-                <i class="fas fa-baby-carriage"></i>
+                <i class="fas fa-baby-carriage" aria-hidden="true"></i>
                 <span class="lang-hi">बेबी टीकाकरण</span>
                 <span class="lang-en" style="display:none">Baby Vaccination</span>
             </a>
             <a href="baby-growth-card.html" class="menu-item">
-                <i class="fas fa-baby"></i>
+                <i class="fas fa-baby" aria-hidden="true"></i>
                 <span class="lang-hi">बेबी ग्रोथ कार्ड</span>
                 <span class="lang-en" style="display:none">Baby Growth Card</span>
             </a>
             <a href="baby-crying-ai-tool.html" class="menu-item">
-                <i class="fas fa-baby-crying"></i>
+                <i class="fas fa-baby-crying" aria-hidden="true"></i>
                 <span class="lang-hi">बेबी क्राइंग AI टूल</span>
                 <span class="lang-en" style="display:none">Baby Crying AI Tool</span>
             </a>
             <a href="baby-qa-blog.html" class="menu-item">
-                <i class="fas fa-question-circle"></i>
+                <i class="fas fa-question-circle" aria-hidden="true"></i>
                 <span class="lang-hi">बेबी Q&A ब्लॉग</span>
                 <span class="lang-en" style="display:none">Baby Q&A Blog</span>
             </a>
@@ -873,18 +876,18 @@
     </div>
     
     <!-- Menu Button (now on left middle side) -->
-    <button class="menu-btn" onclick="toggleSidebar()">
-        <i class="fas fa-baby"></i>
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <i class="fas fa-baby" aria-hidden="true"></i>
     </button>
     
     <header>
         <div class="language-switcher">
-            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
-            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+            <button class="lang-btn active" onclick="switchLanguage('hi')" aria-label="Switch to Hindi">हिंदी</button>
+            <button class="lang-btn" onclick="switchLanguage('en')" aria-label="Switch to English">English</button>
         </div>
         
         <div>
-            <h1><i class="fas fa-baby"></i> <span class="lang-hi">बेबी केयर प्लानर</span><span class="lang-en" style="display:none">Baby Care Planner</span></h1>
+            <h1><i class="fas fa-baby" aria-hidden="true"></i> <span class="lang-hi">बेबी केयर प्लानर</span><span class="lang-en" style="display:none">Baby Care Planner</span></h1>
             <p class="subtitle lang-hi">AI द्वारा बनाया गया व्यक्तिगत भोजन, नींद और गतिविधि शेड्यूल</p>
             <p class="subtitle lang-en" style="display:none">AI-powered personalized feeding, sleeping and activity schedule</p>
         </div>
@@ -897,22 +900,22 @@
             <div class="form-group">
                 <label for="babyName" class="lang-hi">बच्चे का नाम</label>
                 <label for="babyName" class="lang-en" style="display:none">Baby's Name</label>
-                <input type="text" id="babyName" placeholder="जैसे: आरव" class="lang-hi">
-                <input type="text" id="babyName" placeholder="e.g. Arnav" class="lang-en" style="display:none">
+                <input type="text" id="babyName" placeholder="जैसे: आरव" class="lang-hi" aria-label="Enter baby's name">
+                <input type="text" id="babyName" placeholder="e.g. Arnav" class="lang-en" style="display:none" aria-label="Enter baby's name">
             </div>
             
             <div class="form-group">
                 <label for="babyAge" class="lang-hi">उम्र (महीनों में)</label>
                 <label for="babyAge" class="lang-en" style="display:none">Age (in months)</label>
-                <input type="number" id="babyAge" min="0" max="36" placeholder="जैसे: 18 (1.5 साल)" class="lang-hi">
-                <input type="number" id="babyAge" min="0" max="36" placeholder="e.g. 18 (1.5 years)" class="lang-en" style="display:none">
+                <input type="number" id="babyAge" min="0" max="36" placeholder="जैसे: 18 (1.5 साल)" class="lang-hi" aria-label="Enter baby's age in months">
+                <input type="number" id="babyAge" min="0" max="36" placeholder="e.g. 18 (1.5 years)" class="lang-en" style="display:none" aria-label="Enter baby's age in months">
             </div>
             
             <div class="form-group">
                 <label for="babyWeight" class="lang-hi">वजन (किलो में)</label>
                 <label for="babyWeight" class="lang-en" style="display:none">Weight (in kg)</label>
-                <input type="number" id="babyWeight" min="2" max="25" step="0.1" placeholder="जैसे: 10" class="lang-hi">
-                <input type="number" id="babyWeight" min="2" max="25" step="0.1" placeholder="e.g. 10" class="lang-en" style="display:none">
+                <input type="number" id="babyWeight" min="2" max="25" step="0.1" placeholder="जैसे: 10" class="lang-hi" aria-label="Enter baby's weight in kg">
+                <input type="number" id="babyWeight" min="2" max="25" step="0.1" placeholder="e.g. 10" class="lang-en" style="display:none" aria-label="Enter baby's weight in kg">
             </div>
             
             <div class="form-group">
@@ -920,10 +923,10 @@
                 <label class="lang-en" style="display:none">Breastfeeding?</label>
                 <div class="radio-group">
                     <label class="radio-option">
-                        <input type="radio" name="breastMilk" value="yes" checked> <span class="lang-hi">हाँ</span><span class="lang-en" style="display:none">Yes</span>
+                        <input type="radio" name="breastMilk" value="yes" checked aria-label="Yes, baby drinks breast milk"> <span class="lang-hi">हाँ</span><span class="lang-en" style="display:none">Yes</span>
                     </label>
                     <label class="radio-option">
-                        <input type="radio" name="breastMilk" value="no"> <span class="lang-hi">नहीं</span><span class="lang-en" style="display:none">No</span>
+                        <input type="radio" name="breastMilk" value="no" aria-label="No, baby doesn't drink breast milk"> <span class="lang-hi">नहीं</span><span class="lang-en" style="display:none">No</span>
                     </label>
                 </div>
             </div>
@@ -931,13 +934,13 @@
             <div class="form-group">
                 <label for="healthStatus" class="lang-hi">बच्चे की स्वास्थ्य स्थिति</label>
                 <label for="healthStatus" class="lang-en" style="display:none">Baby's Health Status</label>
-                <select id="healthStatus" class="lang-hi">
+                <select id="healthStatus" class="lang-hi" aria-label="Select baby's health status">
                     <option value="excellent">उत्तम</option>
                     <option value="good">अच्छा</option>
                     <option value="average">सामान्य</option>
                     <option value="poor">कमजोर</option>
                 </select>
-                <select id="healthStatus" class="lang-en" style="display:none">
+                <select id="healthStatus" class="lang-en" style="display:none" aria-label="Select baby's health status">
                     <option value="excellent">Excellent</option>
                     <option value="good">Good</option>
                     <option value="average">Average</option>
@@ -948,22 +951,22 @@
             <div class="form-group">
                 <label for="favoriteFood" class="lang-hi">पसंदीदा खाना (वैकल्पिक)</label>
                 <label for="favoriteFood" class="lang-en" style="display:none">Favorite Food (optional)</label>
-                <input type="text" id="favoriteFood" placeholder="जैसे: खिचड़ी, दलिया, केला" class="lang-hi">
-                <input type="text" id="favoriteFood" placeholder="e.g. Khichdi, Daliya, Banana" class="lang-en" style="display:none">
+                <input type="text" id="favoriteFood" placeholder="जैसे: खिचड़ी, दलिया, केला" class="lang-hi" aria-label="Enter baby's favorite food">
+                <input type="text" id="favoriteFood" placeholder="e.g. Khichdi, Daliya, Banana" class="lang-en" style="display:none" aria-label="Enter baby's favorite food">
             </div>
             
             <div class="form-group">
                 <label for="allergies" class="lang-hi">एलर्जी या परहेज (वैकल्पिक)</label>
                 <label for="allergies" class="lang-en" style="display:none">Allergies or Restrictions (optional)</label>
-                <input type="text" id="allergies" placeholder="जैसे: दूध, मूंगफली, अंडा" class="lang-hi">
-                <input type="text" id="allergies" placeholder="e.g. Milk, Peanuts, Egg" class="lang-en" style="display:none">
+                <input type="text" id="allergies" placeholder="जैसे: दूध, मूंगफली, अंडा" class="lang-hi" aria-label="Enter baby's allergies">
+                <input type="text" id="allergies" placeholder="e.g. Milk, Peanuts, Egg" class="lang-en" style="display:none" aria-label="Enter baby's allergies">
             </div>
             
-            <button onclick="generatePlan()" id="generateBtn" class="lang-hi">
-                <i class="fas fa-magic"></i> प्लान जनरेट करें
+            <button onclick="generatePlan()" id="generateBtn" class="lang-hi" aria-label="Generate baby care plan">
+                <i class="fas fa-magic" aria-hidden="true"></i> प्लान जनरेट करें
             </button>
-            <button onclick="generatePlan()" id="generateBtn" class="lang-en" style="display:none">
-                <i class="fas fa-magic"></i> Generate Plan
+            <button onclick="generatePlan()" id="generateBtn" class="lang-en" style="display:none" aria-label="Generate baby care plan">
+                <i class="fas fa-magic" aria-hidden="true"></i> Generate Plan
             </button>
         </div>
         
@@ -988,44 +991,44 @@
             </div>
             
             <div class="schedule-card">
-                <h3><i class="fas fa-utensils"></i> <span class="lang-hi">भोजन योजना</span><span class="lang-en" style="display:none">Meal Plan</span></h3>
+                <h3><i class="fas fa-utensils" aria-hidden="true"></i> <span class="lang-hi">भोजन योजना</span><span class="lang-en" style="display:none">Meal Plan</span></h3>
                 <div id="mealPlan">
                     <!-- Filled by JavaScript -->
                 </div>
             </div>
             
             <div class="schedule-card">
-                <h3><i class="fas fa-moon"></i> <span class="lang-hi">नींद का समय</span><span class="lang-en" style="display:none">Sleep Schedule</span></h3>
+                <h3><i class="fas fa-moon" aria-hidden="true"></i> <span class="lang-hi">नींद का समय</span><span class="lang-en" style="display:none">Sleep Schedule</span></h3>
                 <div id="sleepPlan">
                     <!-- Filled by JavaScript -->
                 </div>
             </div>
             
             <div class="schedule-card">
-                <h3><i class="fas fa-child"></i> <span class="lang-hi">गतिविधियाँ</span><span class="lang-en" style="display:none">Activities</span></h3>
+                <h3><i class="fas fa-child" aria-hidden="true"></i> <span class="lang-hi">गतिविधियाँ</span><span class="lang-en" style="display:none">Activities</span></h3>
                 <div id="activityPlan">
                     <!-- Filled by JavaScript -->
                 </div>
             </div>
             
             <div class="health-info" id="healthInfo">
-                <h4><i class="fas fa-heartbeat"></i> <span class="lang-hi">स्वास्थ्य सुझाव</span><span class="lang-en" style="display:none">Health Advice</span></h4>
+                <h4><i class="fas fa-heartbeat" aria-hidden="true"></i> <span class="lang-hi">स्वास्थ्य सुझाव</span><span class="lang-en" style="display:none">Health Advice</span></h4>
                 <p id="healthAdvice" class="lang-hi">आपके बच्चे के स्वास्थ्य के लिए विशेष सुझाव यहाँ दिखाई देंगे</p>
                 <p id="healthAdvice" class="lang-en" style="display:none">Special health advice for your child will appear here</p>
             </div>
             
             <div class="action-buttons">
-                <button class="whatsapp-btn" onclick="sendWhatsAppReminder()">
-                    <i class="fab fa-whatsapp"></i> <span class="lang-hi">WhatsApp</span><span class="lang-en" style="display:none">WhatsApp</span>
+                <button class="whatsapp-btn" onclick="sendWhatsAppReminder()" aria-label="Share plan via WhatsApp">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> <span class="lang-hi">WhatsApp</span><span class="lang-en" style="display:none">WhatsApp</span>
                 </button>
-                <button class="save-btn" onclick="savePlan()">
-                    <i class="fas fa-save"></i> <span class="lang-hi">सेव करें</span><span class="lang-en" style="display:none">Save</span>
+                <button class="save-btn" onclick="savePlan()" aria-label="Save baby care plan">
+                    <i class="fas fa-save" aria-hidden="true"></i> <span class="lang-hi">सेव करें</span><span class="lang-en" style="display:none">Save</span>
                 </button>
-                <button class="tips-btn" onclick="showTips()">
-                    <i class="fas fa-lightbulb"></i> <span class="lang-hi">विशेष टिप्स</span><span class="lang-en" style="display:none">Special Tips</span>
+                <button class="tips-btn" onclick="showTips()" aria-label="View expert tips">
+                    <i class="fas fa-lightbulb" aria-hidden="true"></i> <span class="lang-hi">विशेष टिप्स</span><span class="lang-en" style="display:none">Special Tips</span>
                 </button>
-                <button class="pdf-btn" onclick="generatePDF()">
-                    <i class="fas fa-file-pdf"></i> <span class="lang-hi">PDF डाउनलोड</span><span class="lang-en" style="display:none">Download PDF</span>
+                <button class="pdf-btn" onclick="generatePDF()" aria-label="Download PDF of baby care plan">
+                    <i class="fas fa-file-pdf" aria-hidden="true"></i> <span class="lang-hi">PDF डाउनलोड</span><span class="lang-en" style="display:none">Download PDF</span>
                 </button>
             </div>
         </div>
@@ -1047,8 +1050,8 @@
     </div>
     
     <!-- ChatGPT Button -->
-    <div class="chatgpt-btn" onclick="toggleChatGPT()">
-        <i class="fas fa-comment-dots"></i>
+    <div class="chatgpt-btn" onclick="toggleChatGPT()" aria-label="Open baby care assistant chat">
+        <i class="fas fa-comment-dots" aria-hidden="true"></i>
     </div>
     
     <!-- ChatGPT Container -->
@@ -1056,18 +1059,18 @@
         <div class="chatgpt-header">
             <h3 class="lang-hi">बेबी केयर सहायक</h3>
             <h3 class="lang-en" style="display:none">Baby Care Assistant</h3>
-            <button class="close-chatgpt" onclick="toggleChatGPT()">
-                <i class="fas fa-times"></i>
+            <button class="close-chatgpt" onclick="toggleChatGPT()" aria-label="Close chat">
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
         </div>
         <div class="chatgpt-messages" id="chatGPTMessages">
             <!-- Messages will appear here -->
         </div>
         <div class="chatgpt-input">
-            <input type="text" id="chatGPTInput" placeholder="अपना प्रश्न लिखें..." class="lang-hi">
-            <input type="text" id="chatGPTInput" placeholder="Type your question..." class="lang-en" style="display:none">
-            <button onclick="sendChatGPTMessage()">
-                <i class="fas fa-paper-plane"></i>
+            <input type="text" id="chatGPTInput" placeholder="अपना प्रश्न लिखें..." class="lang-hi" aria-label="Type your question for baby care assistant">
+            <input type="text" id="chatGPTInput" placeholder="Type your question..." class="lang-en" style="display:none" aria-label="Type your question for baby care assistant">
+            <button onclick="sendChatGPTMessage()" aria-label="Send message">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i>
             </button>
         </div>
     </div>
@@ -1077,7 +1080,7 @@
             <div style="text-align: center; padding: 20px; color: var(--text); font-size: 0.9rem;">
                 <p class="lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
                 <p class="lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
-                <p style="margin-top: 10px;"><a href="privacy-policy.html" style="color: var(--secondary);">Privacy Policy</a> | <a href="terms-of-service.html" style="color: var(--secondary);">Terms of Service</a></p>
+                <p style="margin-top: 10px;"><a href="privacy-policy.html" style="color: var(--secondary);">Privacy Policy</a> | <a href="terms-of-service.html" style="color: var(--secondary);">Terms of Service</a> | <a href="sitemap.xml" style="color: var(--secondary);">Sitemap</a></p>
             </div>
         </div>
     </footer>
@@ -1466,7 +1469,7 @@
                     <div class="schedule-item">
                         <div class="time">${item.time}</div>
                         <div class="activity">
-                            <i class="fas ${icon} food-icon"></i>
+                            <i class="fas ${icon} food-icon" aria-hidden="true"></i>
                             ${item.activity}
                             <span class="health-indicator ${item.health}">
                                 ${healthText}
@@ -1857,7 +1860,7 @@
             modal.style.display = 'flex';
             modal.innerHTML = `
                 <div class="modal-content" style="max-width: 600px;">
-                    <span class="close-modal" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+                    <span class="close-modal" onclick="this.parentElement.parentElement.style.display='none'" aria-label="Close modal">&times;</span>
                     <div style="padding: 15px; max-height: 70vh; overflow-y: auto;">
                         ${tipsHTML}
                     </div>
