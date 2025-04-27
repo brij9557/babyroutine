@@ -738,6 +738,96 @@
             text-transform: uppercase;
         }
         
+        /* User Profile Button Styles */
+        .user-profile-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            color: var(--secondary);
+            border: 2px solid var(--primary);
+        }
+        
+        .user-profile-btn:hover {
+            background: var(--light);
+            transform: scale(1.1);
+        }
+        
+        .user-profile-menu {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: none;
+            width: 200px;
+            overflow: hidden;
+        }
+        
+        .user-profile-menu.open {
+            display: block;
+        }
+        
+        .user-profile-menu-item {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-profile-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .user-profile-menu-item:hover {
+            background: var(--light);
+            color: var(--secondary);
+        }
+        
+        .user-profile-menu-item.logout {
+            color: var(--danger);
+        }
+        
+        .user-profile-menu-item.logout i {
+            color: var(--danger);
+        }
+        
+        .user-profile-menu-item.logout:hover {
+            background: #ffebee;
+        }
+        
+        .user-info {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            font-size: 12px;
+            color: #777;
+        }
+        
         /* Responsive adjustments */
         @media (min-width: 768px) {
             .container {
@@ -776,6 +866,20 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
+            }
+            
+            .user-profile-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .user-profile-menu {
+                top: 65px;
+                left: 15px;
+                width: 180px;
             }
         }
         
@@ -822,6 +926,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics-compat.js"></script>
 </head>
 <body>
     <!-- Sidebar Menu -->
@@ -879,6 +988,29 @@
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
         <i class="fas fa-baby" aria-hidden="true"></i>
     </button>
+    
+    <!-- User Profile Button -->
+    <div class="user-profile-btn" id="userProfileBtn" onclick="toggleUserMenu()">
+        <i class="fas fa-user" aria-hidden="true"></i>
+    </div>
+    
+    <!-- User Profile Menu -->
+    <div class="user-profile-menu" id="userProfileMenu">
+        <div class="user-info" id="userInfo">
+            <div class="user-name" id="userName">Guest User</div>
+            <div class="user-email" id="userEmail">Not logged in</div>
+        </div>
+        <div class="user-profile-menu-item" id="loginBtn" onclick="handleAuth()">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="lang-hi">लॉगिन करें</span>
+            <span class="lang-en" style="display:none">Login</span>
+        </div>
+        <div class="user-profile-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="lang-hi">लॉगआउट</span>
+            <span class="lang-en" style="display:none">Logout</span>
+        </div>
+    </div>
     
     <header>
         <div class="language-switcher">
@@ -1088,6 +1220,108 @@
     <script>
         // Initialize jsPDF
         const { jsPDF } = window.jspdf;
+        
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAbP8-ZOYyGWcqUGvJhCWhJwj5Yj47bn1Q",
+            authDomain: "mybabyroutine-41aa9.firebaseapp.com",
+            projectId: "mybabyroutine-41aa9",
+            storageBucket: "mybabyroutine-41aa9.firebasestorage.app",
+            messagingSenderId: "489588024529",
+            appId: "1:489588024529:web:a2e58edca1307b0f7651f0",
+            measurementId: "G-5YEGNR6VEM"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const analytics = firebase.analytics();
+        
+        // Track authentication state changes
+        auth.onAuthStateChanged(user => {
+            updateUserUI(user);
+        });
+        
+        // Update user interface based on auth state
+        function updateUserUI(user) {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (user) {
+                // User is signed in
+                userName.textContent = user.displayName || (isHindi ? 'स्वागत यूजर' : 'Welcome User');
+                userEmail.textContent = user.email || '';
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'flex';
+                
+                // Change profile icon to show logged in state
+                document.getElementById('userProfileBtn').innerHTML = '<i class="fas fa-user-check" aria-hidden="true"></i>';
+            } else {
+                // User is signed out
+                userName.textContent = isHindi ? 'अतिथि यूजर' : 'Guest User';
+                userEmail.textContent = isHindi ? 'लॉगिन नहीं किया' : 'Not logged in';
+                loginBtn.style.display = 'flex';
+                logoutBtn.style.display = 'none';
+                
+                // Change profile icon to show logged out state
+                document.getElementById('userProfileBtn').innerHTML = '<i class="fas fa-user" aria-hidden="true"></i>';
+            }
+        }
+        
+        // Handle authentication (login/logout)
+        function handleAuth() {
+            const user = auth.currentUser;
+            
+            if (user) {
+                // User is logged in, so log them out
+                auth.signOut().then(() => {
+                    const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                    alert(isHindi ? 'सफलतापूर्वक लॉगआउट हो गया' : 'Successfully logged out');
+                    toggleUserMenu();
+                }).catch(error => {
+                    console.error("Logout error:", error);
+                });
+            } else {
+                // User is not logged in, so log them in
+                const provider = new firebase.auth.GoogleAuthProvider();
+                auth.signInWithPopup(provider).then(result => {
+                    const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                    alert(isHindi ? 'सफलतापूर्वक लॉगिन हो गया' : 'Successfully logged in');
+                    toggleUserMenu();
+                }).catch(error => {
+                    console.error("Login error:", error);
+                });
+            }
+        }
+        
+        // Toggle user profile menu
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('userProfileMenu');
+            userMenu.classList.toggle('open');
+            
+            // Close when clicking outside
+            if (userMenu.classList.contains('open')) {
+                setTimeout(() => {
+                    document.addEventListener('click', closeUserMenuOutside);
+                }, 10);
+            } else {
+                document.removeEventListener('click', closeUserMenuOutside);
+            }
+        }
+        
+        // Close user menu when clicking outside
+        function closeUserMenuOutside(event) {
+            const userMenu = document.getElementById('userProfileMenu');
+            const userBtn = document.getElementById('userProfileBtn');
+            
+            if (!userMenu.contains(event.target) && !userBtn.contains(event.target)) {
+                userMenu.classList.remove('open');
+                document.removeEventListener('click', closeUserMenuOutside);
+            }
+        }
         
         // Food icons mapping
         const foodIcons = {
