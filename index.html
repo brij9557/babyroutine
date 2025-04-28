@@ -1000,11 +1000,11 @@
             <div class="user-name" id="userName">Guest User</div>
             <div class="user-email" id="userEmail">Not logged in</div>
         </div>
-        <div class="user-profile-menu-item" id="loginBtn" onclick="handleAuth()">
+        <a href="Login.html" class="user-profile-menu-item" id="loginBtn">
             <i class="fas fa-sign-in-alt"></i>
             <span class="lang-hi">लॉगिन करें</span>
             <span class="lang-en" style="display:none">Login</span>
-        </div>
+        </a>
         <div class="user-profile-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
             <i class="fas fa-sign-out-alt"></i>
             <span class="lang-hi">लॉगआउट</span>
@@ -1271,7 +1271,7 @@
             }
         }
         
-        // Handle authentication (login/logout)
+        // Handle authentication (logout only, login is handled via Login.html)
         function handleAuth() {
             const user = auth.currentUser;
             
@@ -1283,16 +1283,6 @@
                     toggleUserMenu();
                 }).catch(error => {
                     console.error("Logout error:", error);
-                });
-            } else {
-                // User is not logged in, so log them in
-                const provider = new firebase.auth.GoogleAuthProvider();
-                auth.signInWithPopup(provider).then(result => {
-                    const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
-                    alert(isHindi ? 'सफलतापूर्वक लॉगिन हो गया' : 'Successfully logged in');
-                    toggleUserMenu();
-                }).catch(error => {
-                    console.error("Login error:", error);
                 });
             }
         }
