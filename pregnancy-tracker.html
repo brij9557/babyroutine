@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head> 
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गर्भावस्था देखभाल योजनाकार - व्यक्तिगत गर्भावस्था मार्गदर्शन | Pregnancy Care Planner</title>
+    <meta name="description" content="AI-आधारित गर्भावस्था देखभाल योजनाकार जो आपकी गर्भावस्था के चरण, स्वास्थ्य और जरूरतों के अनुसार व्यक्तिगत योजना बनाता है। AI-powered pregnancy care planner that creates personalized guidance based on your pregnancy stage, health and needs.">
+    <meta name="keywords" content="गर्भावस्था देखभाल, प्रेगनेंसी केयर, गर्भवती महिला, प्रेगनेंसी डाइट, प्रेगनेंसी एक्सरसाइज, pregnancy care, pregnant woman, pregnancy diet, pregnancy exercise, prenatal care">
+    <meta name="author" content="Pregnancy Care Planner">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.babycareplanner.com/pregnancy" />
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="गर्भावस्था देखभाल योजनाकार - व्यक्तिगत गर्भावस्था मार्गदर्शन">
+    <meta property="og:description" content="AI-आधारित गर्भावस्था देखभाल योजनाकार जो आपकी गर्भावस्था के चरण, स्वास्थ्य और जरूरतों के अनुसार व्यक्तिगत योजना बनाता है">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.babycareplanner.com/pregnancy">
+    <meta property="og:image" content="https://www.babycareplanner.com/images/pregnancy-care-planner-og.jpg" alt="Pregnancy Care Planner App Screenshot">
+    <meta property="og:site_name" content="Pregnancy Care Planner">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="गर्भावस्था देखभाल योजनाकार - व्यक्तिगत गर्भावस्था मार्गदर्शन">
+    <meta name="twitter:description" content="AI-आधारित गर्भावस्था देखभाल योजनाकार जो आपकी गर्भावस्था के चरण, स्वास्थ्य और जरूरतों के अनुसार व्यक्तिगत योजना बनाता है">
+    <meta name="twitter:image" content="https://www.babycareplanner.com/images/pregnancy-care-planner-og.jpg" alt="Pregnancy Care Planner App Screenshot">
+    
+    <!-- Favicon with ALT -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" alt="Pregnancy Care Planner Favicon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" alt="Pregnancy Care Planner App Icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" alt="Pregnancy Care Planner Favicon 32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" alt="Pregnancy Care Planner Favicon 16x16">
+    <link rel="manifest" href="/site.webmanifest" alt="Web App Manifest">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Structured Data / Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Pregnancy Care Planner",
+      "alternateName": "गर्भावस्था देखभाल योजनाकार",
+      "description": "AI-powered personalized pregnancy care planner for diet, exercise and health monitoring",
+      "url": "https://www.babycareplanner.com/pregnancy",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "Baby Care Solutions"
+      }
+    }
+    </script>
+    
+    <!-- Sitemap and Robots Link -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    
+    <!-- Use the same CSS as Baby Care Planner -->
+    <style>
+        :root {
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
+            --danger: #F44336;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #FFF9FB;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0 15px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .menu-item:hover {
+            background: var(--light);
+            color: var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: var(--highlight);
+            color: var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .menu-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 15px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 126, 185, 0.1);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 8px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        button i {
+            margin-right: 8px;
+        }
+        
+        .result-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--highlight);
+        }
+        
+        .result-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .schedule-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-card h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .schedule-card h3 i {
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+        
+        .schedule-item {
+            display: flex;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #FFB6C1;
+            align-items: center;
+        }
+        
+        .schedule-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .time {
+            font-weight: 600;
+            min-width: 70px;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+        
+        .activity {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        .food-icon {
+            margin-right: 10px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .health-indicator {
+            margin-left: 10px;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--success);
+            color: white;
+        }
+        
+        .health-excellent {
+            background: var(--success);
+        }
+        
+        .health-good {
+            background: var(--info);
+        }
+        
+        .health-average {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .health-poor {
+            background: var(--danger);
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        .save-btn {
+            background: var(--success);
+        }
+        
+        .save-btn:hover {
+            background: #3d8b40;
+        }
+        
+        .tips-btn {
+            background: var(--warning);
+            grid-column: span 2;
+        }
+        
+        .tips-btn:hover {
+            background: #e68a00;
+        }
+        
+        .pdf-btn {
+            background: #F44336;
+            grid-column: span 2;
+        }
+        
+        .pdf-btn:hover {
+            background: #d32f2f;
+        }
+        
+        .health-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            border-left: 4px solid var(--info);
+        }
+        
+        .health-info h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .health-info h4 i {
+            margin-right: 8px;
+        }
+        
+        .health-info p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        .modal-title {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        /* User Profile Button Styles */
+        .user-profile-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            color: var(--secondary);
+            border: 2px solid var(--primary);
+        }
+        
+        .user-profile-btn:hover {
+            background: var(--light);
+            transform: scale(1.1);
+        }
+        
+        .user-profile-menu {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: none;
+            width: 200px;
+            overflow: hidden;
+        }
+        
+        .user-profile-menu.open {
+            display: block;
+        }
+        
+        .user-profile-menu-item {
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-profile-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .user-profile-menu-item:hover {
+            background: var(--light);
+            color: var(--secondary);
+        }
+        
+        .user-profile-menu-item.logout {
+            color: var(--danger);
+        }
+        
+        .user-profile-menu-item.logout i {
+            color: var(--danger);
+        }
+        
+        .user-profile-menu-item.logout:hover {
+            background: #ffebee;
+        }
+        
+        .user-info {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        /* Pregnancy Specific Styles */
+        .pregnancy-week-info {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .week-title {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .baby-development {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #FFB6C1;
+        }
+        
+        .baby-development h4 {
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+        
+        .baby-size {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .baby-size i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .checklist {
+            margin-top: 15px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .checklist-item input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        
+        .checklist-label {
+            flex-grow: 1;
+        }
+        
+        /* Due Date Calculator Styles */
+        .due-date-calculator {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        .due-date-result {
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .due-date-result h4 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        /* Symptom Tracker Styles */
+        .symptom-tracker {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        
+        .symptom-form {
+            margin-top: 15px;
+        }
+        
+        .symptom-log {
+            margin-top: 20px;
+        }
+        
+        .symptom-log-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .symptom-log-item:last-child {
+            border-bottom: none;
+        }
+        
+        .symptom-severity {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        
+        .severity-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ddd;
+        }
+        
+        .severity-dot.active {
+            background: var(--secondary);
+        }
+        
+        /* Ad Container Styles */
+        .ad-container {
+            width: 100%;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .ad-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            
+            .tips-btn, .pdf-btn {
+                grid-column: auto;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container.sidebar-open {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .menu-btn {
+                left: 10px;
+                top: 50%;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .user-profile-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .user-profile-menu {
+                top: 65px;
+                left: 15px;
+                width: 180px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 80%;
+            }
+            
+            .language-switcher {
+                position: static;
+                margin-top: 10px;
+            }
+            
+            header {
+                padding: 15px 0;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            
+            .menu-btn:hover {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics-compat.js"></script>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">गर्भावस्था मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Pregnancy Menu</div>
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <span class="lang-hi">होम</span>
+                <span class="lang-en" style="display:none">Home</span>
+            </a>
+            <a href="pregnancy-care.html" class="menu-item active">
+                <i class="fas fa-baby-carriage" aria-hidden="true"></i>
+                <span class="lang-hi">गर्भावस्था देखभाल</span>
+                <span class="lang-en" style="display:none">Pregnancy Care</span>
+            </a>
+            <a href="pregnancy-diet.html" class="menu-item">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span class="lang-hi">गर्भावस्था आहार</span>
+                <span class="lang-en" style="display:none">Pregnancy Diet</span>
+            </a>
+            <a href="pregnancy-exercise.html" class="menu-item">
+                <i class="fas fa-running" aria-hidden="true"></i>
+                <span class="lang-hi">गर्भावस्था व्यायाम</span>
+                <span class="lang-en" style="display:none">Pregnancy Exercise</span>
+            </a>
+            <a href="pregnancy-symptoms.html" class="menu-item">
+                <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                <span class="lang-hi">लक्षण ट्रैकर</span>
+                <span class="lang-en" style="display:none">Symptoms Tracker</span>
+            </a>
+            <a href="pregnancy-checklist.html" class="menu-item">
+                <i class="fas fa-list-check" aria-hidden="true"></i>
+                <span class="lang-hi">तैयारी चेकलिस्ट</span>
+                <span class="lang-en" style="display:none">Preparation Checklist</span>
+            </a>
+            <a href="pregnancy-qa.html" class="menu-item">
+                <i class="fas fa-question-circle" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <i class="fas fa-baby" aria-hidden="true"></i>
+    </button>
+    
+    <!-- User Profile Button -->
+    <div class="user-profile-btn" id="userProfileBtn" onclick="toggleUserMenu()">
+        <i class="fas fa-user" aria-hidden="true"></i>
+    </div>
+    
+    <!-- User Profile Menu -->
+    <div class="user-profile-menu" id="userProfileMenu">
+        <div class="user-info" id="userInfo">
+            <div class="user-name" id="userName">Guest User</div>
+            <div class="user-email" id="userEmail">Not logged in</div>
+        </div>
+        <a href="Login.html" class="user-profile-menu-item" id="loginBtn">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="lang-hi">लॉगिन करें</span>
+            <span class="lang-en" style="display:none">Login</span>
+        </a>
+        <div class="user-profile-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="lang-hi">लॉगआउट</span>
+            <span class="lang-en" style="display:none">Logout</span>
+        </div>
+    </div>
+    
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('hi')" aria-label="Switch to Hindi">हिंदी</button>
+            <button class="lang-btn" onclick="switchLanguage('en')" aria-label="Switch to English">English</button>
+        </div>
+        
+        <div>
+            <h1><i class="fas fa-baby" aria-hidden="true"></i> <span class="lang-hi">गर्भावस्था देखभाल योजनाकार</span><span class="lang-en" style="display:none">Pregnancy Care Planner</span></h1>
+            <p class="subtitle lang-hi">AI द्वारा बनाया गया व्यक्तिगत गर्भावस्था मार्गदर्शन</p>
+            <p class="subtitle lang-en" style="display:none">AI-powered personalized pregnancy guidance</p>
+        </div>
+    </header>
+    
+    <div class="container" id="mainContainer">
+        <!-- Due Date Calculator -->
+        <div class="due-date-calculator">
+            <h2><i class="fas fa-calendar-alt" aria-hidden="true"></i> <span class="lang-hi">प्रसव की अनुमानित तिथि कैलकुलेटर</span><span class="lang-en" style="display:none">Due Date Calculator</span></h2>
+            <p class="lang-hi">अपनी अंतिम मासिक धर्म की तिथि दर्ज करें और अपनी प्रसव की अनुमानित तिथि जानें</p>
+            <p class="lang-en" style="display:none">Enter your last menstrual period date to calculate your estimated due date</p>
+            
+            <div class="form-group">
+                <label for="lastPeriodDate" class="lang-hi">अंतिम मासिक धर्म की तिथि</label>
+                <label for="lastPeriodDate" class="lang-en" style="display:none">Last Menstrual Period Date</label>
+                <input type="date" id="lastPeriodDate" class="lang-hi" aria-label="Enter last menstrual period date">
+                <input type="date" id="lastPeriodDate" class="lang-en" style="display:none" aria-label="Enter last menstrual period date">
+            </div>
+            
+            <button onclick="calculateDueDate()" class="lang-hi" aria-label="Calculate due date">
+                <i class="fas fa-calculator" aria-hidden="true"></i> तिथि की गणना करें
+            </button>
+            <button onclick="calculateDueDate()" class="lang-en" style="display:none" aria-label="Calculate due date">
+                <i class="fas fa-calculator" aria-hidden="true"></i> Calculate Date
+            </button>
+            
+            <div class="due-date-result" id="dueDateResult">
+                <h4 class="lang-hi">आपकी प्रसव की अनुमानित तिथि</h4>
+                <h4 class="lang-en" style="display:none">Your Estimated Due Date</h4>
+                <p id="dueDateText" class="lang-hi">यहाँ परिणाम दिखाई देगा</p>
+                <p id="dueDateText" class="lang-en" style="display:none">Result will appear here</p>
+                <p id="currentWeekText" class="lang-hi"></p>
+                <p id="currentWeekText" class="lang-en" style="display:none"></p>
+            </div>
+        </div>
+        
+        <!-- Symptom Tracker Section -->
+        <div class="symptom-tracker">
+            <h2><i class="fas fa-heartbeat" aria-hidden="true"></i> <span class="lang-hi">लक्षण ट्रैकर</span><span class="lang-en" style="display:none">Symptom Tracker</span></h2>
+            <p class="lang-hi">अपने गर्भावस्था के लक्षणों को ट्रैक करें और उनकी गंभीरता को रिकॉर्ड करें</p>
+            <p class="lang-en" style="display:none">Track your pregnancy symptoms and record their severity</p>
+            
+            <div class="symptom-form">
+                <div class="form-group">
+                    <label for="symptomType" class="lang-hi">लक्षण का प्रकार</label>
+                    <label for="symptomType" class="lang-en" style="display:none">Symptom Type</label>
+                    <select id="symptomType" class="lang-hi" aria-label="Select symptom type">
+                        <option value="morningSickness">सुबह की बीमारी (मॉर्निंग सिकनेस)</option>
+                        <option value="fatigue">थकान</option>
+                        <option value="backPain">पीठ दर्द</option>
+                        <option value="heartburn">सीने में जलन</option>
+                        <option value="swelling">सूजन</option>
+                        <option value="headache">सिरदर्द</option>
+                        <option value="cramps">ऐंठन</option>
+                        <option value="other">अन्य</option>
+                    </select>
+                    <select id="symptomType" class="lang-en" style="display:none" aria-label="Select symptom type">
+                        <option value="morningSickness">Morning Sickness</option>
+                        <option value="fatigue">Fatigue</option>
+                        <option value="backPain">Back Pain</option>
+                        <option value="heartburn">Heartburn</option>
+                        <option value="swelling">Swelling</option>
+                        <option value="headache">Headache</option>
+                        <option value="cramps">Cramps</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="lang-hi">गंभीरता</label>
+                    <label class="lang-en" style="display:none">Severity</label>
+                    <div class="symptom-severity">
+                        <div class="severity-dot" onclick="setSeverity(1)" data-severity="1"></div>
+                        <div class="severity-dot" onclick="setSeverity(2)" data-severity="2"></div>
+                        <div class="severity-dot" onclick="setSeverity(3)" data-severity="3"></div>
+                        <div class="severity-dot" onclick="setSeverity(4)" data-severity="4"></div>
+                        <div class="severity-dot" onclick="setSeverity(5)" data-severity="5"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="symptomNotes" class="lang-hi">अतिरिक्त नोट्स (वैकल्पिक)</label>
+                    <label for="symptomNotes" class="lang-en" style="display:none">Additional Notes (optional)</label>
+                    <textarea id="symptomNotes" rows="3" class="lang-hi" placeholder="अपने लक्षणों के बारे में अतिरिक्त जानकारी दें" aria-label="Enter additional notes about symptoms"></textarea>
+                    <textarea id="symptomNotes" rows="3" class="lang-en" style="display:none" placeholder="Add additional information about your symptoms" aria-label="Enter additional notes about symptoms"></textarea>
+                </div>
+                
+                <button onclick="logSymptom()" class="lang-hi" aria-label="Log symptom">
+                    <i class="fas fa-plus" aria-hidden="true"></i> लक्षण जोड़ें
+                </button>
+                <button onclick="logSymptom()" class="lang-en" style="display:none" aria-label="Log symptom">
+                    <i class="fas fa-plus" aria-hidden="true"></i> Add Symptom
+                </button>
+            </div>
+            
+            <div class="symptom-log" id="symptomLog">
+                <h4 class="lang-hi">आपके दर्ज किए गए लक्षण</h4>
+                <h4 class="lang-en" style="display:none">Your Logged Symptoms</h4>
+                <p id="noSymptomsText" class="lang-hi">कोई लक्षण दर्ज नहीं किए गए हैं</p>
+                <p id="noSymptomsText" class="lang-en" style="display:none">No symptoms logged yet</p>
+            </div>
+        </div>
+        
+        <!-- Pregnancy Care Planner Form -->
+        <div class="form-container" id="formContainer">
+            <h2><i class="fas fa-baby" aria-hidden="true"></i> <span class="lang-hi">गर्भावस्था देखभाल योजनाकार</span><span class="lang-en" style="display:none">Pregnancy Care Planner</span></h2>
+            <p class="lang-hi">अपनी जानकारी दर्ज करें और एक व्यक्तिगत गर्भावस्था देखभाल योजना प्राप्त करें</p>
+            <p class="lang-en" style="display:none">Enter your information to get a personalized pregnancy care plan</p>
+            
+            <div class="form-group">
+                <label for="motherName" class="lang-hi">माँ का नाम</label>
+                <label for="motherName" class="lang-en" style="display:none">Mother's Name</label>
+                <input type="text" id="motherName" placeholder="जैसे: प्रिया" class="lang-hi" aria-label="Enter mother's name">
+                <input type="text" id="motherName" placeholder="e.g. Priya" class="lang-en" style="display:none" aria-label="Enter mother's name">
+            </div>
+            
+            <div class="form-group">
+                <label for="pregnancyWeek" class="lang-hi">गर्भावस्था सप्ताह</label>
+                <label for="pregnancyWeek" class="lang-en" style="display:none">Pregnancy Week</label>
+                <input type="number" id="pregnancyWeek" min="1" max="42" placeholder="जैसे: 12" class="lang-hi" aria-label="Enter pregnancy week">
+                <input type="number" id="pregnancyWeek" min="1" max="42" placeholder="e.g. 12" class="lang-en" style="display:none" aria-label="Enter pregnancy week">
+            </div>
+            
+            <div class="form-group">
+                <label for="motherWeight" class="lang-hi">वजन (किलो में)</label>
+                <label for="motherWeight" class="lang-en" style="display:none">Weight (in kg)</label>
+                <input type="number" id="motherWeight" min="30" max="120" step="0.1" placeholder="जैसे: 58" class="lang-hi" aria-label="Enter mother's weight in kg">
+                <input type="number" id="motherWeight" min="30" max="120" step="0.1" placeholder="e.g. 58" class="lang-en" style="display:none" aria-label="Enter mother's weight in kg">
+            </div>
+            
+            <div class="form-group">
+                <label for="healthStatus" class="lang-hi">स्वास्थ्य स्थिति</label>
+                <label for="healthStatus" class="lang-en" style="display:none">Health Status</label>
+                <select id="healthStatus" class="lang-hi" aria-label="Select health status">
+                    <option value="excellent">उत्तम</option>
+                    <option value="good">अच्छा</option>
+                    <option value="average">सामान्य</option>
+                    <option value="poor">कमजोर</option>
+                </select>
+                <select id="healthStatus" class="lang-en" style="display:none" aria-label="Select health status">
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                    <option value="poor">Poor</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="pregnancyType" class="lang-hi">गर्भावस्था प्रकार</label>
+                <label for="pregnancyType" class="lang-en" style="display:none">Pregnancy Type</label>
+                <select id="pregnancyType" class="lang-hi" aria-label="Select pregnancy type">
+                    <option value="normal">सामान्य</option>
+                    <option value="first">पहली गर्भावस्था</option>
+                    <option value="highRisk">हाई रिस्क</option>
+                    <option value="twins">जुड़वाँ बच्चे</option>
+                </select>
+                <select id="pregnancyType" class="lang-en" style="display:none" aria-label="Select pregnancy type">
+                    <option value="normal">Normal</option>
+                    <option value="first">First Pregnancy</option>
+                    <option value="highRisk">High Risk</option>
+                    <option value="twins">Twins</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="allergies" class="lang-hi">एलर्जी या परहेज (वैकल्पिक)</label>
+                <label for="allergies" class="lang-en" style="display:none">Allergies or Restrictions (optional)</label>
+                <input type="text" id="allergies" placeholder="जैसे: मूंगफली, अंडा, ग्लूटेन" class="lang-hi" aria-label="Enter allergies">
+                <input type="text" id="allergies" placeholder="e.g. Peanuts, Egg, Gluten" class="lang-en" style="display:none" aria-label="Enter allergies">
+            </div>
+            
+            <button onclick="generatePlan()" id="generateBtn" class="lang-hi" aria-label="Generate pregnancy care plan">
+                <i class="fas fa-magic" aria-hidden="true"></i> प्लान जनरेट करें
+            </button>
+            <button onclick="generatePlan()" id="generateBtn" class="lang-en" style="display:none" aria-label="Generate pregnancy care plan">
+                <i class="fas fa-magic" aria-hidden="true"></i> Generate Plan
+            </button>
+        </div>
+        
+        <!-- Ad Container - Middle -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="result-header">
+                <h2 class="result-title" id="resultTitle"><span class="lang-hi">प्रिया (12 सप्ताह) का गर्भावस्था प्लान</span><span class="lang-en" style="display:none">Priya (12 weeks) Pregnancy Plan</span></h2>
+            </div>
+            
+            <div class="pregnancy-week-info">
+                <h3 class="week-title lang-hi">12वां सप्ताह - गर्भावस्था अपडेट</h3>
+                <h3 class="week-title lang-en" style="display:none">Week 12 - Pregnancy Update</h3>
+                
+                <p class="lang-hi">आप दूसरी तिमाही के करीब हैं! इस सप्ताह, आपका बच्चा तेजी से बढ़ रहा है और अधिक मानवीय रूप ले रहा है।</p>
+                <p class="lang-en" style="display:none">You're nearing the second trimester! This week, your baby is growing rapidly and taking on a more human form.</p>
+                
+                <div class="baby-development">
+                    <h4 class="lang-hi">बच्चे का विकास</h4>
+                    <h4 class="lang-en" style="display:none">Baby Development</h4>
+                    
+                    <p class="lang-hi">आपके बच्चे की अंगुलियों और पैर की उंगलियों में अब नाखून बन रहे हैं। आंतें अब पेट के अंदर सही जगह पर जा रही हैं।</p>
+                    <p class="lang-en" style="display:none">Your baby's fingers and toes now have nails. The intestines are now moving to their proper place inside the abdomen.</p>
+                    
+                    <div class="baby-size">
+                        <i class="fas fa-ruler-vertical"></i>
+                        <span class="lang-hi">आकार: ~5.4 सेमी (एक नींबू के आकार का)</span>
+                        <span class="lang-en" style="display:none">Size: ~5.4 cm (size of a lime)</span>
+                    </div>
+                    <div class="baby-size">
+                        <i class="fas fa-weight-hanging"></i>
+                        <span class="lang-hi">वजन: ~14 ग्राम</span>
+                        <span class="lang-en" style="display:none">Weight: ~14 grams</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="schedule-card">
+                <h3><i class="fas fa-utensils" aria-hidden="true"></i> <span class="lang-hi">आहार योजना</span><span class="lang-en" style="display:none">Diet Plan</span></h3>
+                <div id="dietPlan">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="schedule-card">
+                <h3><i class="fas fa-running" aria-hidden="true"></i> <span class="lang-hi">व्यायाम योजना</span><span class="lang-en" style="display:none">Exercise Plan</span></h3>
+                <div id="exercisePlan">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="schedule-card">
+                <h3><i class="fas fa-check-circle" aria-hidden="true"></i> <span class="lang-hi">इस सप्ताह की चेकलिस्ट</span><span class="lang-en" style="display:none">This Week's Checklist</span></h3>
+                <div class="checklist" id="checklistPlan">
+                    <!-- Filled by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="health-info" id="healthInfo">
+                <h4><i class="fas fa-heartbeat" aria-hidden="true"></i> <span class="lang-hi">स्वास्थ्य सुझाव</span><span class="lang-en" style="display:none">Health Advice</span></h4>
+                <p id="healthAdvice" class="lang-hi">आपके स्वास्थ्य के लिए विशेष सुझाव यहाँ दिखाई देंगे</p>
+                <p id="healthAdvice" class="lang-en" style="display:none">Special health advice for you will appear here</p>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="whatsapp-btn" onclick="sendWhatsAppReminder()" aria-label="Share plan via WhatsApp">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> <span class="lang-hi">WhatsApp</span><span class="lang-en" style="display:none">WhatsApp</span>
+                </button>
+                <button class="save-btn" onclick="savePlan()" aria-label="Save pregnancy care plan">
+                    <i class="fas fa-save" aria-hidden="true"></i> <span class="lang-hi">सेव करें</span><span class="lang-en" style="display:none">Save</span>
+                </button>
+                <button class="tips-btn" onclick="showTips()" aria-label="View expert tips">
+                    <i class="fas fa-lightbulb" aria-hidden="true"></i> <span class="lang-hi">विशेष टिप्स</span><span class="lang-en" style="display:none">Special Tips</span>
+                </button>
+                <button class="pdf-btn" onclick="generatePDF()" aria-label="Download PDF of pregnancy care plan">
+                    <i class="fas fa-file-pdf" aria-hidden="true"></i> <span class="lang-hi">PDF डाउनलोड</span><span class="lang-en" style="display:none">Download PDF</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Ad Container - Bottom -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div style="text-align: center; padding: 20px; color: var(--text); font-size: 0.9rem;">
+                <p class="lang-hi">© 2023 गर्भावस्था देखभाल योजनाकार - सभी गर्भवती महिलाओं के लिए स्वस्थ गर्भावस्था</p>
+                <p class="lang-en" style="display:none">© 2023 Pregnancy Care Planner - Healthy pregnancy for all women</p>
+                <p style="margin-top: 10px;"><a href="privacy-policy.html" style="color: var(--secondary);">Privacy Policy</a> | <a href="terms-of-service.html" style="color: var(--secondary);">Terms of Service</a> | <a href="sitemap.xml" style="color: var(--secondary);">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize jsPDF
+        const { jsPDF } = window.jspdf;
+        
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAbP8-ZOYyGWcqUGvJhCWhJwj5Yj47bn1Q",
+            authDomain: "mybabyroutine-41aa9.firebaseapp.com",
+            projectId: "mybabyroutine-41aa9",
+            storageBucket: "mybabyroutine-41aa9.appspot.com",
+            messagingSenderId: "489588024529",
+            appId: "1:489588024529:web:a2e58edca1307b0f7651f0",
+            measurementId: "G-5YEGNR6VEM"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const analytics = firebase.analytics();
+        
+        // Track authentication state changes
+        auth.onAuthStateChanged(user => {
+            updateUserUI(user);
+        });
+        
+        // Update user interface based on auth state
+        function updateUserUI(user) {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (user) {
+                // User is signed in
+                userName.textContent = user.displayName || (isHindi ? 'स्वागत यूजर' : 'Welcome User');
+                userEmail.textContent = user.email || '';
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'flex';
+                
+                // Change profile icon to show logged in state
+                document.getElementById('userProfileBtn').innerHTML = '<i class="fas fa-user-check" aria-hidden="true"></i>';
+            } else {
+                // User is signed out
+                userName.textContent = isHindi ? 'अतिथि यूजर' : 'Guest User';
+                userEmail.textContent = isHindi ? 'लॉगिन नहीं किया' : 'Not logged in';
+                loginBtn.style.display = 'flex';
+                logoutBtn.style.display = 'none';
+                
+                // Change profile icon to show logged out state
+                document.getElementById('userProfileBtn').innerHTML = '<i class="fas fa-user" aria-hidden="true"></i>';
+            }
+        }
+        
+        // Handle authentication (logout only, login is handled via Login.html)
+        function handleAuth() {
+            const user = auth.currentUser;
+            
+            if (user) {
+                // User is logged in, so log them out
+                auth.signOut().then(() => {
+                    const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                    alert(isHindi ? 'सफलतापूर्वक लॉगआउट हो गया' : 'Successfully logged out');
+                    toggleUserMenu();
+                }).catch(error => {
+                    console.error("Logout error:", error);
+                });
+            }
+        }
+        
+        // Toggle user profile menu
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('userProfileMenu');
+            userMenu.classList.toggle('open');
+            
+            // Close when clicking outside
+            if (userMenu.classList.contains('open')) {
+                setTimeout(() => {
+                    document.addEventListener('click', closeUserMenuOutside);
+                }, 10);
+            } else {
+                document.removeEventListener('click', closeUserMenuOutside);
+            }
+        }
+        
+        // Close user menu when clicking outside
+        function closeUserMenuOutside(event) {
+            const userMenu = document.getElementById('userProfileMenu');
+            const userBtn = document.getElementById('userProfileBtn');
+            
+            if (!userMenu.contains(event.target) && !userBtn.contains(event.target)) {
+                userMenu.classList.remove('open');
+                document.removeEventListener('click', closeUserMenuOutside);
+            }
+        }
+        
+        // Food icons mapping
+        const foodIcons = {
+            'फल': 'fa-apple-whole',
+            'सब्जी': 'fa-carrot',
+            'दूध': 'fa-glass-water',
+            'दही': 'fa-blender',
+            'पनीर': 'fa-cheese',
+            'अंडा': 'fa-egg',
+            'मछली': 'fa-fish',
+            'चिकन': 'fa-drumstick-bite',
+            'दाल': 'fa-utensils',
+            'चावल': 'fa-rice',
+            'रोटी': 'fa-bread-slice',
+            'सूप': 'fa-mug-hot',
+            'नट्स': 'fa-peanut',
+            'Fruits': 'fa-apple-whole',
+            'Vegetables': 'fa-carrot',
+            'Milk': 'fa-glass-water',
+            'Curd': 'fa-blender',
+            'Paneer': 'fa-cheese',
+            'Egg': 'fa-egg',
+            'Fish': 'fa-fish',
+            'Chicken': 'fa-drumstick-bite',
+            'Dal': 'fa-utensils',
+            'Rice': 'fa-rice',
+            'Roti': 'fa-bread-slice',
+            'Soup': 'fa-mug-hot',
+            'Nuts': 'fa-peanut'
+        };
+        
+        // Exercise icons mapping
+        const exerciseIcons = {
+            'टहलना': 'fa-walking',
+            'योग': 'fa-spa',
+            'तैरना': 'fa-swimming-pool',
+            'पिलेट्स': 'fa-dumbbell',
+            'स्ट्रेचिंग': 'fa-child',
+            'Walking': 'fa-walking',
+            'Yoga': 'fa-spa',
+            'Swimming': 'fa-swimming-pool',
+            'Pilates': 'fa-dumbbell',
+            'Stretching': 'fa-child'
+        };
+        
+        // Health advice based on status - Hindi
+        const healthAdviceHi = {
+            'excellent': {
+                text: 'आपका स्वास्थ्य उत्तम स्थिति में है। संतुलित आहार और नियमित व्यायाम जारी रखें।',
+                class: 'health-excellent'
+            },
+            'good': {
+                text: 'आपका स्वास्थ्य अच्छा है। पोषक तत्वों से भरपूर आहार लें और नियमित जांच करवाते रहें।',
+                class: 'health-good'
+            },
+            'average': {
+                text: 'आपका स्वास्थ्य सामान्य है। विटामिन और मिनरल युक्त आहार पर विशेष ध्यान दें।',
+                class: 'health-average'
+            },
+            'poor': {
+                text: 'आपका स्वास्थ्य कमजोर है। डॉक्टर से सलाह लें और पौष्टिक आहार का विशेष ध्यान रखें।',
+                class: 'health-poor'
+            }
+        };
+        
+        // Health advice based on status - English
+        const healthAdviceEn = {
+            'excellent': {
+                text: 'You are in excellent health. Continue with balanced diet and regular exercise.',
+                class: 'health-excellent'
+            },
+            'good': {
+                text: 'You are in good health. Eat nutritious food and get regular checkups.',
+                class: 'health-good'
+            },
+            'average': {
+                text: 'You are in average health. Pay special attention to vitamin and mineral rich diet.',
+                class: 'health-average'
+            },
+            'poor': {
+                text: 'You are in poor health. Consult a doctor and pay special attention to nutritious diet.',
+                class: 'health-poor'
+            }
+        };
+        
+        // Sample data for different trimesters - Hindi
+        const dietPlansHi = {
+            '1': [
+                { time: 'सुबह (7-8 AM)', activity: 'फल + सूखे मेवे + दूध', health: 'excellent' },
+                { time: 'मिड मॉर्निंग (10-11 AM)', activity: 'नारियल पानी या फ्रेश जूस', health: 'good' },
+                { time: 'दोपहर (1-2 PM)', activity: 'रोटी + दाल + सब्जी + दही', health: 'good' },
+                { time: 'शाम (4-5 PM)', activity: 'स्प्राउट्स या उबले अंडे', health: 'good' },
+                { time: 'रात (8-9 PM)', activity: 'चावल + दाल + सब्जी + सलाद', health: 'good' },
+                { time: 'सोने से पहले', activity: 'हल्दी वाला दूध', health: 'excellent' }
+            ],
+            '2': [
+                { time: 'सुबह (7-8 AM)', activity: 'पोहा/उपमा + फल', health: 'excellent' },
+                { time: 'मिड मॉर्निंग (10-11 AM)', activity: 'ड्राई फ्रूट्स + जूस', health: 'good' },
+                { time: 'दोपहर (1-2 PM)', activity: 'रोटी + पनीर/चिकन + दाल + सब्जी', health: 'good' },
+                { time: 'शाम (4-5 PM)', activity: 'भुने चने + नारियल पानी', health: 'good' },
+                { time: 'रात (8-9 PM)', activity: 'खिचड़ी/दलिया + सब्जी + सलाद', health: 'good' },
+                { time: 'सोने से पहले', activity: 'केसर वाला दूध', health: 'excellent' }
+            ],
+            '3': [
+                { time: 'सुबह (7-8 AM)', activity: 'इडली/डोसा + चटनी + सांभर', health: 'excellent' },
+                { time: 'मिड मॉर्निंग (10-11 AM)', activity: 'फल + नट्स', health: 'good' },
+                { time: 'दोपहर (1-2 PM)', activity: 'रोटी + मछली/अंडा + दाल + सब्जी', health: 'good' },
+                { time: 'शाम (4-5 PM)', activity: 'सूप + क्रैकर्स', health: 'good' },
+                { time: 'रात (8-9 PM)', activity: 'चपाती + सब्जी + दही', health: 'good' },
+                { time: 'सोने से पहले', activity: 'बादाम दूध', health: 'excellent' }
+            ]
+        };
+        
+        // Sample data for different trimesters - English
+        const dietPlansEn = {
+            '1': [
+                { time: 'Morning (7-8 AM)', activity: 'Fruits + Dry fruits + Milk', health: 'excellent' },
+                { time: 'Mid Morning (10-11 AM)', activity: 'Coconut water or Fresh juice', health: 'good' },
+                { time: 'Afternoon (1-2 PM)', activity: 'Roti + Dal + Vegetables + Curd', health: 'good' },
+                { time: 'Evening (4-5 PM)', activity: 'Sprouts or Boiled eggs', health: 'good' },
+                { time: 'Night (8-9 PM)', activity: 'Rice + Dal + Vegetables + Salad', health: 'good' },
+                { time: 'Before Bed', activity: 'Turmeric milk', health: 'excellent' }
+            ],
+            '2': [
+                { time: 'Morning (7-8 AM)', activity: 'Poha/Upma + Fruits', health: 'excellent' },
+                { time: 'Mid Morning (10-11 AM)', activity: 'Dry fruits + Juice', health: 'good' },
+                { time: 'Afternoon (1-2 PM)', activity: 'Roti + Paneer/Chicken + Dal + Vegetables', health: 'good' },
+                { time: 'Evening (4-5 PM)', activity: 'Roasted chana + Coconut water', health: 'good' },
+                { time: 'Night (8-9 PM)', activity: 'Khichdi/Daliya + Vegetables + Salad', health: 'good' },
+                { time: 'Before Bed', activity: 'Saffron milk', health: 'excellent' }
+            ],
+            '3': [
+                { time: 'Morning (7-8 AM)', activity: 'Idli/Dosa + Chutney + Sambhar', health: 'excellent' },
+                { time: 'Mid Morning (10-11 AM)', activity: 'Fruits + Nuts', health: 'good' },
+                { time: 'Afternoon (1-2 PM)', activity: 'Roti + Fish/Egg + Dal + Vegetables', health: 'good' },
+                { time: 'Evening (4-5 PM)', activity: 'Soup + Crackers', health: 'good' },
+                { time: 'Night (8-9 PM)', activity: 'Chapati + Vegetables + Curd', health: 'good' },
+                { time: 'Before Bed', activity: 'Almond milk', health: 'excellent' }
+            ]
+        };
+        
+        const exercisePlansHi = {
+            '1': [
+                { time: 'सुबह', activity: 'टहलना (20-30 मिनट)', health: 'excellent' },
+                { time: 'दोपहर', activity: 'प्रेगनेंसी योग (15 मिनट)', health: 'good' },
+                { time: 'शाम', activity: 'स्ट्रेचिंग एक्सरसाइज (10 मिनट)', health: 'good' }
+            ],
+            '2': [
+                { time: 'सुबह', activity: 'तैराकी या वॉक (30 मिनट)', health: 'excellent' },
+                { time: 'दोपहर', activity: 'प्रेगनेंसी पिलेट्स (20 मिनट)', health: 'good' },
+                { time: 'शाम', activity: 'डीप ब्रीदिंग एक्सरसाइज (10 मिनट)', health: 'good' }
+            ],
+            '3': [
+                { time: 'सुबह', activity: 'धीमी वॉक (20 मिनट)', health: 'good' },
+                { time: 'दोपहर', activity: 'कीगल एक्सरसाइज (15 मिनट)', health: 'good' },
+                { time: 'शाम', activity: 'प्रेगनेंसी योग (20 मिनट)', health: 'excellent' }
+            ]
+        };
+        
+        const exercisePlansEn = {
+            '1': [
+                { time: 'Morning', activity: 'Walking (20-30 mins)', health: 'excellent' },
+                { time: 'Afternoon', activity: 'Pregnancy yoga (15 mins)', health: 'good' },
+                { time: 'Evening', activity: 'Stretching exercises (10 mins)', health: 'good' }
+            ],
+            '2': [
+                { time: 'Morning', activity: 'Swimming or Walk (30 mins)', health: 'excellent' },
+                { time: 'Afternoon', activity: 'Pregnancy pilates (20 mins)', health: 'good' },
+                { time: 'Evening', activity: 'Deep breathing exercises (10 mins)', health: 'good' }
+            ],
+            '3': [
+                { time: 'Morning', activity: 'Slow walk (20 mins)', health: 'good' },
+                { time: 'Afternoon', activity: 'Kegel exercises (15 mins)', health: 'good' },
+                { time: 'Evening', activity: 'Pregnancy yoga (20 mins)', health: 'excellent' }
+            ]
+        };
+        
+        const checklistsHi = {
+            '1': [
+                'प्रसव पूर्व विटामिन लेना शुरू करें',
+                'डॉक्टर से पहली अपॉइंटमेंट लें',
+                'धूम्रपान और शराब से परहेज करें',
+                'कैफीन का सेवन कम करें'
+            ],
+            '2': [
+                'अल्ट्रासाउंड स्कैन के लिए अपॉइंटमेंट लें',
+                'प्रेगनेंसी क्लासेस जॉइन करें',
+                'मैटरनिटी कपड़े खरीदें',
+                'बच्चे के नामों की सूची बनाएं'
+            ],
+            '3': [
+                'हॉस्पिटल बैग पैक करें',
+                'बर्थ प्लान तैयार करें',
+                'बेबी शावर प्लान करें',
+                'घर की तैयारी पूरी करें'
+            ]
+        };
+        
+        const checklistsEn = {
+            '1': [
+                'Start taking prenatal vitamins',
+                'Schedule first doctor appointment',
+                'Avoid smoking and alcohol',
+                'Reduce caffeine intake'
+            ],
+            '2': [
+                'Schedule ultrasound scan',
+                'Join pregnancy classes',
+                'Buy maternity clothes',
+                'Make a list of baby names'
+            ],
+            '3': [
+                'Pack hospital bag',
+                'Prepare birth plan',
+                'Plan baby shower',
+                'Complete home preparations'
+            ]
+        };
+        
+        // Baby development data by week - Hindi
+        const babyDevelopmentHi = {
+            '12': {
+                title: '12वां सप्ताह - गर्भावस्था अपडेट',
+                description: "आप दूसरी तिमाही के करीब हैं! इस सप्ताह, आपका बच्चा तेजी से बढ़ रहा है और अधिक मानवीय रूप ले रहा है।",
+                development: "आपके बच्चे की अंगुलियों और पैर की उंगलियों में अब नाखून बन रहे हैं। आंतें अब पेट के अंदर सही जगह पर जा रही हैं।",
+                size: '~5.4 सेमी (एक नींबू के आकार का)',
+                weight: '~14 ग्राम'
+            }
+        };
+        
+        // Baby development data by week - English
+        const babyDevelopmentEn = {
+            '12': {
+                title: 'Week 12 - Pregnancy Update',
+                description: "You're nearing the second trimester! This week, your baby is growing rapidly and taking on a more human form.",
+                development: "Your baby's fingers and toes now have nails. The intestines are now moving to their proper place inside the abdomen.",
+                size: '~5.4 cm (size of a lime)',
+                weight: '~14 grams'
+            }
+        };
+        
+        // Symptom data
+        const symptomsHi = {
+            'morningSickness': 'सुबह की बीमारी (मॉर्निंग सिकनेस)',
+            'fatigue': 'थकान',
+            'backPain': 'पीठ दर्द',
+            'heartburn': 'सीने में जलन',
+            'swelling': 'सूजन',
+            'headache': 'सिरदर्द',
+            'cramps': 'ऐंठन',
+            'other': 'अन्य'
+        };
+        
+        const symptomsEn = {
+            'morningSickness': 'Morning Sickness',
+            'fatigue': 'Fatigue',
+            'backPain': 'Back Pain',
+            'heartburn': 'Heartburn',
+            'swelling': 'Swelling',
+            'headache': 'Headache',
+            'cramps': 'Cramps',
+            'other': 'Other'
+        };
+        
+        function getTrimester(week) {
+            if (week >= 1 && week <= 12) return '1';
+            if (week >= 13 && week <= 26) return '2';
+            if (week >= 27 && week <= 42) return '3';
+            return '1'; // default
+        }
+        
+        function getFoodIcon(foodItem) {
+            for (const [food, icon] of Object.entries(foodIcons)) {
+                if (foodItem.includes(food)) {
+                    return icon;
+                }
+            }
+            return 'fa-utensils'; // default icon
+        }
+        
+        function getExerciseIcon(exerciseItem) {
+            for (const [exercise, icon] of Object.entries(exerciseIcons)) {
+                if (exerciseItem.includes(exercise)) {
+                    return icon;
+                }
+            }
+            return 'fa-walking'; // default icon
+        }
+        
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('mainContainer');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
+        }
+        
+        // Due Date Calculator
+        function calculateDueDate() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const lastPeriodDate = document.getElementById('lastPeriodDate').value;
+            
+            if (!lastPeriodDate) {
+                alert(isHindi ? 'कृपया अंतिम मासिक धर्म की तिथि दर्ज करें' : 'Please enter last menstrual period date');
+                return;
+            }
+            
+            const lastPeriod = new Date(lastPeriodDate);
+            if (isNaN(lastPeriod.getTime())) {
+                alert(isHindi ? 'अमान्य तिथि दर्ज की गई है' : 'Invalid date entered');
+                return;
+            }
+            
+            // Calculate due date (280 days from last period)
+            const dueDate = new Date(lastPeriod);
+            dueDate.setDate(dueDate.getDate() + 280);
+            
+            // Calculate current week of pregnancy
+            const today = new Date();
+            const diffTime = Math.abs(today - lastPeriod);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const currentWeek = Math.floor(diffDays / 7);
+            
+            // Format dates
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDueDate = dueDate.toLocaleDateString(isHindi ? 'hi-IN' : 'en-US', options);
+            const formattedLastPeriod = lastPeriod.toLocaleDateString(isHindi ? 'hi-IN' : 'en-US', options);
+            
+            // Show result
+            document.getElementById('dueDateResult').style.display = 'block';
+            document.getElementById('dueDateText').textContent = formattedDueDate;
+            
+            if (currentWeek <= 42) {
+                document.getElementById('currentWeekText').textContent = 
+                    isHindi ? 
+                    `आप वर्तमान में ${currentWeek} सप्ताह की गर्भवती हैं (अंतिम मासिक धर्म: ${formattedLastPeriod})` :
+                    `You are currently ${currentWeek} weeks pregnant (Last period: ${formattedLastPeriod})`;
+            } else {
+                document.getElementById('currentWeekText').textContent = 
+                    isHindi ? 
+                    `आपकी प्रसव की अनुमानित तिथि पार हो चुकी है (अंतिम मासिक धर्म: ${formattedLastPeriod})` :
+                    `Your estimated due date has passed (Last period: ${formattedLastPeriod})`;
+            }
+            
+            // Scroll to result
+            document.getElementById('dueDateResult').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Symptom Tracker Functions
+        function setSeverity(level) {
+            // Remove active class from all dots
+            document.querySelectorAll('.severity-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Add active class to selected dot and all before it
+            for (let i = 1; i <= level; i++) {
+                document.querySelector(`.severity-dot[data-severity="${i}"]`).classList.add('active');
+            }
+        }
+        
+        function logSymptom() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const symptomType = document.getElementById('symptomType').value;
+            const symptomNotes = document.getElementById('symptomNotes').value;
+            
+            // Get severity level
+            const severityDot = document.querySelector('.severity-dot.active');
+            if (!severityDot) {
+                alert(isHindi ? 'कृपया लक्षण की गंभीरता चुनें' : 'Please select symptom severity');
+                return;
+            }
+            const severity = parseInt(severityDot.dataset.severity);
+            
+            // Get symptom name
+            const symptomName = isHindi ? symptomsHi[symptomType] : symptomsEn[symptomType];
+            
+            // Create log item
+            const logItem = document.createElement('div');
+            logItem.className = 'symptom-log-item';
+            
+            // Get current date and time
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            const formattedDate = now.toLocaleDateString(isHindi ? 'hi-IN' : 'en-US', options);
+            
+            // Create severity dots for display
+            let severityDots = '';
+            for (let i = 1; i <= 5; i++) {
+                severityDots += `<div class="severity-dot ${i <= severity ? 'active' : ''}"></div>`;
+            }
+            
+            logItem.innerHTML = `
+                <div>
+                    <strong>${symptomName}</strong>
+                    <div style="font-size: 12px; color: #777;">${formattedDate}</div>
+                    ${symptomNotes ? `<div style="margin-top: 5px;">${symptomNotes}</div>` : ''}
+                </div>
+                <div style="display: flex; gap: 3px;">
+                    ${severityDots}
+                </div>
+            `;
+            
+            // Add to log
+            const symptomLog = document.getElementById('symptomLog');
+            const noSymptomsText = document.getElementById('noSymptomsText');
+            
+            if (noSymptomsText) {
+                noSymptomsText.style.display = 'none';
+            }
+            
+            // Add new log at the top
+            if (symptomLog.children.length > 0 && symptomLog.children[0].id !== 'noSymptomsText') {
+                symptomLog.insertBefore(logItem, symptomLog.children[0]);
+            } else {
+                symptomLog.appendChild(logItem);
+            }
+            
+            // Clear form
+            document.getElementById('symptomNotes').value = '';
+            document.querySelectorAll('.severity-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show success message
+            alert(isHindi ? 'लक्षण सफलतापूर्वक दर्ज किया गया' : 'Symptom logged successfully');
+        }
+        
+        function generatePlan() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const name = document.getElementById('motherName').value.trim() || (isHindi ? 'माँ' : 'Mother');
+            const weekInput = document.getElementById('pregnancyWeek').value;
+            const week = parseInt(weekInput);
+            
+            // Validate week input
+            if (!weekInput || isNaN(week)) {
+                alert(isHindi ? 'कृपया गर्भावस्था सप्ताह (1-42) दर्ज करें' : 'Please enter pregnancy week (1-42)');
+                return;
+            }
+            
+            if (week < 1 || week > 42) {
+                alert(isHindi ? 'कृपया गर्भावस्था सप्ताह (1-42) दर्ज करें' : 'Please enter week between 1-42');
+                return;
+            }
+            
+            const weight = document.getElementById('motherWeight').value;
+            if (!weight || isNaN(parseFloat(weight))) {
+                alert(isHindi ? 'कृपया सही वजन दर्ज करें' : 'Please enter correct weight');
+                return;
+            }
+            
+            const healthStatus = document.getElementById('healthStatus').value;
+            const pregnancyType = document.getElementById('pregnancyType').value;
+            const allergies = document.getElementById('allergies').value;
+            
+            const trimester = getTrimester(week);
+            const weekText = isHindi ? `${week} सप्ताह` : `week ${week}`;
+            
+            // Update result title with mother's name
+            document.getElementById('resultTitle').innerHTML = isHindi ?
+                `${name} (${weekText}) का गर्भावस्था प्लान` :
+                `${name} (${weekText}) Pregnancy Plan`;
+            
+            // Get appropriate plans based on language
+            const diets = isHindi ? 
+                JSON.parse(JSON.stringify(dietPlansHi[trimester])) : 
+                JSON.parse(JSON.stringify(dietPlansEn[trimester]));
+            const exercises = isHindi ? exercisePlansHi[trimester] : exercisePlansEn[trimester];
+            const checklistItems = isHindi ? checklistsHi[trimester] : checklistsEn[trimester];
+            
+            // Customize diet plan based on inputs
+            if (allergies) {
+                diets.forEach(item => {
+                    if (item.activity.includes(allergies)) {
+                        item.health = 'poor';
+                        item.activity += isHindi ? 
+                            ' (एलर्जी हो सकती है)' : 
+                            ' (may cause allergy)';
+                    }
+                });
+            }
+            
+            if (pregnancyType === 'highRisk') {
+                diets.forEach(item => {
+                    if (item.health === 'excellent') {
+                        item.health = 'good';
+                    }
+                });
+            }
+            
+            // Generate diet plan HTML with icons
+            let dietHTML = '';
+            diets.forEach(item => {
+                const icon = getFoodIcon(item.activity);
+                const healthText = isHindi ? 
+                    (item.health === 'excellent' ? 'उत्तम' : 
+                     item.health === 'good' ? 'अच्छा' : 
+                     item.health === 'average' ? 'सामान्य' : 'कमजोर') :
+                    (item.health === 'excellent' ? 'Excellent' : 
+                     item.health === 'good' ? 'Good' : 
+                     item.health === 'average' ? 'Average' : 'Poor');
+                
+                dietHTML += `
+                    <div class="schedule-item">
+                        <div class="time">${item.time}</div>
+                        <div class="activity">
+                            <i class="fas ${icon} food-icon" aria-hidden="true"></i>
+                            ${item.activity}
+                            <span class="health-indicator ${item.health}">
+                                ${healthText}
+                            </span>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('dietPlan').innerHTML = dietHTML;
+            
+            // Generate exercise plan HTML
+            let exerciseHTML = '';
+            exercises.forEach(item => {
+                const icon = getExerciseIcon(item.activity);
+                exerciseHTML += `
+                    <div class="schedule-item">
+                        <div class="time">${item.time}</div>
+                        <div class="activity">
+                            <i class="fas ${icon} food-icon" aria-hidden="true"></i>
+                            ${item.activity}
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('exercisePlan').innerHTML = exerciseHTML;
+            
+            // Generate checklist HTML
+            let checklistHTML = '';
+            checklistItems.forEach(item => {
+                checklistHTML += `
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check${checklistItems.indexOf(item)}">
+                        <label class="checklist-label" for="check${checklistItems.indexOf(item)}">${item}</label>
+                    </div>
+                `;
+            });
+            document.getElementById('checklistPlan').innerHTML = checklistHTML;
+            
+            // Update baby development info
+            let babyInfo;
+            if (week <= 12) {
+                babyInfo = isHindi ? babyDevelopmentHi['12'] : babyDevelopmentEn['12'];
+            } else if (week <= 26) {
+                babyInfo = isHindi ? babyDevelopmentHi['12'] : babyDevelopmentEn['12'];
+            } else {
+                babyInfo = isHindi ? babyDevelopmentHi['12'] : babyDevelopmentEn['12'];
+            }
+            
+            document.querySelector('.week-title.lang-hi').textContent = isHindi ? babyInfo.title : '';
+            document.querySelector('.week-title.lang-en').textContent = isHindi ? '' : babyInfo.title;
+            
+            document.querySelector('.pregnancy-week-info p.lang-hi').textContent = isHindi ? babyInfo.description : '';
+            document.querySelector('.pregnancy-week-info p.lang-en').textContent = isHindi ? '' : babyInfo.description;
+            
+            document.querySelector('.baby-development p.lang-hi').textContent = isHindi ? babyInfo.development : '';
+            document.querySelector('.baby-development p.lang-en').textContent = isHindi ? '' : babyInfo.development;
+            
+            document.querySelectorAll('.baby-size')[0].querySelector('span.lang-hi').textContent = isHindi ? `आकार: ${babyInfo.size}` : '';
+            document.querySelectorAll('.baby-size')[0].querySelector('span.lang-en').textContent = isHindi ? '' : `Size: ${babyInfo.size}`;
+            
+            document.querySelectorAll('.baby-size')[1].querySelector('span.lang-hi').textContent = isHindi ? `वजन: ${babyInfo.weight}` : '';
+            document.querySelectorAll('.baby-size')[1].querySelector('span.lang-en').textContent = isHindi ? '' : `Weight: ${babyInfo.weight}`;
+            
+            // Update health advice
+            const advice = isHindi ? healthAdviceHi[healthStatus] : healthAdviceEn[healthStatus];
+            document.querySelector('#healthAdvice.lang-hi').textContent = isHindi ? advice.text : '';
+            document.querySelector('#healthAdvice.lang-en').textContent = isHindi ? '' : advice.text;
+            document.getElementById('healthInfo').style.borderLeftColor = `var(--${healthStatus === 'excellent' ? 'success' : 
+                                                                           healthStatus === 'good' ? 'info' : 
+                                                                           healthStatus === 'average' ? 'warning' : 'danger'})`;
+            
+            // Show result container
+            document.getElementById('resultContainer').style.display = 'block';
+            document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function generatePDF() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            
+            // Check if jsPDF is loaded
+            if (typeof jsPDF === 'undefined') {
+                alert(isHindi ? 'PDF जनरेट करने में त्रुटि: jsPDF लाइब्रेरी लोड नहीं हुई' : 'PDF generation error: jsPDF library not loaded');
+                return;
+            }
+            
+            const doc = new jsPDF();
+            
+            // Set font for Unicode support
+            doc.setFont('helvetica');
+            
+            // Add title
+            const title = document.getElementById('resultTitle').textContent;
+            doc.setFontSize(18);
+            doc.setTextColor(255, 101, 163);
+            doc.text(title, 105, 20, { align: 'center' });
+            
+            // Baby Development Section
+            doc.setFontSize(14);
+            doc.setTextColor(0, 0, 0);
+            doc.text(isHindi ? 'बच्चे का विकास' : 'Baby Development', 14, 35);
+            
+            const weekTitle = document.querySelector('.week-title').textContent;
+            const weekDesc = document.querySelector('.pregnancy-week-info p').textContent;
+            const babyDev = document.querySelector('.baby-development p').textContent;
+            const babySize = document.querySelectorAll('.baby-size')[0].textContent.replace(/\s+/g, ' ').trim();
+            const babyWeight = document.querySelectorAll('.baby-size')[1].textContent.replace(/\s+/g, ' ').trim();
+            
+            doc.setFontSize(12);
+            doc.text(weekTitle, 14, 45);
+            doc.text(weekDesc, 14, 55, { maxWidth: 180 });
+            doc.text(babyDev, 14, 70, { maxWidth: 180 });
+            doc.text(babySize, 14, 90);
+            doc.text(babyWeight, 14, 100);
+            
+            // Diet Plan Section
+            let finalY = 110;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'आहार योजना' : 'Diet Plan', 14, finalY);
+            
+            const dietData = [];
+            document.querySelectorAll('#dietPlan .schedule-item').forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent
+                    .replace(/\s+/g, ' ')
+                    .trim();
+                dietData.push([time, activity]);
+            });
+            
+            doc.autoTable({
+                startY: finalY + 5,
+                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'आहार' : 'Diet']],
+                body: dietData,
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3,
+                    valign: 'middle'
+                },
+                columnStyles: {
+                    0: { cellWidth: 35, fontStyle: 'bold', textColor: [255, 101, 163] },
+                    1: { cellWidth: 'auto' }
+                }
+            });
+            
+            // Exercise Plan Section
+            finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'व्यायाम योजना' : 'Exercise Plan', 14, finalY);
+            
+            const exerciseData = [];
+            document.querySelectorAll('#exercisePlan .schedule-item').forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent;
+                exerciseData.push([time, activity]);
+            });
+            
+            doc.autoTable({
+                startY: finalY + 5,
+                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'व्यायाम' : 'Exercise']],
+                body: exerciseData,
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3
+                },
+                columnStyles: {
+                    0: { cellWidth: 35, fontStyle: 'bold', textColor: [255, 101, 163] },
+                    1: { cellWidth: 'auto' }
+                }
+            });
+            
+            // Checklist Section
+            finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'चेकलिस्ट' : 'Checklist', 14, finalY);
+            
+            const checklistData = [];
+            document.querySelectorAll('#checklistPlan .checklist-item').forEach(item => {
+                const label = item.querySelector('.checklist-label').textContent;
+                checklistData.push([label]);
+            });
+            
+            doc.autoTable({
+                startY: finalY + 5,
+                body: checklistData,
+                styles: {
+                    fontSize: 10,
+                    cellPadding: 3
+                },
+                columnStyles: {
+                    0: { cellWidth: 'auto' }
+                }
+            });
+            
+            // Health Advice Section
+            finalY = doc.lastAutoTable.finalY + 10;
+            doc.setFontSize(14);
+            doc.text(isHindi ? 'स्वास्थ्य सुझाव' : 'Health Advice', 14, finalY);
+            
+            const healthAdvice = document.querySelector('#healthAdvice').textContent;
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            doc.text(healthAdvice, 14, finalY + 10, { maxWidth: 180 });
+            
+            // Footer
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(isHindi ? 'Smart Pregnancy Care द्वारा जनरेट किया गया' : 'Generated by Smart Pregnancy Care', 
+                    105, 285, { align: 'center' });
+            
+            // Save the PDF
+            doc.save(isHindi ? 'गर्भावस्था_योजना.pdf' : 'pregnancy_plan.pdf');
+        }
+        
+        function sendWhatsAppReminder() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const planTitle = document.getElementById('resultTitle').textContent;
+            let planText = `*${planTitle}*\n\n`;
+            
+            // Add baby development
+            const weekTitle = document.querySelector('.week-title').textContent;
+            const weekDesc = document.querySelector('.pregnancy-week-info p').textContent;
+            const babyDev = document.querySelector('.baby-development p').textContent;
+            const babySize = document.querySelectorAll('.baby-size')[0].textContent;
+            const babyWeight = document.querySelectorAll('.baby-size')[1].textContent;
+            
+            planText += `*${weekTitle}*\n`;
+            planText += `${weekDesc}\n\n`;
+            planText += isHindi ? '*बच्चे का विकास:*\n' : '*Baby Development:*\n';
+            planText += `${babyDev}\n`;
+            planText += `${babySize}\n`;
+            planText += `${babyWeight}\n\n`;
+            
+            // Add diet plan
+            planText += isHindi ? '*आहार योजना:*\n' : '*Diet Plan:*\n';
+            const dietItems = document.querySelectorAll('#dietPlan .schedule-item');
+            dietItems.forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent.replace(/\s+/g, ' ').trim();
+                planText += `${time} - ${activity}\n`;
+            });
+            
+            planText += '\n';
+            
+            // Add exercise plan
+            planText += isHindi ? '*व्यायाम योजना:*\n' : '*Exercise Plan:*\n';
+            const exerciseItems = document.querySelectorAll('#exercisePlan .schedule-item');
+            exerciseItems.forEach(item => {
+                const time = item.querySelector('.time').textContent;
+                const activity = item.querySelector('.activity').textContent;
+                planText += `${time} - ${activity}\n`;
+            });
+            
+            planText += '\n';
+            
+            // Add checklist
+            planText += isHindi ? '*चेकलिस्ट:*\n' : '*Checklist:*\n';
+            const checklistItems = document.querySelectorAll('#checklistPlan .checklist-label');
+            checklistItems.forEach(item => {
+                planText += `- ${item.textContent}\n`;
+            });
+            
+            // Encode for WhatsApp URL
+            const encodedText = encodeURIComponent(planText);
+            const whatsappUrl = `https://wa.me/?text=${encodedText}`;
+            
+            // Open in new tab
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        function savePlan() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const printContent = document.getElementById('resultContainer').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = `
+                <style>
+                    body { font-family: Arial; padding: 20px; }
+                    h2 { color: #FF65A3; }
+                    .schedule-card { 
+                        background: #FFF0F5; 
+                        padding: 15px; 
+                        margin-bottom: 15px; 
+                        border-radius: 10px;
+                    }
+                    .schedule-item {
+                        display: flex;
+                        margin-bottom: 10px;
+                    }
+                    .time {
+                        font-weight: bold;
+                        min-width: 80px;
+                        color: #FF65A3;
+                    }
+                    .food-icon {
+                        margin-right: 8px;
+                    }
+                    .health-indicator {
+                        margin-left: 8px;
+                        font-size: 11px;
+                        padding: 2px 6px;
+                        border-radius: 8px;
+                        color: white;
+                    }
+                    .checklist-item {
+                        display: flex;
+                        margin-bottom: 8px;
+                    }
+                </style>
+                ${printContent}
+                <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #777;">
+                    ${isHindi ? 'Smart Pregnancy Care द्वारा जनरेट किया गया' : 'Generated by Smart Pregnancy Care'}
+                </div>
+            `;
+            
+            window.print();
+            
+            // Restore original content
+            document.body.innerHTML = originalContent;
+            
+            // Show confirmation
+            alert(isHindi ? 'प्लान सफलतापूर्वक सेव किया गया' : 'Plan saved successfully');
+        }
+        
+        function showTips() {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const week = parseInt(document.getElementById('pregnancyWeek').value);
+            const trimester = getTrimester(week);
+            const healthStatus = document.getElementById('healthStatus').value;
+            const pregnancyType = document.getElementById('pregnancyType').value;
+            
+            let tipsHTML = `<h3 style="margin-bottom: 15px; color: #FF65A3;">${isHindi ? 'विशेषज्ञ टिप्स' : 'Expert Tips'}</h3>`;
+            
+            // Trimester-specific tips
+            tipsHTML += `<h4 style="margin-bottom: 8px; color: #555;">${isHindi ? 'त्रैमासिक सुझाव:' : 'Trimester-specific Tips:'}</h4><ul style="padding-left: 20px; margin-bottom: 15px;">`;
+            
+            const trimesterTipsHi = {
+                '1': [
+                    "फोलिक एसिड युक्त आहार लें",
+                    "दिन में छोटे-छोटे भोजन करें",
+                    "पानी खूब पिएं"
+                ],
+                '2': [
+                    "प्रोटीन युक्त आहार बढ़ाएं",
+                    "नियमित हल्का व्यायाम करें",
+                    "आयरन युक्त खाद्य पदार्थ खाएं"
+                ],
+                '3': [
+                    "कैल्शियम युक्त आहार लें",
+                    "पैरों की सूजन से बचने के लिए आराम करें",
+                    "डॉक्टर से नियमित जांच करवाएं"
+                ]
+            };
+            
+            const trimesterTipsEn = {
+                '1': [
+                    "Eat folate-rich foods",
+                    "Have small frequent meals",
+                    "Drink plenty of water"
+                ],
+                '2': [
+                    "Increase protein intake",
+                    "Do regular light exercise",
+                    "Eat iron-rich foods"
+                ],
+                '3': [
+                    "Consume calcium-rich diet",
+                    "Rest to avoid swelling in feet",
+                    "Get regular checkups from doctor"
+                ]
+            };
+            
+            const trimesterTips = isHindi ? trimesterTipsHi : trimesterTipsEn;
+            
+            trimesterTips[trimester].forEach(tip => {
+                tipsHTML += `<li style="margin-bottom: 8px;">${tip}</li>`;
+            });
+            
+            tipsHTML += '</ul>';
+            
+            // Pregnancy type specific tips
+            tipsHTML += `<h4 style="margin-bottom: 8px; color: #555;">${isHindi ? 'गर्भावस्था प्रकार के अनुसार सुझाव:' : 'Pregnancy Type Tips:'}</h4><ul style="padding-left: 20px; margin-bottom: 15px;">`;
+            
+            const typeTipsHi = {
+                'normal': [
+                    "संतुलित आहार जारी रखें",
+                    "नियमित व्यायाम करें",
+                    "तनाव मुक्त रहें"
+                ],
+                'first': [
+                    "प्रसव पूर्व कक्षाओं में भाग लें",
+                    "अनुभवी माताओं से सलाह लें",
+                    "अपने शरीर में हो रहे बदलावों को समझें"
+                ],
+                'highRisk': [
+                    "डॉक्टर के निर्देशों का पालन करें",
+                    "अधिक आराम करें",
+                    "किसी भी असामान्य लक्षण पर तुरंत डॉक्टर को दिखाएं"
+                ],
+                'twins': [
+                    "अतिरिक्त कैलोरी और पोषण लें",
+                    "अधिक बार डॉक्टर से जांच करवाएं",
+                    "प्रसव पूर्व विशेष देखभाल लें"
+                ]
+            };
+            
+            const typeTipsEn = {
+                'normal': [
+                    "Continue balanced diet",
+                    "Exercise regularly",
+                    "Stay stress-free"
+                ],
+                'first': [
+                    "Attend prenatal classes",
+                    "Take advice from experienced mothers",
+                    "Understand changes in your body"
+                ],
+                'highRisk': [
+                    "Follow doctor's instructions",
+                    "Take more rest",
+                    "Consult doctor immediately for any abnormal symptoms"
+                ],
+                'twins': [
+                    "Take extra calories and nutrition",
+                    "Get more frequent checkups",
+                    "Take special prenatal care"
+                ]
+            };
+            
+            const typeTips = isHindi ? typeTipsHi : typeTipsEn;
+            
+            typeTips[pregnancyType].forEach(tip => {
+                tipsHTML += `<li style="margin-bottom: 8px;">${tip}</li>`;
+            });
+            
+            tipsHTML += '</ul>';
+            
+            // Health-specific tips
+            tipsHTML += `<h4 style="margin-bottom: 8px; color: #555;">${isHindi ? 'स्वास्थ्य स्थिति के अनुसार सुझाव:' : 'Health-specific Tips:'}</h4><ul style="padding-left: 20px;">`;
+            
+            const healthTipsHi = {
+                'excellent': [
+                    "संतुलित आहार जारी रखें",
+                    "नियमित व्यायाम जारी रखें",
+                    "मौसमी फल और सब्जियाँ शामिल करें"
+                ],
+                'good': [
+                    "प्रोटीन और कैल्शियम युक्त आहार पर ध्यान दें",
+                    "नियमित स्वास्थ्य जाँच करवाएँ",
+                    "पानी की पर्याप्त मात्रा सुनिश्चित करें"
+                ],
+                'average': [
+                    "आयरन और विटामिन युक्त आहार दें",
+                    "डॉक्टर से नियमित सलाह लें",
+                    "भोजन में हरी पत्तेदार सब्जियाँ शामिल करें"
+                ],
+                'poor': [
+                    "तुरंत डॉक्टर से संपर्क करें",
+                    "ऊर्जा युक्त आहार दें",
+                    "छोटे-छोटे अंतराल पर भोजन दें"
+                ]
+            };
+            
+            const healthTipsEn = {
+                'excellent': [
+                    "Continue balanced diet",
+                    "Maintain regular exercise",
+                    "Include seasonal fruits and vegetables"
+                ],
+                'good': [
+                    "Focus on protein and calcium rich foods",
+                    "Get regular health checkups",
+                    "Ensure adequate water intake"
+                ],
+                'average': [
+                    "Provide iron and vitamin rich foods",
+                    "Consult doctor regularly",
+                    "Include green leafy vegetables"
+                ],
+                'poor': [
+                    "Consult doctor immediately",
+                    "Provide energy dense foods",
+                    "Give small frequent meals"
+                ]
+            };
+            
+            const healthTips = isHindi ? healthTipsHi : healthTipsEn;
+            
+            healthTips[healthStatus].forEach(tip => {
+                tipsHTML += `<li style="margin-bottom: 8px;">${tip}</li>`;
+            });
+            
+            tipsHTML += '</ul>';
+            
+            // Create modal for tips
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = `
+                <div class="modal-content" style="max-width: 600px;">
+                    <span class="close-modal" onclick="this.parentElement.parentElement.style.display='none'" aria-label="Close modal">&times;</span>
+                    <div style="padding: 15px; max-height: 70vh; overflow-y: auto;">
+                        ${tipsHTML}
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Close when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+        
+        function switchLanguage(lang) {
+            if (lang === 'hi') {
+                // Show Hindi elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'हिंदी') btn.classList.add('active');
+                });
+                
+                // Reset form placeholders in Hindi
+                document.getElementById('motherName').placeholder = "जैसे: प्रिया";
+                document.getElementById('pregnancyWeek').placeholder = "जैसे: 12";
+                document.getElementById('motherWeight').placeholder = "जैसे: 58";
+                document.getElementById('allergies').placeholder = "जैसे: मूंगफली, अंडा, ग्लूटेन";
+                
+                // Update symptom select options
+                const symptomOptions = document.getElementById('symptomType').options;
+                symptomOptions[0].text = 'सुबह की बीमारी (मॉर्निंग सिकनेस)';
+                symptomOptions[1].text = 'थकान';
+                symptomOptions[2].text = 'पीठ दर्द';
+                symptomOptions[3].text = 'सीने में जलन';
+                symptomOptions[4].text = 'सूजन';
+                symptomOptions[5].text = 'सिरदर्द';
+                symptomOptions[6].text = 'ऐंठन';
+                symptomOptions[7].text = 'अन्य';
+                
+                document.getElementById('symptomNotes').placeholder = "अपने लक्षणों के बारे में अतिरिक्त जानकारी दें";
+            } else {
+                // Show English elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+                
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.textContent === 'English') btn.classList.add('active');
+                });
+                
+                // Reset form placeholders in English
+                document.getElementById('motherName').placeholder = "e.g. Priya";
+                document.getElementById('pregnancyWeek').placeholder = "e.g. 12";
+                document.getElementById('motherWeight').placeholder = "e.g. 58";
+                document.getElementById('allergies').placeholder = "e.g. Peanuts, Egg, Gluten";
+                
+                // Update symptom select options
+                const symptomOptions = document.getElementById('symptomType').options;
+                symptomOptions[0].text = 'Morning Sickness';
+                symptomOptions[1].text = 'Fatigue';
+                symptomOptions[2].text = 'Back Pain';
+                symptomOptions[3].text = 'Heartburn';
+                symptomOptions[4].text = 'Swelling';
+                symptomOptions[5].text = 'Headache';
+                symptomOptions[6].text = 'Cramps';
+                symptomOptions[7].text = 'Other';
+                
+                document.getElementById('symptomNotes').placeholder = "Add additional information about your symptoms";
+            }
+            
+            // Close sidebar when switching language
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('open')) {
+                toggleSidebar();
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // Add event listener for Enter key
+        document.getElementById('pregnancyWeek').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generatePlan();
+            }
+        });
+        
+        // Initialize with Hindi language
+        switchLanguage('hi');
+    </script>
+</body>
+</html>
