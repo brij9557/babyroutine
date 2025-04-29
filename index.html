@@ -135,18 +135,30 @@
         }
         
         .sidebar-menu {
-            padding: 0 15px;
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF7EB9;
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid #FFD1DC;
         }
         
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
             color: var(--text);
             text-decoration: none;
             transition: all 0.3s;
+            border-left: 3px solid transparent;
         }
         
         .menu-item i {
@@ -154,16 +166,19 @@
             width: 20px;
             text-align: center;
             color: var(--secondary);
+            font-size: 1.1rem;
         }
         
         .menu-item:hover {
-            background: var(--light);
+            background: rgba(255, 101, 163, 0.1);
             color: var(--secondary);
+            border-left: 3px solid var(--secondary);
         }
         
         .menu-item.active {
-            background: var(--highlight);
+            background: rgba(255, 101, 163, 0.1);
             color: var(--secondary);
+            border-left: 3px solid var(--secondary);
         }
         
         .overlay {
@@ -485,15 +500,6 @@
         
         .tips-btn:hover {
             background: #e68a00;
-        }
-        
-        .pdf-btn {
-            background: #F44336;
-            grid-column: span 2;
-        }
-        
-        .pdf-btn:hover {
-            background: #d32f2f;
         }
         
         .health-info {
@@ -842,7 +848,7 @@
                 grid-template-columns: 1fr 1fr 1fr;
             }
             
-            .tips-btn, .pdf-btn {
+            .tips-btn {
                 grid-column: auto;
             }
             
@@ -946,46 +952,57 @@
         </div>
         
         <div class="sidebar-menu">
-            <a href="about.html" class="menu-item">
-                <i class="fas fa-user" aria-hidden="true"></i>
-                <span class="lang-hi">मेरे बारे में</span>
-                <span class="lang-en" style="display:none">About Me</span>
+           
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
+                <span class="lang-en" style="display:none">Pregnancy Tracker</span>
+            </a>
+            <div class="menu-section lang-hi">शिशु देखभाल</div>
+            <div class="menu-section lang-en" style="display:none">Baby Care</div>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span class="lang-hi">दैनिक देखभाल योजना</span>
+                <span class="lang-en" style="display:none">Daily Care Plan</span>
+            </a>
+<a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span class="lang-hi">क्राइंग एनालाइज़र</span>
+                <span class="lang-en" style="display:none">Crying Analyzer</span>
             </a>
             <a href="baby-food-recipes.html" class="menu-item">
                 <i class="fas fa-utensils" aria-hidden="true"></i>
-                <span class="lang-hi">शिशु आहार व्यंजन</span>
-                <span class="lang-en" style="display:none">Baby Food Recipes</span>
+                <span class="lang-hi">आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Food Recipes</span>
             </a>
             <a href="baby-play-activities.html" class="menu-item">
                 <i class="fas fa-gamepad" aria-hidden="true"></i>
-                <span class="lang-hi">शिशु खेल गतिविधियाँ</span>
-                <span class="lang-en" style="display:none">Baby Play Activities</span>
-            </a>
-            <a href="baby-tikakarn.html" class="menu-item">
-                <i class="fas fa-baby-carriage" aria-hidden="true"></i>
-                <span class="lang-hi">बेबी टीकाकरण</span>
-                <span class="lang-en" style="display:none">Baby Vaccination</span>
+                <span class="lang-hi">खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Play Activities</span>
             </a>
             <a href="baby-growth-card.html" class="menu-item">
                 <i class="fas fa-baby" aria-hidden="true"></i>
-                <span class="lang-hi">बेबी ग्रोथ कार्ड</span>
-                <span class="lang-en" style="display:none">Baby Growth Card</span>
+                <span class="lang-hi">विकास चार्ट</span>
+                <span class="lang-en" style="display:none">Growth Chart</span>
             </a>
-            <a href="baby-crying-ai-tool.html" class="menu-item">
-                <i class="fas fa-baby-crying" aria-hidden="true"></i>
-                <span class="lang-hi">बेबी क्राइंग AI टूल</span>
-                <span class="lang-en" style="display:none">Baby Crying AI Tool</span>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span class="lang-hi">टीकाकरण</span>
+                <span class="lang-en" style="display:none">Vaccination</span>
             </a>
-    
-            <a href="pregnancy-tracker.html" class="menu-item">
-        <i class="fas fa-baby-carriage" aria-hidden="true"></i>
-        <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
-        <span class="lang-en" style="display:none">Pregnancy Tracker</span>
-                
+            <div class="menu-section lang-hi">संसाधन</div>
+            <div class="menu-section lang-en" style="display:none">Resources</div>
+            
             <a href="baby-qa-blog.html" class="menu-item">
-                <i class="fas fa-question-circle" aria-hidden="true"></i>
-                <span class="lang-hi">बेबी Q&A ब्लॉग</span>
-                <span class="lang-en" style="display:none">Baby Q&A Blog</span>
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+
+ <a href="about.html" class="menu-item">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="lang-hi">मेरा प्रोफाइल</span>
+                <span class="lang-en" style="display:none">About Us</span>
             </a>
         </div>
     </div>
@@ -1165,9 +1182,6 @@
                 <button class="tips-btn" onclick="showTips()" aria-label="View expert tips">
                     <i class="fas fa-lightbulb" aria-hidden="true"></i> <span class="lang-hi">विशेष टिप्स</span><span class="lang-en" style="display:none">Special Tips</span>
                 </button>
-                <button class="pdf-btn" onclick="generatePDF()" aria-label="Download PDF of baby care plan">
-                    <i class="fas fa-file-pdf" aria-hidden="true"></i> <span class="lang-hi">PDF डाउनलोड</span><span class="lang-en" style="display:none">Download PDF</span>
-                </button>
             </div>
         </div>
         
@@ -1232,7 +1246,7 @@
             apiKey: "AIzaSyAbP8-ZOYyGWcqUGvJhCWhJwj5Yj47bn1Q",
             authDomain: "mybabyroutine-41aa9.firebaseapp.com",
             projectId: "mybabyroutine-41aa9",
-            storageBucket: "mybabyroutine-41aa9.firebasestorage.app",
+            storageBucket: "mybabyroutine-41aa9.appspot.com",
             messagingSenderId: "489588024529",
             appId: "1:489588024529:web:a2e58edca1307b0f7651f0",
             measurementId: "G-5YEGNR6VEM"
@@ -1745,127 +1759,6 @@
             // Show result container
             document.getElementById('resultContainer').style.display = 'block';
             document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function generatePDF() {
-            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
-            
-            // Check if jsPDF is loaded
-            if (typeof jsPDF === 'undefined') {
-                alert(isHindi ? 'PDF जनरेट करने में त्रुटि: jsPDF लाइब्रेरी लोड नहीं हुई' : 'PDF generation error: jsPDF library not loaded');
-                return;
-            }
-            
-            const doc = new jsPDF();
-            
-            // Set font for Unicode support
-            doc.setFont('helvetica');
-            
-            // Add title
-            const title = document.getElementById('resultTitle').textContent;
-            doc.setFontSize(18);
-            doc.setTextColor(255, 101, 163);
-            doc.text(title, 105, 20, { align: 'center' });
-            
-            // Meal Plan Section
-            doc.setFontSize(14);
-            doc.setTextColor(0, 0, 0);
-            doc.text(isHindi ? 'भोजन योजना' : 'Meal Plan', 14, 35);
-            
-            const mealData = [];
-            document.querySelectorAll('#mealPlan .schedule-item').forEach(item => {
-                const time = item.querySelector('.time').textContent;
-                const activity = item.querySelector('.activity').textContent
-                    .replace(/\s+/g, ' ')
-                    .trim();
-                mealData.push([time, activity]);
-            });
-            
-            doc.autoTable({
-                startY: 40,
-                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'गतिविधि' : 'Activity']],
-                body: mealData,
-                styles: {
-                    fontSize: 10,
-                    cellPadding: 3,
-                    valign: 'middle'
-                },
-                columnStyles: {
-                    0: { cellWidth: 25, fontStyle: 'bold', textColor: [255, 101, 163] },
-                    1: { cellWidth: 'auto' }
-                }
-            });
-            
-            // Sleep Plan Section
-            let finalY = doc.lastAutoTable.finalY + 10;
-            doc.setFontSize(14);
-            doc.text(isHindi ? 'नींद का समय' : 'Sleep Schedule', 14, finalY);
-            
-            const sleepData = [];
-            document.querySelectorAll('#sleepPlan .schedule-item').forEach(item => {
-                const time = item.querySelector('.time').textContent;
-                const activity = item.querySelector('.activity').textContent;
-                sleepData.push([time, activity]);
-            });
-            
-            doc.autoTable({
-                startY: finalY + 5,
-                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'गतिविधि' : 'Activity']],
-                body: sleepData,
-                styles: {
-                    fontSize: 10,
-                    cellPadding: 3
-                },
-                columnStyles: {
-                    0: { cellWidth: 25, fontStyle: 'bold', textColor: [255, 101, 163] },
-                    1: { cellWidth: 'auto' }
-                }
-            });
-            
-            // Activity Plan Section
-            finalY = doc.lastAutoTable.finalY + 10;
-            doc.setFontSize(14);
-            doc.text(isHindi ? 'गतिविधियाँ' : 'Activities', 14, finalY);
-            
-            const activityData = [];
-            document.querySelectorAll('#activityPlan .schedule-item').forEach(item => {
-                const time = item.querySelector('.time').textContent;
-                const activity = item.querySelector('.activity').textContent;
-                activityData.push([time, activity]);
-            });
-            
-            doc.autoTable({
-                startY: finalY + 5,
-                head: [[isHindi ? 'समय' : 'Time', isHindi ? 'गतिविधि' : 'Activity']],
-                body: activityData,
-                styles: {
-                    fontSize: 10,
-                    cellPadding: 3
-                },
-                columnStyles: {
-                    0: { cellWidth: 25, fontStyle: 'bold', textColor: [255, 101, 163] },
-                    1: { cellWidth: 'auto' }
-                }
-            });
-            
-            // Health Advice Section
-            finalY = doc.lastAutoTable.finalY + 10;
-            doc.setFontSize(14);
-            doc.text(isHindi ? 'स्वास्थ्य सुझाव' : 'Health Advice', 14, finalY);
-            
-            const healthAdvice = document.querySelector('#healthAdvice').textContent;
-            doc.setFontSize(10);
-            doc.setTextColor(0, 0, 0);
-            doc.text(healthAdvice, 14, finalY + 10, { maxWidth: 180 });
-            
-            // Footer
-            doc.setFontSize(10);
-            doc.setTextColor(100, 100, 100);
-            doc.text(isHindi ? 'Smart Baby Care द्वारा जनरेट किया गया' : 'Generated by Smart Baby Care', 
-                    105, 285, { align: 'center' });
-            
-            // Save the PDF
-            doc.save(isHindi ? 'बेबी_केयर_प्लान.pdf' : 'baby_care_plan.pdf');
         }
         
         function sendWhatsAppReminder() {
