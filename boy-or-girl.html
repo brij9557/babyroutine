@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>बेबी जेंडर प्रिडिक्टर - लड़का या लड़की</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
+            --danger: #F44336;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', sans-serif;
+        }
+        
+        body {
+            background-color: #FFF9FB;
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF7EB9;
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid #FFD1DC;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lang-btn.active {
+            background: white;
+            color: var(--secondary);
+        }
+        
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            padding: 7px;
+        }
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover img.menu-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Gender Predictor Styles */
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 126, 185, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 15px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 126, 185, 0.1);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
+        .result-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--highlight);
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .boy-result {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .girl-result {
+            background: #e84393;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .method-result {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container.sidebar-open {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .menu-btn {
+                left: 10px;
+                top: 60%;
+                width: 60px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .language-switcher {
+                position: static;
+                margin-top: 10px;
+            }
+            
+            header {
+                padding: 15px 0;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            
+            .menu-btn:hover {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
+            <button class="close-sidebar" id="closeSidebar" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
+                <span class="lang-en" style="display:none">Pregnancy Tracker</span>
+            </a>
+            <div class="menu-section lang-hi">शिशु देखभाल</div>
+            <div class="menu-section lang-en" style="display:none">Baby Care</div>
+            <a href="index.html" class="menu-item active">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span class="lang-hi">बेबी जेंडर प्रिडिक्टर</span>
+                <span class="lang-en" style="display:none">Baby Gender Predictor</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span class="lang-hi">क्राइंग एनालाइज़र</span>
+                <span class="lang-en" style="display:none">Crying Analyzer</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span class="lang-hi">आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Food Recipes</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item">
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                <span class="lang-hi">खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Play Activities</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">विकास चार्ट</span>
+                <span class="lang-en" style="display:none">Growth Chart</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span class="lang-hi">टीकाकरण</span>
+                <span class="lang-en" style="display:none">Vaccination</span>
+            </a>
+            <div class="menu-section lang-hi">संसाधन</div>
+            <div class="menu-section lang-en" style="display:none">Resources</div>
+            
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+
+            <a href="about.html" class="menu-item">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="lang-hi">मेरा प्रोफाइल</span>
+                <span class="lang-en" style="display:none">About Us</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">
+        <img src="images/baby-icon.jpeg" alt="Baby Icon" class="menu-icon">
+    </button>
+    
+    <header>
+        <div class="language-switcher">
+            <button class="lang-btn active" id="hindiBtn" aria-label="Switch to Hindi">हिंदी</button>
+            <button class="lang-btn" id="englishBtn" aria-label="Switch to English">English</button>
+        </div>
+        
+        <div>
+            <h1><i class="fas fa-baby" aria-hidden="true"></i> <span class="lang-hi">बेबी जेंडर प्रिडिक्टर</span><span class="lang-en" style="display:none">Baby Gender Predictor</span></h1>
+            <p class="subtitle lang-hi">पारंपरिक और वैज्ञानिक तरीकों से भविष्यवाणी करें कि आपके घर लड़का आएगा या लड़की</p>
+            <p class="subtitle lang-en" style="display:none">Predict whether you'll have a boy or girl using traditional and scientific methods</p>
+        </div>
+    </header>
+    
+    <div class="container" id="mainContainer">
+        <div class="form-container" id="formContainer">
+            <div class="form-group">
+                <label for="motherAge" class="lang-hi">माँ की उम्र (गर्भधारण के समय)</label>
+                <label for="motherAge" class="lang-en" style="display:none">Mother's Age (at conception)</label>
+                <input type="number" id="motherAge" placeholder="जैसे: 25" min="18" max="45" aria-label="Enter mother's age">
+            </div>
+            
+            <div class="form-group">
+                <label for="conceptionMonth" class="lang-hi">गर्भधारण का महीना</label>
+                <label for="conceptionMonth" class="lang-en" style="display:none">Conception Month</label>
+                <select id="conceptionMonth" class="lang-select" aria-label="Select conception month">
+                    <option value="1">जनवरी</option>
+                    <option value="2">फरवरी</option>
+                    <option value="3">मार्च</option>
+                    <option value="4">अप्रैल</option>
+                    <option value="5">मई</option>
+                    <option value="6">जून</option>
+                    <option value="7">जुलाई</option>
+                    <option value="8">अगस्त</option>
+                    <option value="9">सितम्बर</option>
+                    <option value="10">अक्टूबर</option>
+                    <option value="11">नवम्बर</option>
+                    <option value="12">दिसम्बर</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="bellyShape" class="lang-hi">पेट का आकार</label>
+                <label for="bellyShape" class="lang-en" style="display:none">Belly Shape</label>
+                <select id="bellyShape" class="lang-select" aria-label="Select belly shape">
+                    <option value="round">गोल (लड़की का संकेत)</option>
+                    <option value="pointy">नुकीला (लड़का का संकेत)</option>
+                </select>
+            </div>
+            
+            <button id="predictBtn" class="lang-hi" aria-label="Predict baby gender">
+                <i class="fas fa-magic" aria-hidden="true"></i> रिजल्ट देखें
+            </button>
+            <button id="predictBtnEn" class="lang-en" style="display:none" aria-label="Predict baby gender">
+                <i class="fas fa-magic" aria-hidden="true"></i> Get Result
+            </button>
+        </div>
+        
+        <div class="result-container" id="boyResult">
+            <div class="result-header">
+                <h2 class="result-title"><i class="fas fa-male" aria-hidden="true"></i> <span class="lang-hi">परिणाम: लड़का!</span><span class="lang-en" style="display:none">Result: Boy!</span></h2>
+            </div>
+            
+            <div class="boy-result">
+                <div class="method-result" id="chineseBoyResult"></div>
+                <div class="method-result" id="shapeBoyResult"></div>
+                <p class="lang-hi">हमारी भविष्यवाणी के अनुसार आपके घर चूड़ियों की खनक के बजाय गुड्डे-गाड़ियों की आवाज़ गूंजेगी!</p>
+                <p class="lang-en" style="display:none">According to our prediction, your home will echo with the sounds of toys and cars instead of bangles!</p>
+            </div>
+        </div>
+
+        <div class="result-container" id="girlResult">
+            <div class="result-header">
+                <h2 class="result-title"><i class="fas fa-female" aria-hidden="true"></i> <span class="lang-hi">परिणाम: लड़की!</span><span class="lang-en" style="display:none">Result: Girl!</span></h2>
+            </div>
+            
+            <div class="girl-result">
+                <div class="method-result" id="chineseGirlResult"></div>
+                <div class="method-result" id="shapeGirlResult"></div>
+                <p class="lang-hi">तैयार हो जाइए आपके घर गुलाबी रंग और प्यार की बरसात होने वाली है!</p>
+                <p class="lang-en" style="display:none">Get ready for a shower of pink color and love in your home!</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div style="text-align: center; padding: 20px; color: var(--text); font-size: 0.9rem;">
+                <p class="lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
+                <p class="lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+                <p style="margin-top: 10px;"><a href="privacy-policy.html" style="color: var(--secondary);">Privacy Policy</a> | <a href="terms-of-service.html" style="color: var(--secondary);">Terms of Service</a> | <a href="sitemap.xml" style="color: var(--secondary);">Sitemap</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        const container = document.getElementById('mainContainer');
+        const menuBtn = document.getElementById('menuBtn');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const hindiBtn = document.getElementById('hindiBtn');
+        const englishBtn = document.getElementById('englishBtn');
+        const predictBtn = document.getElementById('predictBtn');
+        const predictBtnEn = document.getElementById('predictBtnEn');
+
+        // Toggle sidebar function
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
+        }
+
+        // Event listeners for sidebar
+        menuBtn.addEventListener('click', toggleSidebar);
+        closeSidebar.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Language toggle function
+        function switchLanguage(lang) {
+            if (lang === 'hi') {
+                // Show Hindi elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                
+                // Update language buttons
+                hindiBtn.classList.add('active');
+                englishBtn.classList.remove('active');
+                
+                // Update belly shape options
+                const bellyShape = document.getElementById('bellyShape');
+                bellyShape.innerHTML = '';
+                const options = [
+                    {value: 'round', text: 'गोल (लड़की का संकेत)'},
+                    {value: 'pointy', text: 'नुकीला (लड़का का संकेत)'}
+                ];
+                options.forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt.value;
+                    option.textContent = opt.text;
+                    bellyShape.appendChild(option);
+                });
+            } else {
+                // Show English elements
+                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
+                
+                // Update language buttons
+                englishBtn.classList.add('active');
+                hindiBtn.classList.remove('active');
+                
+                // Update belly shape options
+                const bellyShape = document.getElementById('bellyShape');
+                bellyShape.innerHTML = '';
+                const options = [
+                    {value: 'round', text: 'Round (Indicates Girl)'},
+                    {value: 'pointy', text: 'Pointy (Indicates Boy)'}
+                ];
+                options.forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt.value;
+                    option.textContent = opt.text;
+                    bellyShape.appendChild(option);
+                });
+            }
+        }
+
+        // Event listeners for language buttons
+        hindiBtn.addEventListener('click', () => switchLanguage('hi'));
+        englishBtn.addEventListener('click', () => switchLanguage('en'));
+
+        // Main prediction function
+        function calculateResult() {
+            // Clear previous results
+            document.getElementById('boyResult').style.display = 'none';
+            document.getElementById('girlResult').style.display = 'none';
+
+            // Get values
+            const age = parseInt(document.getElementById('motherAge').value);
+            const month = parseInt(document.getElementById('conceptionMonth').value);
+            const bellyShape = document.getElementById('bellyShape').value;
+
+            // Validate inputs
+            if (isNaN(age)) {
+                const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                alert(isHindi ? 'कृपया माँ की उम्र डालें' : 'Please enter mother\'s age');
+                return;
+            }
+
+            if (age < 18 || age > 45) {
+                const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                alert(isHindi ? 'कृपया माँ की सही उम्र डालें (18-45)' : 'Please enter valid mother\'s age (18-45)');
+                return;
+            }
+
+            // Chinese Calendar Prediction
+            const chinesePrediction = (age % 2) === (month % 2) ? 'girl' : 'boy';
+            const chineseText = document.querySelector('.lang-hi').style.display !== 'none' ? 
+                `चाइनीज कैलेंडर विधि: ${chinesePrediction === 'girl' ? 'लड़की' : 'लड़का'}` :
+                `Chinese Calendar Method: ${chinesePrediction === 'girl' ? 'Girl' : 'Boy'}`;
+
+            // Shape Theory Prediction
+            const shapePrediction = bellyShape === 'round' ? 'girl' : 'boy';
+            const shapeText = document.querySelector('.lang-hi').style.display !== 'none' ?
+                `पेट का आकार विधि: ${shapePrediction === 'girl' ? 'लड़की' : 'लड़का'}` :
+                `Shape Theory Method: ${shapePrediction === 'girl' ? 'Girl' : 'Boy'}`;
+
+            // Set method results
+            document.getElementById('chineseBoyResult').textContent = chineseText;
+            document.getElementById('chineseGirlResult').textContent = chineseText;
+            document.getElementById('shapeBoyResult').textContent = shapeText;
+            document.getElementById('shapeGirlResult').textContent = shapeText;
+
+            // Final decision (both methods must agree)
+            let finalResult;
+            if (chinesePrediction === shapePrediction) {
+                finalResult = chinesePrediction;
+            } else {
+                // If methods disagree, show both possibilities
+                finalResult = Math.random() > 0.5 ? 'boy' : 'girl';
+            }
+
+            // Show appropriate result
+            if (finalResult === 'boy') {
+                document.getElementById('boyResult').style.display = 'block';
+            } else {
+                document.getElementById('girlResult').style.display = 'block';
+            }
+
+            // Scroll to result
+            document.getElementById(finalResult + 'Result').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Event listeners for predict buttons
+        predictBtn.addEventListener('click', calculateResult);
+        predictBtnEn.addEventListener('click', calculateResult);
+
+        // Initialize with Hindi language
+        switchLanguage('hi');
+    </script>
+</body>
+</html>
