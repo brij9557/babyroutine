@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="hi">
-<head> 
+<head>
+    <!-- Replace existing favicon links with -->
+    <link rel="icon" href="images/baby-icon.jpeg" type="image/jpeg">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/baby-icon.jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/baby-icon.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/baby-icon.jpeg">
+    
     <!-- SEO Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -250,22 +256,33 @@
             background: var(--primary);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            border-radius: 90%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             cursor: pointer;
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
             z-index: 100;
             transition: all 0.3s;
+            padding: 7px;
         }
-        
-        .menu-btn:hover {
-            background: var(--secondary);
-            transform: translateY(-50%) scale(1.1);
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn:hover img.menu-icon {
+            transform: scale(1.1);
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
         }
         
         h1 {
@@ -744,94 +761,62 @@
             text-transform: uppercase;
         }
         
-        /* User Profile Button Styles */
-        .user-profile-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            z-index: 100;
-            transition: all 0.3s;
+        /* User Profile Section in Sidebar */
+        .user-profile-section {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+            background: #FFF9FB;
+        }
+        
+        .user-info {
+            margin-bottom: 15px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
             color: var(--secondary);
-            border: 2px solid var(--primary);
         }
         
-        .user-profile-btn:hover {
-            background: var(--light);
-            transform: scale(1.1);
+        .user-email {
+            font-size: 12px;
+            color: #777;
         }
         
-        .user-profile-menu {
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 100;
-            display: none;
-            width: 200px;
-            overflow: hidden;
-        }
-        
-        .user-profile-menu.open {
-            display: block;
-        }
-        
-        .user-profile-menu-item {
-            padding: 12px 15px;
+        .user-menu-item {
             display: flex;
             align-items: center;
-            cursor: pointer;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
             transition: all 0.3s;
         }
         
-        .user-profile-menu-item i {
+        .user-menu-item i {
             margin-right: 10px;
             width: 20px;
             text-align: center;
             color: var(--secondary);
         }
         
-        .user-profile-menu-item:hover {
-            background: var(--light);
+        .user-menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
             color: var(--secondary);
         }
         
-        .user-profile-menu-item.logout {
+        .user-menu-item.logout {
             color: var(--danger);
         }
         
-        .user-profile-menu-item.logout i {
+        .user-menu-item.logout i {
             color: var(--danger);
         }
         
-        .user-profile-menu-item.logout:hover {
+        .user-menu-item.logout:hover {
             background: #ffebee;
-        }
-        
-        .user-info {
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .user-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .user-email {
-            font-size: 12px;
-            color: #777;
         }
         
         /* Responsive adjustments */
@@ -868,8 +853,8 @@
             
             .menu-btn {
                 left: 10px;
-                top: 50%;
-                width: 40px;
+                top: 60%;
+                width: 60px;
                 height: 40px;
                 font-size: 1.2rem;
             }
@@ -880,12 +865,6 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1.2rem;
-            }
-            
-            .user-profile-menu {
-                top: 65px;
-                left: 15px;
-                width: 180px;
             }
         }
         
@@ -952,12 +931,19 @@
         </div>
         
         <div class="sidebar-menu">
-           
             <a href="pregnancy-tracker.html" class="menu-item">
                 <i class="fas fa-calendar-check" aria-hidden="true"></i>
                 <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
                 <span class="lang-en" style="display:none">Pregnancy Tracker</span>
             </a>
+
+<a href="boy-or-girl.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">लड़का या लड़की?</span>
+                <span class="lang-en" style="display:none">Boy or Girl?</span>
+            </a>
+
+
             <div class="menu-section lang-hi">शिशु देखभाल</div>
             <div class="menu-section lang-en" style="display:none">Baby Care</div>
             <a href="index.html" class="menu-item">
@@ -965,7 +951,7 @@
                 <span class="lang-hi">दैनिक देखभाल योजना</span>
                 <span class="lang-en" style="display:none">Daily Care Plan</span>
             </a>
-<a href="baby-crying-ai-tool.html" class="menu-item">
+            <a href="baby-crying-ai-tool.html" class="menu-item">
                 <i class="fas fa-comment-medical" aria-hidden="true"></i>
                 <span class="lang-hi">क्राइंग एनालाइज़र</span>
                 <span class="lang-en" style="display:none">Crying Analyzer</span>
@@ -999,41 +985,38 @@
                 <span class="lang-en" style="display:none">Q&A</span>
             </a>
 
- <a href="about.html" class="menu-item">
+            <a href="about.html" class="menu-item">
                 <i class="fas fa-user-circle" aria-hidden="true"></i>
                 <span class="lang-hi">मेरा प्रोफाइल</span>
                 <span class="lang-en" style="display:none">About Us</span>
             </a>
+            
+            <!-- User Profile Section in Sidebar -->
+            <div class="user-profile-section">
+                <div class="user-info" id="userInfo">
+                    <div class="user-name" id="userName">Guest User</div>
+                    <div class="user-email" id="userEmail">Not logged in</div>
+                </div>
+                
+                <a href="Login.html" class="user-menu-item" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span class="lang-hi">लॉगिन करें</span>
+                    <span class="lang-en" style="display:none">Login</span>
+                </a>
+                
+                <div class="user-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="lang-hi">लॉगआउट</span>
+                    <span class="lang-en" style="display:none">Logout</span>
+                </div>
+            </div>
         </div>
     </div>
     
     <!-- Menu Button (now on left middle side) -->
     <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
-        <i class="fas fa-baby" aria-hidden="true"></i>
+        <img src="images/baby-icon.jpeg" alt="Baby Icon" class="menu-icon">
     </button>
-    
-    <!-- User Profile Button -->
-    <div class="user-profile-btn" id="userProfileBtn" onclick="toggleUserMenu()">
-        <i class="fas fa-user" aria-hidden="true"></i>
-    </div>
-    
-    <!-- User Profile Menu -->
-    <div class="user-profile-menu" id="userProfileMenu">
-        <div class="user-info" id="userInfo">
-            <div class="user-name" id="userName">Guest User</div>
-            <div class="user-email" id="userEmail">Not logged in</div>
-        </div>
-        <a href="Login.html" class="user-profile-menu-item" id="loginBtn">
-            <i class="fas fa-sign-in-alt"></i>
-            <span class="lang-hi">लॉगिन करें</span>
-            <span class="lang-en" style="display:none">Login</span>
-        </a>
-        <div class="user-profile-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="lang-hi">लॉगआउट</span>
-            <span class="lang-en" style="display:none">Logout</span>
-        </div>
-    </div>
     
     <header>
         <div class="language-switcher">
@@ -1276,18 +1259,12 @@
                 userEmail.textContent = user.email || '';
                 loginBtn.style.display = 'none';
                 logoutBtn.style.display = 'flex';
-                
-                // Change profile icon to show logged in state
-                document.getElementById('userProfileBtn').innerHTML = '<i class="fas fa-user-check" aria-hidden="true"></i>';
             } else {
                 // User is signed out
                 userName.textContent = isHindi ? 'अतिथि यूजर' : 'Guest User';
                 userEmail.textContent = isHindi ? 'लॉगिन नहीं किया' : 'Not logged in';
                 loginBtn.style.display = 'flex';
                 logoutBtn.style.display = 'none';
-                
-                // Change profile icon to show logged out state
-                document.getElementById('userProfileBtn').innerHTML = '<i class="fas fa-user" aria-hidden="true"></i>';
             }
         }
         
@@ -1300,36 +1277,9 @@
                 auth.signOut().then(() => {
                     const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
                     alert(isHindi ? 'सफलतापूर्वक लॉगआउट हो गया' : 'Successfully logged out');
-                    toggleUserMenu();
                 }).catch(error => {
                     console.error("Logout error:", error);
                 });
-            }
-        }
-        
-        // Toggle user profile menu
-        function toggleUserMenu() {
-            const userMenu = document.getElementById('userProfileMenu');
-            userMenu.classList.toggle('open');
-            
-            // Close when clicking outside
-            if (userMenu.classList.contains('open')) {
-                setTimeout(() => {
-                    document.addEventListener('click', closeUserMenuOutside);
-                }, 10);
-            } else {
-                document.removeEventListener('click', closeUserMenuOutside);
-            }
-        }
-        
-        // Close user menu when clicking outside
-        function closeUserMenuOutside(event) {
-            const userMenu = document.getElementById('userProfileMenu');
-            const userBtn = document.getElementById('userProfileBtn');
-            
-            if (!userMenu.contains(event.target) && !userBtn.contains(event.target)) {
-                userMenu.classList.remove('open');
-                document.removeEventListener('click', closeUserMenuOutside);
             }
         }
         
