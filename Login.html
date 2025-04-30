@@ -160,9 +160,19 @@
             display: none;
         }
         
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
         @media (max-width: 576px) {
             .auth-header, .auth-body {
                 padding: 1.8rem;
+            }
+            
+            .two-columns {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -193,6 +203,28 @@
                     <div class="form-group">
                         <label for="signup-password">Password</label>
                         <input type="password" id="signup-password" class="form-control" placeholder="Create a password (min 6 characters)" required>
+                    </div>
+                    
+                    <div class="form-group two-columns">
+                        <div>
+                            <label for="mother-name">Mother's Name</label>
+                            <input type="text" id="mother-name" class="form-control" placeholder="Your name" required>
+                        </div>
+                        <div>
+                            <label for="mobile-number">Mobile Number</label>
+                            <input type="tel" id="mobile-number" class="form-control" placeholder="Phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group two-columns">
+                        <div>
+                            <label for="baby-name">Baby's Name</label>
+                            <input type="text" id="baby-name" class="form-control" placeholder="Baby's name" required>
+                        </div>
+                        <div>
+                            <label for="baby-age">Baby's Age (months)</label>
+                            <input type="number" id="baby-age" class="form-control" placeholder="Age in months" min="0" max="36" required>
+                        </div>
                     </div>
                     
                     <div id="signup-error" class="error-message"></div>
@@ -245,6 +277,7 @@
             createUserWithEmailAndPassword, 
             signInWithEmailAndPassword
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
         // Your Firebase configuration
@@ -262,6 +295,7 @@
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         // DOM elements
         const signupForm = document.getElementById('signup-form');
@@ -289,10 +323,14 @@
         });
 
         // Email signup
-        emailSignupForm.addEventListener('submit', (e) => {
+        emailSignupForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
+            const motherName = document.getElementById('mother-name').value;
+            const mobileNumber = document.getElementById('mobile-number').value;
+            const babyName = document.getElementById('baby-name').value;
+            const babyAge = document.getElementById('baby-age').value;
             
             signupError.textContent = '';
             signupSuccess.textContent = '';
@@ -302,38 +340,59 @@
                 return;
             }
 
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Signed up successfully
-                    signupSuccess.textContent = 'Account created successfully! Redirecting...';
-                    // Clear form
-                    emailSignupForm.reset();
-                    // Redirect to dashboard after 1.5 seconds
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1500);
-                })
-                .catch((error) => {
-                    signupError.textContent = error.message.replace('Firebase: ', '');
+            try {
+                // Create user in Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Create user document in Firestore
+                await setDoc(doc(db, "users", user.uid), {
+                    email: email,
+                    motherName: motherName,
+                    mobileNumber: mobileNumber,
+                    babyName: babyName,
+                    babyAge: parseInt(babyAge),
+                    createdAt: new Date(),
+                    lastLogin: new Date()
                 });
+                
+                // Show success message
+                signupSuccess.textContent = 'Account created successfully! Redirecting...';
+                
+                // Clear form
+                emailSignupForm.reset();
+                
+                // Redirect to dashboard after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            } catch (error) {
+                signupError.textContent = error.message.replace('Firebase: ', '');
+            }
         });
 
         // Email login
-        emailLoginForm.addEventListener('submit', (e) => {
+        emailLoginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             
             loginError.textContent = '';
             
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Signed in successfully
-                    window.location.href = 'index.html';
-                })
-                .catch((error) => {
-                    loginError.textContent = error.message.replace('Firebase: ', '');
-                });
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Update last login time in Firestore
+                await setDoc(doc(db, "users", user.uid), {
+                    lastLogin: new Date()
+                }, { merge: true });
+                
+                // Signed in successfully
+                window.location.href = 'index.html';
+            } catch (error) {
+                loginError.textContent = error.message.replace('Firebase: ', '');
+            }
         });
     </script>
 </body>
