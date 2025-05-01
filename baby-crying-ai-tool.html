@@ -18,9 +18,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <style>
         :root {
-            --primary: #5d6bb0;
+            --primary: #FF7EB9;
+            --secondary: #FF65A3;
+            --light: #FFF0F5;
+            --dark: #333;
+            --text: #444;
+            --highlight: #FFD1DC;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
+            --danger: #F44336;
             --hungry: #ff9f1c;
             --diaper: #2ec4b6;
             --sleepy: #5d6bb0;
@@ -41,10 +55,120 @@
             line-height: 1.6;
         }
         
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF7EB9;
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid #FFD1DC;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
         }
         
         header {
@@ -55,40 +179,19 @@
             border-radius: 15px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             position: relative;
-        }
-        
-        .home-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .home-btn:hover {
-            background-color: #4a5899;
-            transform: translateY(-2px);
         }
         
         h1 {
-            color: var(--primary);
+            color: white;
             margin-bottom: 10px;
             font-size: 28px;
             padding: 0 50px;
         }
         
         .tagline {
-            color: #666;
+            color: rgba(255,255,255,0.9);
             font-size: 16px;
             max-width: 80%;
             margin: 0 auto;
@@ -105,6 +208,7 @@
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 126, 185, 0.2);
         }
         
         .controls {
@@ -134,7 +238,7 @@
         }
         
         .btn-primary:hover {
-            background-color: #4a5899;
+            background-color: var(--secondary);
             transform: translateY(-2px);
         }
         
@@ -145,7 +249,7 @@
         }
         
         .btn-outline:hover {
-            background-color: rgba(93, 107, 176, 0.1);
+            background-color: rgba(255, 101, 163, 0.1);
         }
         
         .visualizer {
@@ -236,6 +340,7 @@
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 126, 185, 0.2);
         }
         
         .history-title {
@@ -305,6 +410,7 @@
             padding: 25px;
             margin-top: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 126, 185, 0.2);
         }
         
         .seo-content h2 {
@@ -325,7 +431,7 @@
         .listening-indicator {
             display: none;
             padding: 10px;
-            background-color: rgba(93, 107, 176, 0.1);
+            background-color: rgba(255, 126, 185, 0.1);
             border-radius: 8px;
             margin-bottom: 15px;
             text-align: center;
@@ -344,7 +450,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            background-color: #f0f2f5;
+            background-color: rgba(255,255,255,0.2);
             border-radius: 20px;
             padding: 5px;
             display: flex;
@@ -359,11 +465,12 @@
             cursor: pointer;
             font-size: 12px;
             transition: all 0.3s ease;
+            color: white;
         }
         
         .language-btn.active {
-            background-color: var(--primary);
-            color: white;
+            background-color: white;
+            color: var(--primary);
         }
         
         .feedback-section {
@@ -414,9 +521,9 @@
         
         /* New listening animation styles */
         @keyframes listeningPulse {
-            0% { box-shadow: 0 0 0 0 rgba(93, 107, 176, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(93, 107, 176, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(93, 107, 176, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 126, 185, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 126, 185, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 126, 185, 0); }
         }
         
         .listening-animation {
@@ -428,13 +535,264 @@
             pointer-events: none;
         }
         
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
+        /* Menu Button */
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            padding: 7px;
+        }
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
+        }
+        
+        /* User Profile Section in Sidebar */
+        .user-profile-section {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+            background: #FFF9FB;
+        }
+        
+        .user-info {
+            margin-bottom: 15px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .user-email {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .user-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .user-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .user-menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+        }
+        
+        .user-menu-item.logout {
+            color: var(--danger);
+        }
+        
+        .user-menu-item.logout i {
+            color: var(--danger);
+        }
+        
+        .user-menu-item.logout:hover {
+            background: #ffebee;
+        }
+        
+        /* Premium Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .premium-feature {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .premium-feature i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .price-card {
+            background-color: #FFF0F5;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .price-card h4 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .price-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .price-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .premium-benefits {
+            margin: 20px 0;
+        }
+
+        .premium-benefits h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .premium-benefits ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .premium-benefits li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .premium-benefits i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .premium-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .premium-actions button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-premium {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .btn-premium:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-later {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+        }
+
+        .btn-later:hover {
+            background-color: #e0e0e0;
+        }
+
+        .remaining-uses {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .remaining-uses span {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .container.sidebar-open {
+                margin-left: 0;
             }
             
-            header {
-                padding: 15px;
+            .sidebar {
+                width: 250px;
+            }
+            
+            .menu-btn {
+                left: 10px;
+                top: 60%;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .user-profile-btn {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
             }
             
             h1 {
@@ -451,13 +809,6 @@
                 padding: 20px;
             }
             
-            .home-btn {
-                top: 15px;
-                right: 15px;
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-            
             .language-toggle {
                 top: 15px;
                 left: 15px;
@@ -468,40 +819,127 @@
                 font-size: 14px;
             }
         }
+        
+        @media (max-width: 480px) {
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            
+            .menu-btn:hover {
+                transform: scale(1.1);
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Schema.org markup for Google -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "बेबी क्राइ एनालाइजर",
-      "description": "AI तकनीक से पता करें आपका बच्चा क्यों रो रहा है (भूख, पॉटी, नींद, दर्द)",
-      "applicationCategory": "ParentingApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "INR"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "125"
-      }
-    }
-    </script>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
+                <span class="lang-en" style="display:none">Pregnancy Tracker</span>
+            </a>
 
-    <div class="container">
+            <a href="boy-or-girl.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">लड़का या लड़की?</span>
+                <span class="lang-en" style="display:none">Boy or Girl?</span>
+            </a>
+
+            <div class="menu-section lang-hi">शिशु देखभाल</div>
+            <div class="menu-section lang-en" style="display:none">Baby Care</div>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span class="lang-hi">दैनिक देखभाल योजना</span>
+                <span class="lang-en" style="display:none">Daily Care Plan</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span class="lang-hi">क्राइंग एनालाइज़र</span>
+                <span class="lang-en" style="display:none">Crying Analyzer</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span class="lang-hi">आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Food Recipes</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item">
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                <span class="lang-hi">खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Play Activities</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">विकास चार्ट</span>
+                <span class="lang-en" style="display:none">Growth Chart</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span class="lang-hi">टीकाकरण</span>
+                <span class="lang-en" style="display:none">Vaccination</span>
+            </a>
+            <div class="menu-section lang-hi">संसाधन</div>
+            <div class="menu-section lang-en" style="display:none">Resources</div>
+            
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+
+            <a href="about.html" class="menu-item">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="lang-hi">मेरा प्रोफाइल</span>
+                <span class="lang-en" style="display:none">About Us</span>
+            </a>
+            
+            <!-- User Profile Section in Sidebar -->
+            <div class="user-profile-section">
+                <div class="user-info" id="userInfo">
+                    <div class="user-name" id="userName">Guest User</div>
+                    <div class="user-email" id="userEmail">Not logged in</div>
+                </div>
+                
+                <a href="Login.html" class="user-menu-item" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span class="lang-hi">लॉगिन करें</span>
+                    <span class="lang-en" style="display:none">Login</span>
+                </a>
+                
+                <div class="user-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="lang-hi">लॉगआउट</span>
+                    <span class="lang-en" style="display:none">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <img src="images/baby-icon.jpeg" alt="Baby Icon" class="menu-icon">
+    </button>
+
+    <div class="container" id="mainContainer">
         <header>
             <div class="language-toggle">
                 <button id="lang-hi" class="language-btn active" data-lang="hi">हिंदी</button>
                 <button id="lang-en" class="language-btn" data-lang="en">English</button>
             </div>
-            <a href="https://parentingcare.com" class="home-btn">
-                <i class="fas fa-home"></i> <span data-lang-key="home">होम पेज</span>
-            </a>
+            
             <h1><i class="fas fa-baby"></i> <span data-lang-key="title">बेबी क्राइ एनालाइजर</span></h1>
             <p class="tagline" data-lang-key="tagline">AI तकनीक से पता करें आपका बच्चा क्यों रो रहा है - भूख, पॉटी, नींद या दर्द के कारण</p>
         </header>
@@ -678,10 +1116,129 @@
         </footer>
     </div>
 
+    <!-- Premium Subscription Modal -->
+    <div id="premium-modal" class="modal">
+        <div class="modal-content">
+            <h2 style="color:var(--primary); margin-bottom:15px;"><i class="fas fa-crown"></i> <span id="premium-title">प्रीमियम सदस्यता</span></h2>
+            <p id="premium-desc">आपने अपने 3 मुफ्त विश्लेषण का उपयोग कर लिया है। असीमित उपयोग के लिए प्रीमियम सदस्यता खरीदें।</p>
+            
+            <div class="premium-benefits">
+                <h3 id="features-title">प्रीमियम फीचर्स:</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> <span id="feature1">असीमित बेबी क्राइ विश्लेषण</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="feature2">विस्तृत रिपोर्ट और इतिहास</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="feature3">विशेषज्ञ सलाह</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span id="feature4">विज्ञापन-मुक्त अनुभव</span></li>
+                </ul>
+            </div>
+            
+            <div class="pricing">
+                <h3 id="pricing-title">मूल्य निर्धारण:</h3>
+                <div class="price-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <h4 style="margin:0;" id="monthly-plan">मासिक योजना</h4>
+                            <p style="margin:5px 0; color:#666;" id="monthly-desc">हर महीने स्वचालित नवीनीकरण</p>
+                        </div>
+                        <div style="text-align:right;">
+                            <p style="margin:0; font-size:24px; font-weight:bold; color:var(--primary);">₹99</p>
+                            <p style="margin:0; color:#666;" id="per-month">प्रति माह</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="remaining-uses">
+                <span id="remaining-text">आपके पास</span> <span id="remaining-count" style="color:var(--primary); font-weight:bold;">0</span> <span id="remaining-text2">मुफ्त विश्लेषण शेष हैं</span>
+            </div>
+            
+            <div class="premium-actions">
+                <button id="subscribe-btn" class="btn-premium">
+                    <i class="fas fa-crown"></i> <span id="subscribe-text">सब्सक्राइब करें</span>
+                </button>
+                <button id="close-premium-btn" class="btn-later">
+                    <span id="close-text">बाद में</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
 
     <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAbP8-ZOYyGWcqUGvJhCWhJwj5Yj47bn1Q",
+            authDomain: "mybabyroutine-41aa9.firebaseapp.com",
+            projectId: "mybabyroutine-41aa9",
+            storageBucket: "mybabyroutine-41aa9.appspot.com",
+            messagingSenderId: "489588024529",
+            appId: "1:489588024529:web:a2e58edca1307b0f7651f0",
+            measurementId: "G-5YEGNR6VEM"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const analytics = firebase.analytics();
+        
+        // Track authentication state changes
+        auth.onAuthStateChanged(user => {
+            updateUserUI(user);
+            updateRemainingUses();
+        });
+        
+        // Update user interface based on auth state
+        function updateUserUI(user) {
+            const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (user) {
+                // User is signed in
+                userName.textContent = user.displayName || (isHindi ? 'स्वागत यूजर' : 'Welcome User');
+                userEmail.textContent = user.email || '';
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'flex';
+            } else {
+                // User is signed out
+                userName.textContent = isHindi ? 'अतिथि यूजर' : 'Guest User';
+                userEmail.textContent = isHindi ? 'लॉगिन नहीं किया' : 'Not logged in';
+                loginBtn.style.display = 'flex';
+                logoutBtn.style.display = 'none';
+            }
+        }
+        
+        // Handle authentication (logout only, login is handled via Login.html)
+        function handleAuth() {
+            const user = auth.currentUser;
+            
+            if (user) {
+                // User is logged in, so log them out
+                auth.signOut().then(() => {
+                    const isHindi = document.querySelector('.lang-hi').style.display !== 'none';
+                    alert(isHindi ? 'सफलतापूर्वक लॉगआउट हो गया' : 'Successfully logged out');
+                }).catch(error => {
+                    console.error("Logout error:", error);
+                });
+            }
+        }
+        
+        // Toggle sidebar function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('mainContainer');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
+        }
+
         // Language support
         const translations = {
             hi: {
@@ -736,7 +1293,22 @@
                 copyright: "बेबी क्राइ एनालाइजर &copy; 2023",
                 privacy: "गोपनीयता नीति",
                 terms: "उपयोग की शर्तें",
-                footer_note: "यह टूल पूरी तरह से आपके ब्राउज़र में काम करता है - किसी सर्वर की आवश्यकता नहीं"
+                footer_note: "यह टूल पूरी तरह से आपके ब्राउज़र में काम करता है - किसी सर्वर की आवश्यकता नहीं",
+                premium_title: "प्रीमियम सदस्यता",
+                premium_desc: "आपने अपने 3 मुफ्त विश्लेषण का उपयोग कर लिया है। असीमित उपयोग के लिए प्रीमियम सदस्यता खरीदें।",
+                features_title: "प्रीमियम फीचर्स:",
+                feature1: "असीमित बेबी क्राइ विश्लेषण",
+                feature2: "विस्तृत रिपोर्ट और इतिहास",
+                feature3: "विशेषज्ञ सलाह",
+                feature4: "विज्ञापन-मुक्त अनुभव",
+                pricing_title: "मूल्य निर्धारण:",
+                monthly_plan: "मासिक योजना",
+                monthly_desc: "हर महीने स्वचालित नवीनीकरण",
+                per_month: "प्रति माह",
+                subscribe_text: "सब्सक्राइब करें",
+                close_text: "बाद में",
+                remaining_text: "आपके पास",
+                remaining_text2: "मुफ्त विश्लेषण शेष हैं"
             },
             en: {
                 title: "Baby Cry Analyzer",
@@ -790,7 +1362,22 @@
                 copyright: "Baby Cry Analyzer &copy; 2023",
                 privacy: "Privacy Policy",
                 terms: "Terms of Use",
-                footer_note: "This tool works completely in your browser - no server needed"
+                footer_note: "This tool works completely in your browser - no server needed",
+                premium_title: "Premium Subscription",
+                premium_desc: "You've used all 3 free analyses. Buy premium subscription for unlimited use.",
+                features_title: "Premium Features:",
+                feature1: "Unlimited baby cry analysis",
+                feature2: "Detailed reports and history",
+                feature3: "Expert advice",
+                feature4: "Ad-free experience",
+                pricing_title: "Pricing:",
+                monthly_plan: "Monthly Plan",
+                monthly_desc: "Auto-renews every month",
+                per_month: "per month",
+                subscribe_text: "Subscribe",
+                close_text: "Later",
+                remaining_text: "You have",
+                remaining_text2: "free analyses remaining"
             }
         };
 
@@ -806,6 +1393,23 @@
                     element.textContent = translations[lang][key];
                 }
             });
+            
+            // Update premium modal text
+            document.getElementById('premium-title').textContent = translations[lang].premium_title;
+            document.getElementById('premium-desc').textContent = translations[lang].premium_desc;
+            document.getElementById('features-title').textContent = translations[lang].features_title;
+            document.getElementById('feature1').textContent = translations[lang].feature1;
+            document.getElementById('feature2').textContent = translations[lang].feature2;
+            document.getElementById('feature3').textContent = translations[lang].feature3;
+            document.getElementById('feature4').textContent = translations[lang].feature4;
+            document.getElementById('pricing-title').textContent = translations[lang].pricing_title;
+            document.getElementById('monthly-plan').textContent = translations[lang].monthly_plan;
+            document.getElementById('monthly-desc').textContent = translations[lang].monthly_desc;
+            document.getElementById('per-month').textContent = translations[lang].per_month;
+            document.getElementById('subscribe-text').textContent = translations[lang].subscribe_text;
+            document.getElementById('close-text').textContent = translations[lang].close_text;
+            document.getElementById('remaining-text').textContent = translations[lang].remaining_text;
+            document.getElementById('remaining-text2').textContent = translations[lang].remaining_text2;
             
             // Update active language button
             document.getElementById('lang-hi').classList.toggle('active', lang === 'hi');
@@ -844,6 +1448,12 @@
         // History list
         const historyList = document.getElementById('history-list');
         
+        // Premium modal elements
+        const premiumModal = document.getElementById('premium-modal');
+        const subscribeBtn = document.getElementById('subscribe-btn');
+        const closePremiumBtn = document.getElementById('close-premium-btn');
+        const remainingCount = document.getElementById('remaining-count');
+        
         // Audio variables
         let audioContext;
         let analyser;
@@ -881,7 +1491,7 @@
                 for (let i = 0; i < array.length; i++) {
                     const barHeight = (array[i] / 255) * canvas.height;
                     
-                    ctx.fillStyle = '#5d6bb0';
+                    ctx.fillStyle = '#FF7EB9';
                     ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
                     
                     x += barWidth + 1;
@@ -903,8 +1513,168 @@
             }
         }
         
+        // Track usage and check premium status
+        async function checkUsageAndPremium() {
+            const user = auth.currentUser;
+            
+            if (!user) {
+                // For guest users, use localStorage
+                const guestUsage = parseInt(localStorage.getItem('guestUsageCount') || 0);
+                if (guestUsage >= 3) {
+                    showPremiumModal();
+                    return false;
+                }
+                return true;
+            } else {
+                // For logged in users, check Firestore
+                try {
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                        if (userData.isPremium) {
+                            return true; // Premium user has unlimited access
+                        } else {
+                            if (userData.usageCount >= 3) {
+                                showPremiumModal();
+                                return false;
+                            }
+                            return true;
+                        }
+                    } else {
+                        // New user, initialize with 0 usage
+                        await db.collection('users').doc(user.uid).set({
+                            usageCount: 0,
+                            isPremium: false,
+                            lastUsed: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        return true;
+                    }
+                } catch (error) {
+                    console.error("Error checking usage:", error);
+                    return true; // Fail open in case of error
+                }
+            }
+        }
+        
+        // Increment usage count
+        async function incrementUsage() {
+            const user = auth.currentUser;
+            
+            if (!user) {
+                // For guest users, increment in localStorage
+                const currentCount = parseInt(localStorage.getItem('guestUsageCount') || 0);
+                localStorage.setItem('guestUsageCount', currentCount + 1);
+            } else {
+                // For logged in users, increment in Firestore
+                try {
+                    await db.collection('users').doc(user.uid).update({
+                        usageCount: firebase.firestore.FieldValue.increment(1),
+                        lastUsed: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                } catch (error) {
+                    console.error("Error incrementing usage:", error);
+                }
+            }
+            
+            // Update remaining uses display
+            updateRemainingUses();
+        }
+        
+        // Update remaining uses display
+        async function updateRemainingUses() {
+            const user = auth.currentUser;
+            let remaining = 0;
+            
+            if (!user) {
+                // Guest user
+                const guestUsage = parseInt(localStorage.getItem('guestUsageCount') || 0);
+                remaining = Math.max(0, 3 - guestUsage);
+            } else {
+                // Logged in user
+                try {
+                    const userDoc = await db.collection('users').doc(user.uid).get();
+                    if (userDoc.exists) {
+                        const userData = userDoc.data();
+                        if (userData.isPremium) {
+                            // Premium user has unlimited uses
+                            remaining = 999; // Show a large number
+                        } else {
+                            remaining = Math.max(0, 3 - (userData.usageCount || 0));
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error getting user data:", error);
+                    remaining = 0;
+                }
+            }
+            
+            remainingCount.textContent = remaining;
+            
+            // Hide remaining uses if premium
+            if (remaining >= 999) {
+                document.querySelector('.remaining-uses').style.display = 'none';
+            } else {
+                document.querySelector('.remaining-uses').style.display = 'block';
+            }
+        }
+        
+        // Show premium modal
+        function showPremiumModal() {
+            premiumModal.style.display = 'flex';
+            
+            // Disable the start button
+            document.getElementById('start-btn').disabled = true;
+        }
+        
+        // Close premium modal
+        function closePremiumModal() {
+            premiumModal.style.display = 'none';
+        }
+        
+        // Handle subscription
+        async function handleSubscribe() {
+            // In a real implementation, this would integrate with a payment processor
+            // For demo purposes, we'll just mark the user as premium
+            
+            const user = auth.currentUser;
+            if (!user) {
+                alert(currentLang === 'hi' ? 
+                    "सब्सक्रिप्शन के लिए कृपया लॉगिन करें" : 
+                    "Please login to subscribe");
+                return;
+            }
+            
+            try {
+                await db.collection('users').doc(user.uid).update({
+                    isPremium: true,
+                    premiumSince: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                closePremiumModal();
+                document.getElementById('start-btn').disabled = false;
+                
+                alert(currentLang === 'hi' ? 
+                    "धन्यवाद! आपकी प्रीमियम सदस्यता सक्रिय हो गई है।" : 
+                    "Thank you! Your premium subscription is now active.");
+                
+                trackEvent('Premium Subscription Activated');
+                
+                // Update remaining uses display
+                updateRemainingUses();
+            } catch (error) {
+                console.error("Subscription error:", error);
+                alert(currentLang === 'hi' ? 
+                    "सब्सक्रिप्शन में त्रुटि हुई। कृपया पुनः प्रयास करें।" : 
+                    "Error in subscription. Please try again.");
+            }
+        }
+        
         // Start recording with improved error handling
         async function startRecording() {
+            // Check usage limit first
+            const canProceed = await checkUsageAndPremium();
+            if (!canProceed) return;
+            
             try {
                 // Hide previous errors
                 micErrorDiv.style.display = 'none';
@@ -1009,6 +1779,9 @@
             mediaRecorder.onstop = async () => {
                 const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
                 await analyzeAudio(audioBlob);
+                
+                // Increment usage count
+                await incrementUsage();
                 
                 // Track analytics event
                 trackEvent('Recording Stopped');
@@ -1418,6 +2191,9 @@
         function trackEvent(eventName, eventData = {}) {
             console.log('Event:', eventName, eventData);
             // In a real implementation, you would send this to Google Analytics or similar
+            if (typeof analytics !== 'undefined') {
+                analytics.logEvent(eventName, eventData);
+            }
         }
         
         // Handle feedback
@@ -1455,10 +2231,22 @@
             });
         });
         
+        // Premium modal event listeners
+        subscribeBtn.addEventListener('click', handleSubscribe);
+        closePremiumBtn.addEventListener('click', closePremiumModal);
+        
         // Initialize
         window.addEventListener('resize', initCanvas);
         initCanvas();
         loadHistory();
+        
+        // Initialize guest usage count if not set
+        if (!localStorage.getItem('guestUsageCount')) {
+            localStorage.setItem('guestUsageCount', '0');
+        }
+        
+        // Update remaining uses display
+        updateRemainingUses();
         
         // Check if browser supports microphone access
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
