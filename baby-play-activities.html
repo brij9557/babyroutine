@@ -6,7 +6,7 @@
     <title>बच्चों के लिए शैक्षिक खेल (8 महीने से 2 साल) | बेबी केयर प्लानर</title>
     <meta name="description" content="8 महीने से 2 साल तक के बच्चों के लिए मजेदार और शैक्षिक खेल गतिविधियाँ। संज्ञानात्मक, शारीरिक और भाषा विकास को बढ़ावा देने वाले खेल।">
     <meta name="keywords" content="शिशु शैक्षिक खेल, 8 महीने से 2 साल के खेल, बच्चों के लिए सीखने के खेल, भारतीय बच्चे के खेल, प्रारंभिक शिक्षा खेल">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #FF7EB9;
@@ -31,10 +31,120 @@
             font-size: 16px;
         }
         
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF7EB9;
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid #FFD1DC;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 15px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
         }
         
         header {
@@ -44,33 +154,6 @@
             text-align: center;
             margin-bottom: 20px;
             position: relative;
-        }
-        
-        .nav-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
         }
         
         .language-switcher {
@@ -257,6 +340,98 @@
             display: block;
         }
         
+        /* Menu Button */
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            padding: 7px;
+        }
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
+        }
+        
+        /* User Profile Section in Sidebar */
+        .user-profile-section {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+            background: #FFF9FB;
+        }
+        
+        .user-info {
+            margin-bottom: 15px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .user-email {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .user-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .user-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .user-menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+        }
+        
+        .user-menu-item.logout {
+            color: var(--danger);
+        }
+        
+        .user-menu-item.logout i {
+            color: var(--danger);
+        }
+        
+        .user-menu-item.logout:hover {
+            background: #ffebee;
+        }
+        
         @media (min-width: 768px) {
             .container {
                 padding: 20px;
@@ -276,377 +451,510 @@
                 margin: 15px auto;
             }
         }
+        
+        @media (max-width: 768px) {
+            .container.sidebar-open {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .menu-btn {
+                left: 10px;
+                top: 60%;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            
+            .menu-btn:hover {
+                transform: scale(1.1);
+            }
+        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="language-switcher">
-            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
-            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
-        </div>
-        
-        <div class="nav-buttons">
-            <a href="index.html" class="nav-btn" title="Home">
-                <i class="fas fa-home"></i>
-            </a>
-            <a href="about.html" class="nav-btn" title="About">
-                <i class="fas fa-info-circle"></i>
-            </a>
-        </div>
-        
-        <div class="container">
-            <h1><i class="fas fa-gamepad"></i> <span class="lang-hi">बच्चों के लिए शैक्षिक खेल (8 महीने से 2 साल)</span><span class="lang-en" style="display:none">Educational Games for Babies (8 Months to 2 Years)</span></h1>
-            <p class="lang-hi">संज्ञानात्मक, शारीरिक और भाषा विकास को बढ़ावा देने वाले मजेदार खेल</p>
-            <p class="lang-en" style="display:none">Fun games to promote cognitive, physical and language development</p>
-        </div>
-    </header>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
     
-    <div class="container">
-        <div class="intro lang-hi">
-            <p>8 महीने से 2 साल की उम्र बच्चों के तेजी से विकास का समय होता है। यहाँ <strong>उम्र के अनुसार शैक्षिक खेल</strong> दिए गए हैं जो आपके बच्चे के विकास में मदद करेंगे।</p>
-        </div>
-        <div class="intro lang-en" style="display:none">
-            <p>8 months to 2 years is a period of rapid development for children. Here are <strong>age-appropriate educational games</strong> that will help your child's development.</p>
-        </div>
-        
-        <div class="age-tabs">
-            <div class="age-tab active" onclick="showAgeContent('8-12')">8-12 महीने</div>
-            <div class="age-tab" onclick="showAgeContent('1-1.5')">1-1.5 साल</div>
-            <div class="age-tab" onclick="showAgeContent('1.5-2')">1.5-2 साल</div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         
-        <!-- 8-12 Months Content -->
-        <div id="age-8-12" class="age-content active">
-            <!-- Game 1: Peek-a-Boo -->
-            <div class="game-card">
-                <h2><span class="lang-hi">1. पीकाबू (लुका-छिपी)</span><span class="lang-en" style="display:none">1. Peek-a-Boo</span></h2>
-                <div class="game-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i> <span class="lang-hi">समय: 5-10 मिनट</span><span class="lang-en" style="display:none">Time: 5-10 mins</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 8+ महीने</span><span class="lang-en" style="display:none">Age: 8+ months</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-brain"></i> <span class="lang-hi">विकास: सामाजिक, संज्ञानात्मक</span><span class="lang-en" style="display:none">Development: Social, Cognitive</span>
-                    </div>
-                </div>
-                
-                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Peek-a-Boo" class="game-image">
-                
-                <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
-                <ol class="steps-list">
-                    <li class="lang-hi">अपने चेहरे को हाथों से ढककर "लुका-छिपी" खेलें</li>
-                    <li class="lang-en" style="display:none">Cover your face with hands and play peek-a-boo</li>
-                    <li class="lang-hi">हाथ हटाकर "पीकाबू!" कहें और मुस्कुराएँ</li>
-                    <li class="lang-en" style="display:none">Remove hands and say "Peek-a-boo!" with a smile</li>
-                    <li class="lang-hi">बच्चे के चेहरे पर कपड़ा डालकर भी खेल सकते हैं</li>
-                    <li class="lang-en" style="display:none">Can also play by putting cloth on baby's face</li>
-                    <li class="lang-hi">बच्चे को भी अपना चेहरा ढकने के लिए प्रोत्साहित करें</li>
-                    <li class="lang-en" style="display:none">Encourage baby to cover their own face</li>
-                </ol>
-                
-                <div class="benefits-box">
-                    <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
-                    <ul class="lang-hi">
-                        <li>वस्तु स्थायित्व की समझ विकसित करता है</li>
-                        <li>सामाजिक संपर्क और आँख से संपर्क को बढ़ावा देता है</li>
-                        <li>भावनात्मक विकास में सहायक</li>
-                    </ul>
-                    <ul class="lang-en" style="display:none">
-                        <li>Develops understanding of object permanence</li>
-                        <li>Promotes social interaction and eye contact</li>
-                        <li>Supports emotional development</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="sidebar-menu">
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
+                <span class="lang-en" style="display:none">Pregnancy Tracker</span>
+            </a>
+
+            <a href="boy-or-girl.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">लड़का या लड़की?</span>
+                <span class="lang-en" style="display:none">Boy or Girl?</span>
+            </a>
+
+            <div class="menu-section lang-hi">शिशु देखभाल</div>
+            <div class="menu-section lang-en" style="display:none">Baby Care</div>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span class="lang-hi">दैनिक देखभाल योजना</span>
+                <span class="lang-en" style="display:none">Daily Care Plan</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span class="lang-hi">क्राइंग एनालाइज़र</span>
+                <span class="lang-en" style="display:none">Crying Analyzer</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span class="lang-hi">आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Food Recipes</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item active">
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                <span class="lang-hi">खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Play Activities</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">विकास चार्ट</span>
+                <span class="lang-en" style="display:none">Growth Chart</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span class="lang-hi">टीकाकरण</span>
+                <span class="lang-en" style="display:none">Vaccination</span>
+            </a>
+            <div class="menu-section lang-hi">संसाधन</div>
+            <div class="menu-section lang-en" style="display:none">Resources</div>
             
-            <!-- Game 2: Texture Exploration -->
-            <div class="game-card">
-                <h2><span class="lang-hi">2. बनावट अन्वेषण</span><span class="lang-en" style="display:none">2. Texture Exploration</span></h2>
-                <div class="game-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10 मिनट</span><span class="lang-en" style="display:none">Time: 10 mins</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 9+ महीने</span><span class="lang-en" style="display:none">Age: 9+ months</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-brain"></i> <span class="lang-hi">विकास: संवेदी, भाषा</span><span class="lang-en" style="display:none">Development: Sensory, Language</span>
-                    </div>
-                </div>
-                
-                <img src="https://images.unsplash.com/photo-1597260491625-4cf9e1f7f0f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Texture Exploration" class="game-image">
-                
-                <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
-                <ul class="materials-list">
-                    <li class="lang-hi">विभिन्न बनावट वाली वस्तुएँ (मखमल, फोम, रबर, लकड़ी)</li>
-                    <li class="lang-en" style="display:none">Objects with different textures (velvet, foam, rubber, wood)</li>
-                    <li class="lang-hi">रुई, स्पंज, अलमारी की चिपकने वाली पट्टी</li>
-                    <li class="lang-en" style="display:none">Cotton, sponge, velcro strips</li>
-                </ul>
-                
-                <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
-                <ol class="steps-list">
-                    <li class="lang-hi">विभिन्न बनावट वाली वस्तुएँ बच्चे के सामने रखें</li>
-                    <li class="lang-en" style="display:none">Place different textured objects in front of baby</li>
-                    <li class="lang-hi">प्रत्येक वस्तु को छूकर दिखाएँ और बनावट बताएँ ("यह नरम है")</li>
-                    <li class="lang-en" style="display:none">Touch each object and describe texture ("This is soft")</li>
-                    <li class="lang-hi">बच्चे को वस्तुओं को छूने और महसूस करने दें</li>
-                    <li class="lang-en" style="display:none">Let baby touch and feel the objects</li>
-                    <li class="lang-hi">बच्चे की प्रतिक्रिया देखें और प्रोत्साहित करें</li>
-                    <li class="lang-en" style="display:none">Observe baby's reactions and encourage them</li>
-                </ol>
-                
-                <div class="benefits-box">
-                    <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
-                    <ul class="lang-hi">
-                        <li>संवेदी जागरूकता बढ़ाता है</li>
-                        <li>स्पर्श संवेदनशीलता विकसित करता है</li>
-                        <li>वर्णनात्मक भाषा कौशल को बढ़ावा देता है</li>
-                    </ul>
-                    <ul class="lang-en" style="display:none">
-                        <li>Enhances sensory awareness</li>
-                        <li>Develops tactile sensitivity</li>
-                        <li>Promotes descriptive language skills</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 1-1.5 Years Content -->
-        <div id="age-1-1.5" class="age-content">
-            <!-- Game 3: Shape Sorting -->
-            <div class="game-card">
-                <h2><span class="lang-hi">3. आकार पहचान खेल</span><span class="lang-en" style="display:none">3. Shape Sorting Game</span></h2>
-                <div class="game-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10-15 मिनट</span><span class="lang-en" style="display:none">Time: 10-15 mins</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1-1.5 साल</span><span class="lang-en" style="display:none">Age: 1-1.5 years</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-brain"></i> <span class="lang-hi">विकास: संज्ञानात्मक, हाथ-आँख समन्वय</span><span class="lang-en" style="display:none">Development: Cognitive, Hand-Eye</span>
-                    </div>
-                </div>
-                
-                <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Shape Sorting" class="game-image">
-                
-                <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
-                <ul class="materials-list">
-                    <li class="lang-hi">शेप सॉर्टर खिलौना या घर पर बना सॉर्टर</li>
-                    <li class="lang-en" style="display:none">Shape sorter toy or homemade sorter</li>
-                    <li class="lang-hi">विभिन्न आकार के ब्लॉक (गोल, चौकोर, त्रिकोण)</li>
-                    <li class="lang-en" style="display:none">Different shaped blocks (circle, square, triangle)</li>
-                </ul>
-                
-                <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
-                <ol class="steps-list">
-                    <li class="lang-hi">एक समय में एक आकार पेश करें (पहले गोल, फिर चौकोर)</li>
-                    <li class="lang-en" style="display:none">Introduce one shape at a time (circle first, then square)</li>
-                    <li class="lang-hi">बच्चे को दिखाएँ कि ब्लॉक को सही छेद में कैसे डालना है</li>
-                    <li class="lang-en" style="display:none">Show child how to put block in correct hole</li>
-                    <li class="lang-hi">बच्चे को स्वयं प्रयास करने दें</li>
-                    <li class="lang-en" style="display:none">Let child try independently</li>
-                    <li class="lang-hi">आकारों के नाम दोहराएँ ("यह गोल है", "यह चौकोर है")</li>
-                    <li class="lang-en" style="display:none">Repeat shape names ("This is circle", "This is square")</li>
-                </ol>
-                
-                <div class="benefits-box">
-                    <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
-                    <ul class="lang-hi">
-                        <li>आकार पहचान कौशल विकसित करता है</li>
-                        <li>समस्या समाधान क्षमता को बढ़ाता है</li>
-                        <li>हाथ की पकड़ और निपुणता में सुधार करता है</li>
-                    </ul>
-                    <ul class="lang-en" style="display:none">
-                        <li>Develops shape recognition skills</li>
-                        <li>Enhances problem-solving ability</li>
-                        <li>Improves hand grip and dexterity</li>
-                    </ul>
-                </div>
-            </div>
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+
+            <a href="about.html" class="menu-item">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="lang-hi">मेरा प्रोफाइल</span>
+                <span class="lang-en" style="display:none">About Us</span>
+            </a>
             
-            <!-- Game 4: Color Matching -->
-            <div class="game-card">
-                <h2><span class="lang-hi">4. रंग मिलान खेल</span><span class="lang-en" style="display:none">4. Color Matching Game</span></h2>
-                <div class="game-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10 मिनट</span><span class="lang-en" style="display:none">Time: 10 mins</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1-1.5 साल</span><span class="lang-en" style="display:none">Age: 1-1.5 years</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-brain"></i> <span class="lang-hi">विकास: दृश्य, संज्ञानात्मक</span><span class="lang-en" style="display:none">Development: Visual, Cognitive</span>
-                    </div>
+            <!-- User Profile Section in Sidebar -->
+            <div class="user-profile-section">
+                <div class="user-info" id="userInfo">
+                    <div class="user-name" id="userName">Guest User</div>
+                    <div class="user-email" id="userEmail">Not logged in</div>
                 </div>
                 
-                <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Color Matching" class="game-image">
+                <a href="Login.html" class="user-menu-item" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span class="lang-hi">लॉगिन करें</span>
+                    <span class="lang-en" style="display:none">Login</span>
+                </a>
                 
-                <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
-                <ul class="materials-list">
-                    <li class="lang-hi">रंगीन कप (लाल, नीला, पीला, हरा)</li>
-                    <li class="lang-en" style="display:none">Colored cups (red, blue, yellow, green)</li>
-                    <li class="lang-hi">उन्हीं रंगों की छोटी वस्तुएँ (पोम्पोम, ब्लॉक)</li>
-                    <li class="lang-en" style="display:none">Small objects in same colors (pom poms, blocks)</li>
-                </ul>
-                
-                <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
-                <ol class="steps-list">
-                    <li class="lang-hi">रंगीन कपों को टेबल पर रखें</li>
-                    <li class="lang-en" style="display:none">Place colored cups on table</li>
-                    <li class="lang-hi">एक रंग की वस्तु उठाकर उसी रंग के कप में डालकर दिखाएँ</li>
-                    <li class="lang-en" style="display:none">Pick up one colored object and put in matching cup</li>
-                    <li class="lang-hi">बच्चे को भी वस्तु उठाकर सही कप में डालने दें</li>
-                    <li class="lang-en" style="display:none">Let child pick objects and put in matching cups</li>
-                    <li class="lang-hi">रंगों के नाम बताते रहें ("यह लाल है")</li>
-                    <li class="lang-en" style="display:none">Keep naming colors ("This is red")</li>
-                </ol>
-                
-                <div class="benefits-box">
-                    <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
-                    <ul class="lang-hi">
-                        <li>रंग पहचान कौशल विकसित करता है</li>
-                        <li>वर्गीकरण क्षमता को बढ़ावा देता है</li>
-                        <li>हाथ-आँख समन्वय में सुधार करता है</li>
-                    </ul>
-                    <ul class="lang-en" style="display:none">
-                        <li>Develops color recognition skills</li>
-                        <li>Promotes categorization ability</li>
-                        <li>Improves hand-eye coordination</li>
-                    </ul>
+                <div class="user-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="lang-hi">लॉगआउट</span>
+                    <span class="lang-en" style="display:none">Logout</span>
                 </div>
             </div>
-        </div>
-        
-        <!-- 1.5-2 Years Content -->
-        <div id="age-1.5-2" class="age-content">
-            <!-- Game 5: Puzzle Time -->
-            <div class="game-card">
-                <h2><span class="lang-hi">5. पहेली समय (सरल पजल)</span><span class="lang-en" style="display:none">5. Puzzle Time (Simple Puzzles)</span></h2>
-                <div class="game-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10-15 मिनट</span><span class="lang-en" style="display:none">Time: 10-15 mins</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1.5-2 साल</span><span class="lang-en" style="display:none">Age: 1.5-2 years</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-brain"></i> <span class="lang-hi">विकास: संज्ञानात्मक, समस्या समाधान</span><span class="lang-en" style="display:none">Development: Cognitive, Problem-solving</span>
-                    </div>
-                </div>
-                
-                <img src="https://images.unsplash.com/photo-1594787319147-9d436c1e6e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Puzzle Time" class="game-image">
-                
-                <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
-                <ul class="materials-list">
-                    <li class="lang-hi">2-3 टुकड़ों वाले सरल पजल (जानवर, फल)</li>
-                    <li class="lang-en" style="display:none">Simple 2-3 piece puzzles (animals, fruits)</li>
-                    <li class="lang-hi">घर पर बने कार्डबोर्ड पजल (छवि को 2-3 टुकड़ों में काटें)</li>
-                    <li class="lang-en" style="display:none">Homemade cardboard puzzles (cut image into 2-3 pieces)</li>
-                </ul>
-                
-                <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
-                <ol class="steps-list">
-                    <li class="lang-hi">पहले पूरा पजल बच्चे को दिखाएँ</li>
-                    <li class="lang-en" style="display:none">First show child the complete puzzle</li>
-                    <li class="lang-hi">पजल के टुकड़े अलग करें और एक टुकड़ा सही जगह लगाकर दिखाएँ</li>
-                    <li class="lang-en" style="display:none">Separate pieces and show how to place one piece correctly</li>
-                    <li class="lang-hi">बच्चे को दूसरा टुकड़ा लगाने के लिए प्रोत्साहित करें</li>
-                    <li class="lang-en" style="display:none">Encourage child to place the other piece</li>
-                    <li class="lang-hi">पजल में दिख रही वस्तु के बारे में बात करें ("यह सेब है")</li>
-                    <li class="lang-en" style="display:none">Talk about the object in puzzle ("This is an apple")</li>
-                </ol>
-                
-                <div class="benefits-box">
-                    <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
-                    <ul class="lang-hi">
-                        <li>समस्या समाधान कौशल विकसित करता है</li>
-                        <li>स्थानिक जागरूकता को बढ़ावा देता है</li>
-                        <li>धैर्य और एकाग्रता बढ़ाता है</li>
-                    </ul>
-                    <ul class="lang-en" style="display:none">
-                        <li>Develops problem-solving skills</li>
-                        <li>Promotes spatial awareness</li>
-                        <li>Increases patience and concentration</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Game 6: Building Blocks -->
-            <div class="game-card">
-                <h2><span class="lang-hi">6. ब्लॉक बनाना (टावर बनाएँ)</span><span class="lang-en" style="display:none">6. Building Blocks (Make a Tower)</span></h2>
-                <div class="game-meta">
-                    <div class="meta-item">
-                        <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10-15 मिनट</span><span class="lang-en" style="display:none">Time: 10-15 mins</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1.5-2 साल</span><span class="lang-en" style="display:none">Age: 1.5-2 years</span>
-                    </div>
-                    <div class="meta-item">
-                        <i class="fas fa-brain"></i> <span class="lang-hi">विकास: मोटर, रचनात्मक</span><span class="lang-en" style="display:none">Development: Motor, Creative</span>
-                    </div>
-                </div>
-                
-                <img src="https://images.unsplash.com/photo-1590005024862-6b67679a29fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Building Blocks" class="game-image">
-                
-                <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
-                <ul class="materials-list">
-                    <li class="lang-hi">बड़े नरम ब्लॉक या लकड़ी के ब्लॉक</li>
-                    <li class="lang-en" style="display:none">Large soft blocks or wooden blocks</li>
-                    <li class="lang-hi">रंगीन कप या डिब्बे (वैकल्पिक)</li>
-                    <li class="lang-en" style="display:none">Colored cups or containers (optional)</li>
-                </ul>
-                
-                <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
-                <ol class="steps-list">
-                    <li class="lang-hi">बच्चे के सामने 2-3 ब्लॉक रखकर एक छोटा टावर बनाएँ</li>
-                    <li class="lang-en" style="display:none">Place 2-3 blocks in front of child and make small tower</li>
-                    <li class="lang-hi">बच्चे को टावर गिराने दें और फिर से बनाने के लिए प्रोत्साहित करें</li>
-                    <li class="lang-en" style="display:none">Let child knock down tower and encourage to rebuild</li>
-                    <li class="lang-hi">धीरे-धीरे टावर की ऊँचाई बढ़ाएँ</li>
-                    <li class="lang-en" style="display:none">Gradually increase height of tower</li>
-                    <li class="lang-hi">ब्लॉकों को रंग के अनुसार छाँटने का खेल भी खेलें</li>
-                    <li class="lang-en" style="display:none">Also play sorting blocks by color</li>
-                </ol>
-                
-                <div class="benefits-box">
-                    <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
-                    <ul class="lang-hi">
-                        <li>हाथ-आँख समन्वय को बेहतर बनाता है</li>
-                        <li>रचनात्मक सोच को प्रोत्साहित करता है</li>
-                        <li>स्थानिक समझ विकसित करता है</li>
-                    </ul>
-                    <ul class="lang-en" style="display:none">
-                        <li>Improves hand-eye coordination</li>
-                        <li>Encourages creative thinking</li>
-                        <li>Develops spatial understanding</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="lang-hi" style="text-align: center; margin: 30px 0;">
-            <a href="index.html" class="btn"><i class="fas fa-baby"></i> बेबी एक्टिविटी प्लानर टूल आज़माएं</a>
-            <p style="margin-top: 15px;">अपने बच्चे की उम्र और विकास के हिसाब से <strong>पर्सनलाइज्ड प्ले एक्टिविटी प्लान</strong> जनरेट करें!</p>
-        </div>
-        <div class="lang-en" style="text-align: center; margin: 30px 0; display: none;">
-            <a href="index.html" class="btn"><i class="fas fa-baby"></i> Try Baby Activity Planner Tool</a>
-            <p style="margin-top: 15px;">Generate a <strong>personalized play activity plan</strong> based on your child's age and development!</p>
         </div>
     </div>
     
-    <footer>
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <img src="images/baby-icon.jpeg" alt="Baby Icon" class="menu-icon">
+    </button>
+
+    <div class="container" id="mainContainer">
+        <header>
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <h1><i class="fas fa-gamepad"></i> <span class="lang-hi">बच्चों के लिए शैक्षिक खेल (8 महीने से 2 साल)</span><span class="lang-en" style="display:none">Educational Games for Babies (8 Months to 2 Years)</span></h1>
+            <p class="lang-hi">संज्ञानात्मक, शारीरिक और भाषा विकास को बढ़ावा देने वाले मजेदार खेल</p>
+            <p class="lang-en" style="display:none">Fun games to promote cognitive, physical and language development</p>
+        </header>
+        
         <div class="container">
-            <p class="footer-text lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
-            <p class="footer-text lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+            <div class="intro lang-hi">
+                <p>8 महीने से 2 साल की उम्र बच्चों के तेजी से विकास का समय होता है। यहाँ <strong>उम्र के अनुसार शैक्षिक खेल</strong> दिए गए हैं जो आपके बच्चे के विकास में मदद करेंगे।</p>
+            </div>
+            <div class="intro lang-en" style="display:none">
+                <p>8 months to 2 years is a period of rapid development for children. Here are <strong>age-appropriate educational games</strong> that will help your child's development.</p>
+            </div>
+            
+            <div class="age-tabs">
+                <div class="age-tab active" onclick="showAgeContent('8-12')">8-12 महीने</div>
+                <div class="age-tab" onclick="showAgeContent('1-1.5')">1-1.5 साल</div>
+                <div class="age-tab" onclick="showAgeContent('1.5-2')">1.5-2 साल</div>
+            </div>
+            
+            <!-- 8-12 Months Content -->
+            <div id="age-8-12" class="age-content active">
+                <!-- Game 1: Peek-a-Boo -->
+                <div class="game-card">
+                    <h2><span class="lang-hi">1. पीकाबू (लुका-छिपी)</span><span class="lang-en" style="display:none">1. Peek-a-Boo</span></h2>
+                    <div class="game-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i> <span class="lang-hi">समय: 5-10 मिनट</span><span class="lang-en" style="display:none">Time: 5-10 mins</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 8+ महीने</span><span class="lang-en" style="display:none">Age: 8+ months</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-brain"></i> <span class="lang-hi">विकास: सामाजिक, संज्ञानात्मक</span><span class="lang-en" style="display:none">Development: Social, Cognitive</span>
+                        </div>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Peek-a-Boo" class="game-image">
+                    
+                    <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
+                    <ol class="steps-list">
+                        <li class="lang-hi">अपने चेहरे को हाथों से ढककर "लुका-छिपी" खेलें</li>
+                        <li class="lang-en" style="display:none">Cover your face with hands and play peek-a-boo</li>
+                        <li class="lang-hi">हाथ हटाकर "पीकाबू!" कहें और मुस्कुराएँ</li>
+                        <li class="lang-en" style="display:none">Remove hands and say "Peek-a-boo!" with a smile</li>
+                        <li class="lang-hi">बच्चे के चेहरे पर कपड़ा डालकर भी खेल सकते हैं</li>
+                        <li class="lang-en" style="display:none">Can also play by putting cloth on baby's face</li>
+                        <li class="lang-hi">बच्चे को भी अपना चेहरा ढकने के लिए प्रोत्साहित करें</li>
+                        <li class="lang-en" style="display:none">Encourage baby to cover their own face</li>
+                    </ol>
+                    
+                    <div class="benefits-box">
+                        <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
+                        <ul class="lang-hi">
+                            <li>वस्तु स्थायित्व की समझ विकसित करता है</li>
+                            <li>सामाजिक संपर्क और आँख से संपर्क को बढ़ावा देता है</li>
+                            <li>भावनात्मक विकास में सहायक</li>
+                        </ul>
+                        <ul class="lang-en" style="display:none">
+                            <li>Develops understanding of object permanence</li>
+                            <li>Promotes social interaction and eye contact</li>
+                            <li>Supports emotional development</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Game 2: Texture Exploration -->
+                <div class="game-card">
+                    <h2><span class="lang-hi">2. बनावट अन्वेषण</span><span class="lang-en" style="display:none">2. Texture Exploration</span></h2>
+                    <div class="game-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10 मिनट</span><span class="lang-en" style="display:none">Time: 10 mins</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 9+ महीने</span><span class="lang-en" style="display:none">Age: 9+ months</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-brain"></i> <span class="lang-hi">विकास: संवेदी, भाषा</span><span class="lang-en" style="display:none">Development: Sensory, Language</span>
+                        </div>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1597260491625-4cf9e1f7f0f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Texture Exploration" class="game-image">
+                    
+                    <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
+                    <ul class="materials-list">
+                        <li class="lang-hi">विभिन्न बनावट वाली वस्तुएँ (मखमल, फोम, रबर, लकड़ी)</li>
+                        <li class="lang-en" style="display:none">Objects with different textures (velvet, foam, rubber, wood)</li>
+                        <li class="lang-hi">रुई, स्पंज, अलमारी की चिपकने वाली पट्टी</li>
+                        <li class="lang-en" style="display:none">Cotton, sponge, velcro strips</li>
+                    </ul>
+                    
+                    <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
+                    <ol class="steps-list">
+                        <li class="lang-hi">विभिन्न बनावट वाली वस्तुएँ बच्चे के सामने रखें</li>
+                        <li class="lang-en" style="display:none">Place different textured objects in front of baby</li>
+                        <li class="lang-hi">प्रत्येक वस्तु को छूकर दिखाएँ और बनावट बताएँ ("यह नरम है")</li>
+                        <li class="lang-en" style="display:none">Touch each object and describe texture ("This is soft")</li>
+                        <li class="lang-hi">बच्चे को वस्तुओं को छूने और महसूस करने दें</li>
+                        <li class="lang-en" style="display:none">Let baby touch and feel the objects</li>
+                        <li class="lang-hi">बच्चे की प्रतिक्रिया देखें और प्रोत्साहित करें</li>
+                        <li class="lang-en" style="display:none">Observe baby's reactions and encourage them</li>
+                    </ol>
+                    
+                    <div class="benefits-box">
+                        <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
+                        <ul class="lang-hi">
+                            <li>संवेदी जागरूकता बढ़ाता है</li>
+                            <li>स्पर्श संवेदनशीलता विकसित करता है</li>
+                            <li>वर्णनात्मक भाषा कौशल को बढ़ावा देता है</li>
+                        </ul>
+                        <ul class="lang-en" style="display:none">
+                            <li>Enhances sensory awareness</li>
+                            <li>Develops tactile sensitivity</li>
+                            <li>Promotes descriptive language skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 1-1.5 Years Content -->
+            <div id="age-1-1.5" class="age-content">
+                <!-- Game 3: Shape Sorting -->
+                <div class="game-card">
+                    <h2><span class="lang-hi">3. आकार पहचान खेल</span><span class="lang-en" style="display:none">3. Shape Sorting Game</span></h2>
+                    <div class="game-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10-15 मिनट</span><span class="lang-en" style="display:none">Time: 10-15 mins</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1-1.5 साल</span><span class="lang-en" style="display:none">Age: 1-1.5 years</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-brain"></i> <span class="lang-hi">विकास: संज्ञानात्मक, हाथ-आँख समन्वय</span><span class="lang-en" style="display:none">Development: Cognitive, Hand-Eye</span>
+                        </div>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1589927986089-35812388d1f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Shape Sorting" class="game-image">
+                    
+                    <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
+                    <ul class="materials-list">
+                        <li class="lang-hi">शेप सॉर्टर खिलौना या घर पर बना सॉर्टर</li>
+                        <li class="lang-en" style="display:none">Shape sorter toy or homemade sorter</li>
+                        <li class="lang-hi">विभिन्न आकार के ब्लॉक (गोल, चौकोर, त्रिकोण)</li>
+                        <li class="lang-en" style="display:none">Different shaped blocks (circle, square, triangle)</li>
+                    </ul>
+                    
+                    <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
+                    <ol class="steps-list">
+                        <li class="lang-hi">एक समय में एक आकार पेश करें (पहले गोल, फिर चौकोर)</li>
+                        <li class="lang-en" style="display:none">Introduce one shape at a time (circle first, then square)</li>
+                        <li class="lang-hi">बच्चे को दिखाएँ कि ब्लॉक को सही छेद में कैसे डालना है</li>
+                        <li class="lang-en" style="display:none">Show child how to put block in correct hole</li>
+                        <li class="lang-hi">बच्चे को स्वयं प्रयास करने दें</li>
+                        <li class="lang-en" style="display:none">Let child try independently</li>
+                        <li class="lang-hi">आकारों के नाम दोहराएँ ("यह गोल है", "यह चौकोर है")</li>
+                        <li class="lang-en" style="display:none">Repeat shape names ("This is circle", "This is square")</li>
+                    </ol>
+                    
+                    <div class="benefits-box">
+                        <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
+                        <ul class="lang-hi">
+                            <li>आकार पहचान कौशल विकसित करता है</li>
+                            <li>समस्या समाधान क्षमता को बढ़ाता है</li>
+                            <li>हाथ की पकड़ और निपुणता में सुधार करता है</li>
+                        </ul>
+                        <ul class="lang-en" style="display:none">
+                            <li>Develops shape recognition skills</li>
+                            <li>Enhances problem-solving ability</li>
+                            <li>Improves hand grip and dexterity</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Game 4: Color Matching -->
+                <div class="game-card">
+                    <h2><span class="lang-hi">4. रंग मिलान खेल</span><span class="lang-en" style="display:none">4. Color Matching Game</span></h2>
+                    <div class="game-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10 मिनट</span><span class="lang-en" style="display:none">Time: 10 mins</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1-1.5 साल</span><span class="lang-en" style="display:none">Age: 1-1.5 years</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-brain"></i> <span class="lang-hi">विकास: दृश्य, संज्ञानात्मक</span><span class="lang-en" style="display:none">Development: Visual, Cognitive</span>
+                        </div>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Color Matching" class="game-image">
+                    
+                    <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
+                    <ul class="materials-list">
+                        <li class="lang-hi">रंगीन कप (लाल, नीला, पीला, हरा)</li>
+                        <li class="lang-en" style="display:none">Colored cups (red, blue, yellow, green)</li>
+                        <li class="lang-hi">उन्हीं रंगों की छोटी वस्तुएँ (पोम्पोम, ब्लॉक)</li>
+                        <li class="lang-en" style="display:none">Small objects in same colors (pom poms, blocks)</li>
+                    </ul>
+                    
+                    <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
+                    <ol class="steps-list">
+                        <li class="lang-hi">रंगीन कपों को टेबल पर रखें</li>
+                        <li class="lang-en" style="display:none">Place colored cups on table</li>
+                        <li class="lang-hi">एक रंग की वस्तु उठाकर उसी रंग के कप में डालकर दिखाएँ</li>
+                        <li class="lang-en" style="display:none">Pick up one colored object and put in matching cup</li>
+                        <li class="lang-hi">बच्चे को भी वस्तु उठाकर सही कप में डालने दें</li>
+                        <li class="lang-en" style="display:none">Let child pick objects and put in matching cups</li>
+                        <li class="lang-hi">रंगों के नाम बताते रहें ("यह लाल है")</li>
+                        <li class="lang-en" style="display:none">Keep naming colors ("This is red")</li>
+                    </ol>
+                    
+                    <div class="benefits-box">
+                        <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
+                        <ul class="lang-hi">
+                            <li>रंग पहचान कौशल विकसित करता है</li>
+                            <li>वर्गीकरण क्षमता को बढ़ावा देता है</li>
+                            <li>हाथ-आँख समन्वय में सुधार करता है</li>
+                        </ul>
+                        <ul class="lang-en" style="display:none">
+                            <li>Develops color recognition skills</li>
+                            <li>Promotes categorization ability</li>
+                            <li>Improves hand-eye coordination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 1.5-2 Years Content -->
+            <div id="age-1.5-2" class="age-content">
+                <!-- Game 5: Puzzle Time -->
+                <div class="game-card">
+                    <h2><span class="lang-hi">5. पहेली समय (सरल पजल)</span><span class="lang-en" style="display:none">5. Puzzle Time (Simple Puzzles)</span></h2>
+                    <div class="game-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10-15 मिनट</span><span class="lang-en" style="display:none">Time: 10-15 mins</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1.5-2 साल</span><span class="lang-en" style="display:none">Age: 1.5-2 years</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-brain"></i> <span class="lang-hi">विकास: संज्ञानात्मक, समस्या समाधान</span><span class="lang-en" style="display:none">Development: Cognitive, Problem-solving</span>
+                        </div>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1594787319147-9d436c1e6e1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Puzzle Time" class="game-image">
+                    
+                    <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
+                    <ul class="materials-list">
+                        <li class="lang-hi">2-3 टुकड़ों वाले सरल पजल (जानवर, फल)</li>
+                        <li class="lang-en" style="display:none">Simple 2-3 piece puzzles (animals, fruits)</li>
+                        <li class="lang-hi">घर पर बने कार्डबोर्ड पजल (छवि को 2-3 टुकड़ों में काटें)</li>
+                        <li class="lang-en" style="display:none">Homemade cardboard puzzles (cut image into 2-3 pieces)</li>
+                    </ul>
+                    
+                    <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
+                    <ol class="steps-list">
+                        <li class="lang-hi">पहले पूरा पजल बच्चे को दिखाएँ</li>
+                        <li class="lang-en" style="display:none">First show child the complete puzzle</li>
+                        <li class="lang-hi">पजल के टुकड़े अलग करें और एक टुकड़ा सही जगह लगाकर दिखाएँ</li>
+                        <li class="lang-en" style="display:none">Separate pieces and show how to place one piece correctly</li>
+                        <li class="lang-hi">बच्चे को दूसरा टुकड़ा लगाने के लिए प्रोत्साहित करें</li>
+                        <li class="lang-en" style="display:none">Encourage child to place the other piece</li>
+                        <li class="lang-hi">पजल में दिख रही वस्तु के बारे में बात करें ("यह सेब है")</li>
+                        <li class="lang-en" style="display:none">Talk about the object in puzzle ("This is an apple")</li>
+                    </ol>
+                    
+                    <div class="benefits-box">
+                        <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
+                        <ul class="lang-hi">
+                            <li>समस्या समाधान कौशल विकसित करता है</li>
+                            <li>स्थानिक जागरूकता को बढ़ावा देता है</li>
+                            <li>धैर्य और एकाग्रता बढ़ाता है</li>
+                        </ul>
+                        <ul class="lang-en" style="display:none">
+                            <li>Develops problem-solving skills</li>
+                            <li>Promotes spatial awareness</li>
+                            <li>Increases patience and concentration</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Game 6: Building Blocks -->
+                <div class="game-card">
+                    <h2><span class="lang-hi">6. ब्लॉक बनाना (टावर बनाएँ)</span><span class="lang-en" style="display:none">6. Building Blocks (Make a Tower)</span></h2>
+                    <div class="game-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i> <span class="lang-hi">समय: 10-15 मिनट</span><span class="lang-en" style="display:none">Time: 10-15 mins</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-baby"></i> <span class="lang-hi">उम्र: 1.5-2 साल</span><span class="lang-en" style="display:none">Age: 1.5-2 years</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-brain"></i> <span class="lang-hi">विकास: मोटर, रचनात्मक</span><span class="lang-en" style="display:none">Development: Motor, Creative</span>
+                        </div>
+                    </div>
+                    
+                    <img src="https://images.unsplash.com/photo-1590005024862-6b67679a29fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Building Blocks" class="game-image">
+                    
+                    <h3><span class="lang-hi">सामग्री</span><span class="lang-en" style="display:none">Materials</span></h3>
+                    <ul class="materials-list">
+                        <li class="lang-hi">बड़े नरम ब्लॉक या लकड़ी के ब्लॉक</li>
+                        <li class="lang-en" style="display:none">Large soft blocks or wooden blocks</li>
+                        <li class="lang-hi">रंगीन कप या डिब्बे (वैकल्पिक)</li>
+                        <li class="lang-en" style="display:none">Colored cups or containers (optional)</li>
+                    </ul>
+                    
+                    <h3><span class="lang-hi">कैसे खेलें</span><span class="lang-en" style="display:none">How to Play</span></h3>
+                    <ol class="steps-list">
+                        <li class="lang-hi">बच्चे के सामने 2-3 ब्लॉक रखकर एक छोटा टावर बनाएँ</li>
+                        <li class="lang-en" style="display:none">Place 2-3 blocks in front of child and make small tower</li>
+                        <li class="lang-hi">बच्चे को टावर गिराने दें और फिर से बनाने के लिए प्रोत्साहित करें</li>
+                        <li class="lang-en" style="display:none">Let child knock down tower and encourage to rebuild</li>
+                        <li class="lang-hi">धीरे-धीरे टावर की ऊँचाई बढ़ाएँ</li>
+                        <li class="lang-en" style="display:none">Gradually increase height of tower</li>
+                        <li class="lang-hi">ब्लॉकों को रंग के अनुसार छाँटने का खेल भी खेलें</li>
+                        <li class="lang-en" style="display:none">Also play sorting blocks by color</li>
+                    </ol>
+                    
+                    <div class="benefits-box">
+                        <h4><i class="fas fa-star"></i> <span class="lang-hi">विकासात्मक लाभ</span><span class="lang-en" style="display:none">Developmental Benefits</span></h4>
+                        <ul class="lang-hi">
+                            <li>हाथ-आँख समन्वय को बेहतर बनाता है</li>
+                            <li>रचनात्मक सोच को प्रोत्साहित करता है</li>
+                            <li>स्थानिक समझ विकसित करता है</li>
+                        </ul>
+                        <ul class="lang-en" style="display:none">
+                            <li>Improves hand-eye coordination</li>
+                            <li>Encourages creative thinking</li>
+                            <li>Develops spatial understanding</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lang-hi" style="text-align: center; margin: 30px 0;">
+                <a href="index.html" class="btn"><i class="fas fa-baby"></i> बेबी एक्टिविटी प्लानर टूल आज़माएं</a>
+                <p style="margin-top: 15px;">अपने बच्चे की उम्र और विकास के हिसाब से <strong>पर्सनलाइज्ड प्ले एक्टिविटी प्लान</strong> जनरेट करें!</p>
+            </div>
+            <div class="lang-en" style="text-align: center; margin: 30px 0; display: none;">
+                <a href="index.html" class="btn"><i class="fas fa-baby"></i> Try Baby Activity Planner Tool</a>
+                <p style="margin-top: 15px;">Generate a <strong>personalized play activity plan</strong> based on your child's age and development!</p>
+            </div>
         </div>
-    </footer>
+        
+        <footer>
+            <div class="container">
+                <p class="footer-text lang-hi">© 2023 बेबी केयर प्लानर - सभी बच्चों के लिए स्वस्थ दिनचर्या</p>
+                <p class="footer-text lang-en" style="display:none">© 2023 Baby Care Planner - Healthy routines for all children</p>
+            </div>
+        </footer>
+    </div>
 
     <script>
+        // Toggle sidebar function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('mainContainer');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
+        }
+
+        // Close sidebar when clicking on overlay
+        document.getElementById('overlay').addEventListener('click', toggleSidebar);
+
         function switchLanguage(lang) {
             if (lang === 'hi') {
                 // Show Hindi elements
