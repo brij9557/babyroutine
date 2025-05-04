@@ -6,7 +6,7 @@
     <title>5 Best Indian Baby Food Recipes (8-15 Months) | Baby Care Planner</title>
     <meta name="description" content="Healthy and easy Indian baby food recipes for 8-15-month-old babies. Nutritious homemade khichdi, dalia, fruit puree, and more for your toddler.">
     <meta name="keywords" content="Indian baby food recipes, homemade baby food, 8-15 month baby food, khichdi for baby, dalia recipe for baby, healthy baby food, Indian toddler food">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #FF7EB9;
@@ -31,10 +31,212 @@
             font-size: 16px;
         }
         
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF7EB9;
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid #FFD1DC;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 15px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
+        }
+        
+        /* Menu Button */
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            padding: 7px;
+        }
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
+        }
+        
+        /* User Profile Section in Sidebar */
+        .user-profile-section {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+            background: #FFF9FB;
+        }
+        
+        .user-info {
+            margin-bottom: 15px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .user-email {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .user-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .user-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .user-menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+        }
+        
+        .user-menu-item.logout {
+            color: #F44336;
+        }
+        
+        .user-menu-item.logout i {
+            color: #F44336;
+        }
+        
+        .user-menu-item.logout:hover {
+            background: #ffebee;
         }
         
         header {
@@ -46,57 +248,31 @@
             position: relative;
         }
         
-        .nav-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-        
-        .language-switcher {
+        .language-toggle {
             position: absolute;
             top: 20px;
             left: 20px;
-        }
-        
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 5px 10px;
+            background-color: rgba(255,255,255,0.2);
             border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .language-btn {
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: none;
+            background: none;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            color: white;
         }
         
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .lang-btn.active {
-            background: white;
-            color: var(--secondary);
+        .language-btn.active {
+            background-color: white;
+            color: var(--primary);
         }
         
         h1 {
@@ -126,6 +302,16 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             margin-bottom: 25px;
             border: 1px solid rgba(255, 126, 185, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
         
         .recipe-intro {
@@ -139,6 +325,7 @@
             gap: 20px;
             margin-bottom: 15px;
             font-size: 14px;
+            flex-wrap: wrap;
         }
         
         .meta-item {
@@ -218,46 +405,163 @@
             color: #ddd;
         }
         
-        @media (min-width: 768px) {
-            .container {
-                padding: 20px;
+        @media (max-width: 768px) {
+            .container.sidebar-open {
+                margin-left: 0;
+            }
+            
+            .sidebar {
+                width: 250px;
+            }
+            
+            .menu-btn {
+                left: 10px;
+                top: 60%;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .recipe-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .recipe-image {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
+            
+            .menu-btn:hover {
+                transform: scale(1.1);
             }
             
             h1 {
-                font-size: 2rem;
-            }
-            
-            .recipe-card {
-                padding: 25px;
+                font-size: 1.5rem;
+                padding: 0 20px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="language-switcher">
-            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
-            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         
-        <div class="nav-buttons">
-            <a href="index.html" class="nav-btn" title="Home">
-                <i class="fas fa-home"></i>
+        <div class="sidebar-menu">
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
+                <span class="lang-en" style="display:none">Pregnancy Tracker</span>
             </a>
-            <a href="about.html" class="nav-btn" title="About">
-                <i class="fas fa-info-circle"></i>
+
+            <a href="boy-or-girl.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">लड़का या लड़की?</span>
+                <span class="lang-en" style="display:none">Boy or Girl?</span>
             </a>
+
+            <div class="menu-section lang-hi">शिशु देखभाल</div>
+            <div class="menu-section lang-en" style="display:none">Baby Care</div>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span class="lang-hi">दैनिक देखभाल योजना</span>
+                <span class="lang-en" style="display:none">Daily Care Plan</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span class="lang-hi">क्राइंग एनालाइज़र</span>
+                <span class="lang-en" style="display:none">Crying Analyzer</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item active">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span class="lang-hi">आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Food Recipes</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item">
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                <span class="lang-hi">खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Play Activities</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">विकास चार्ट</span>
+                <span class="lang-en" style="display:none">Growth Chart</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span class="lang-hi">टीकाकरण</span>
+                <span class="lang-en" style="display:none">Vaccination</span>
+            </a>
+            <div class="menu-section lang-hi">संसाधन</div>
+            <div class="menu-section lang-en" style="display:none">Resources</div>
+            
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+
+            <a href="about.html" class="menu-item">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="lang-hi">मेरा प्रोफाइल</span>
+                <span class="lang-en" style="display:none">About Us</span>
+            </a>
+            
+            <!-- User Profile Section in Sidebar -->
+            <div class="user-profile-section">
+                <div class="user-info" id="userInfo">
+                    <div class="user-name" id="userName">Guest User</div>
+                    <div class="user-email" id="userEmail">Not logged in</div>
+                </div>
+                
+                <a href="Login.html" class="user-menu-item" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span class="lang-hi">लॉगिन करें</span>
+                    <span class="lang-en" style="display:none">Login</span>
+                </a>
+                
+                <div class="user-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="lang-hi">लॉगआउट</span>
+                    <span class="lang-en" style="display:none">Logout</span>
+                </div>
+            </div>
         </div>
-        
-        <div class="container">
+    </div>
+    
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <img src="images/baby-icon.jpeg" alt="Baby Icon" class="menu-icon">
+    </button>
+
+    <div class="container" id="mainContainer">
+        <header>
+            <div class="language-toggle">
+                <button id="lang-hi" class="language-btn active" data-lang="hi">हिंदी</button>
+                <button id="lang-en" class="language-btn" data-lang="en">English</button>
+            </div>
+            
             <h1><i class="fas fa-utensils"></i> <span class="lang-hi">8-15 महीने के बच्चों के लिए 5 बेस्ट इंडियन बेबी फूड रेसिपी</span><span class="lang-en" style="display:none">5 Best Indian Baby Food Recipes (8-15 Months)</span></h1>
             <p class="lang-hi">पौष्टिक, स्वादिष्ट और आसान घर पर बनने वाले भारतीय शिशु आहार</p>
             <p class="lang-en" style="display:none">Nutritious, tasty and easy homemade Indian baby food</p>
-        </div>
-    </header>
-    
-    <div class="container">
+        </header>
+        
         <div class="recipe-intro lang-hi">
             <p>जब आपका बच्चा 8-15 महीने का होता है, तो उसे ठोस आहार की शुरुआत करनी चाहिए। यहाँ <strong>5 आसान और पौष्टिक भारतीय बेबी फूड रेसिपी</strong> दी गई हैं जो आपके बच्चे को पसंद आएंगी और उसके विकास में मदद करेंगी।</p>
         </div>
@@ -267,6 +571,7 @@
         
         <!-- Recipe 1: Dal Khichdi -->
         <div class="recipe-card">
+            <img src="https://i.imgur.com/JqYeZ0U.jpg" alt="Dal Khichdi" class="recipe-image">
             <h2><span class="lang-hi">1. दाल खिचड़ी</span><span class="lang-en" style="display:none">1. Dal Khichdi</span></h2>
             <div class="recipe-meta">
                 <div class="meta-item">
@@ -317,6 +622,7 @@
         
         <!-- Recipe 2: Apple Dalia -->
         <div class="recipe-card">
+            <img src="https://i.imgur.com/pQqX3fN.jpg" alt="Apple Dalia" class="recipe-image">
             <h2><span class="lang-hi">2. सेब दलिया</span><span class="lang-en" style="display:none">2. Apple Dalia</span></h2>
             <div class="recipe-meta">
                 <div class="meta-item">
@@ -363,6 +669,7 @@
         
         <!-- Recipe 3: Vegetable Poha -->
         <div class="recipe-card">
+            <img src="https://i.imgur.com/8mJvZ7T.jpg" alt="Vegetable Poha" class="recipe-image">
             <h2><span class="lang-hi">3. वेजिटेबल पोहा</span><span class="lang-en" style="display:none">3. Vegetable Poha</span></h2>
             <div class="recipe-meta">
                 <div class="meta-item">
@@ -413,6 +720,7 @@
         
         <!-- Recipe 4: Moong Dal Halwa -->
         <div class="recipe-card">
+            <img src="https://i.imgur.com/vVb7J9Q.jpg" alt="Moong Dal Halwa" class="recipe-image">
             <h2><span class="lang-hi">4. मूंग दल हलवा</span><span class="lang-en" style="display:none">4. Moong Dal Halwa</span></h2>
             <div class="recipe-meta">
                 <div class="meta-item">
@@ -463,6 +771,7 @@
         
         <!-- Recipe 5: Ragi Porridge -->
         <div class="recipe-card">
+            <img src="https://i.imgur.com/9kXxZQm.jpg" alt="Ragi Porridge" class="recipe-image">
             <h2><span class="lang-hi">5. रागी पोरिज</span><span class="lang-en" style="display:none">5. Ragi Porridge</span></h2>
             <div class="recipe-meta">
                 <div class="meta-item">
@@ -527,32 +836,161 @@
     </footer>
 
     <script>
-        function switchLanguage(lang) {
-            if (lang === 'hi') {
-                // Show Hindi elements
-                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = '');
-                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-                
-                // Update language buttons
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.textContent === 'हिंदी') btn.classList.add('active');
-                });
-            } else {
-                // Show English elements
-                document.querySelectorAll('.lang-hi').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
-                
-                // Update language buttons
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.textContent === 'English') btn.classList.add('active');
-                });
-            }
+        // Toggle sidebar function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('mainContainer');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
         }
-        
-        // Initialize with Hindi language
-        switchLanguage('hi');
+
+        // Language support
+        const translations = {
+            hi: {
+                title: "8-15 महीने के बच्चों के लिए 5 बेस्ट इंडियन बेबी फूड रेसिपी",
+                tagline: "पौष्टिक, स्वादिष्ट और आसान घर पर बनने वाले भारतीय शिशु आहार",
+                home: "होम पेज",
+                analysis: "रोने का विश्लेषण",
+                need_help: "मदद चाहिए?",
+                listening: "सुन रहे हैं...",
+                start_listening: "सुनना शुरू करें",
+                stop: "रोकें",
+                analysis_result: "विश्लेषण परिणाम",
+                no_analysis: "अभी तक कोई विश्लेषण नहीं हुआ है। सुनना शुरू करने के लिए बटन दबाएं।",
+                hungry: "भूख लगी है",
+                hungry_desc: "आपके बच्चे को भूख लगी है। शायद दूध पिलाने का समय हो गया है!",
+                diaper: "डायपर बदलने की जरूरत",
+                diaper_desc: "बच्चे ने पॉटी की है या डायपर गीला हो गया है। जांच करें और बदलें।",
+                sleepy: "नींद आ रही है",
+                sleepy_desc: "आपका बच्चा थक गया है और सोना चाहता है।",
+                pain: "दर्द/तकलीफ",
+                pain_desc: "बच्चे को कोई दर्द या तकलीफ हो सकती है। अन्य लक्षणों की जांच करें।",
+                attention: "ध्यान चाहिए",
+                attention_desc: "आपका बच्चा आपका ध्यान या प्यार चाहता है।",
+                feedback: "क्या यह परिणाम सही लगा?",
+                share_whatsapp: "WhatsApp पर शेयर करें",
+                history: "पिछले विश्लेषण",
+                how_it_works: "बेबी क्राइ एनालाइजर कैसे काम करता है?",
+                how_it_works_desc: "यह उन्नत AI तकनीक पर आधारित टूल आपके बच्चे के रोने की आवाज़ का विश्लेषण करके पता लगाता है कि बच्चा क्यों रो रहा है। विभिन्न प्रकार के रोने के पैटर्न को पहचानकर यह सटीक परिणाम देता है।",
+                reasons_title: "बच्चे रोने के मुख्य कारण:",
+                reason_hungry: "भूख लगना",
+                reason_hungry_desc: "नियमित अंतराल पर रोना, मुंह में उंगली डालना",
+                reason_diaper: "पॉटी/डायपर गीला होना",
+                reason_diaper_desc: "असहज महसूस करने पर अचानक रोना",
+                reason_sleepy: "नींद आना",
+                reason_sleepy_desc: "आँखें मलते हुए, थकान भरा रोना",
+                reason_pain: "दर्द/तकलीफ",
+                reason_pain_desc: "तेज और लगातार रोना",
+                reason_attention: "ध्यान चाहिए",
+                reason_attention_desc: "रुक-रुक कर रोना",
+                benefits_title: "इस टूल के फायदे:",
+                benefit_private: "100% प्राइवेट - सभी प्रोसेसिंग आपके डिवाइस पर होती है",
+                benefit_indian: "भारतीय बच्चों के रोने के पैटर्न के अनुकूल",
+                benefit_offline: "कोई इंटरनेट कनेक्शन आवश्यक नहीं",
+                benefit_easy: "उपयोग में आसान और तुरंत परिणाम",
+                copyright: "बेबी क्राइ एनालाइजर &copy; 2023",
+                privacy: "गोपनीयता नीति",
+                terms: "उपयोग की शर्तें",
+                footer_note: "यह टूल पूरी तरह से आपके ब्राउज़र में काम करता है - किसी सर्वर की आवश्यकता नहीं"
+            },
+            en: {
+                title: "5 Best Indian Baby Food Recipes (8-15 Months)",
+                tagline: "Nutritious, tasty and easy homemade Indian baby food",
+                home: "Home Page",
+                analysis: "Cry Analysis",
+                need_help: "Need Help?",
+                listening: "Listening...",
+                start_listening: "Start Listening",
+                stop: "Stop",
+                analysis_result: "Analysis Result",
+                no_analysis: "No analysis yet. Press the button to start listening.",
+                hungry: "Hungry",
+                hungry_desc: "Your baby is hungry. It might be time for feeding!",
+                diaper: "Diaper Change Needed",
+                diaper_desc: "Baby has pooped or diaper is wet. Please check and change.",
+                sleepy: "Sleepy",
+                sleepy_desc: "Your baby is tired and wants to sleep.",
+                pain: "Pain/Discomfort",
+                pain_desc: "Baby might be in pain or discomfort. Check for other symptoms.",
+                attention: "Needs Attention",
+                attention_desc: "Your baby wants your attention or love.",
+                feedback: "Was this result accurate?",
+                share_whatsapp: "Share on WhatsApp",
+                history: "Analysis History",
+                how_it_works: "How Baby Cry Analyzer Works?",
+                how_it_works_desc: "This AI-powered tool analyzes your baby's crying sound to determine why they're crying. It recognizes different crying patterns to provide accurate results.",
+                reasons_title: "Main Reasons Babies Cry:",
+                reason_hungry: "Hunger",
+                reason_hungry_desc: "Crying at regular intervals, putting fingers in mouth",
+                reason_diaper: "Diaper/Wet",
+                reason_diaper_desc: "Sudden crying when feeling uncomfortable",
+                reason_sleepy: "Sleepy",
+                reason_sleepy_desc: "Rubbing eyes, tired crying",
+                reason_pain: "Pain/Discomfort",
+                reason_pain_desc: "Loud and continuous crying",
+                reason_attention: "Needs Attention",
+                reason_attention_desc: "Intermittent crying",
+                benefits_title: "Benefits of This Tool:",
+                benefit_private: "100% Private - All processing happens on your device",
+                benefit_indian: "Optimized for Indian babies' crying patterns",
+                benefit_offline: "No internet connection required",
+                benefit_easy: "Easy to use with instant results",
+                copyright: "Baby Cry Analyzer &copy; 2023",
+                privacy: "Privacy Policy",
+                terms: "Terms of Use",
+                footer_note: "This tool works completely in your browser - no server needed"
+            }
+        };
+
+        // Set initial language
+        let currentLang = 'hi';
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Toggle language specific elements
+            document.querySelectorAll('.lang-hi').forEach(el => {
+                el.style.display = lang === 'hi' ? '' : 'none';
+            });
+            document.querySelectorAll('.lang-en').forEach(el => {
+                el.style.display = lang === 'en' ? '' : 'none';
+            });
+            
+            // Update active language button
+            document.getElementById('lang-hi').classList.toggle('active', lang === 'hi');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            
+            // Save language preference
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load preferred language
+            const preferredLang = localStorage.getItem('preferredLang') || 'hi';
+            changeLanguage(preferredLang);
+            
+            // Language toggle event listeners
+            document.getElementById('lang-hi').addEventListener('click', () => changeLanguage('hi'));
+            document.getElementById('lang-en').addEventListener('click', () => changeLanguage('en'));
+        });
+
+        // Handle authentication (logout only, login is handled via Login.html)
+        function handleAuth() {
+            alert(currentLang === 'hi' ? 
+                'लॉगआउट सफलतापूर्वक हो गया' : 
+                'Successfully logged out');
+        }
     </script>
 </body>
 </html>
