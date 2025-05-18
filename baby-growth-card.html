@@ -28,9 +28,13 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Preload important resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Baloo+Bhai+2:wght@500;600;700&display=swap" as="style">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Baloo+Bhai+2:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- Schema.org markup for Google -->
     <script type="application/ld+json">
@@ -41,619 +45,890 @@
       "url": "https://yourwebsite.com/baby-growth-tracker",
       "description": "अपने बच्चे के विकास का ट्रैक रखें और सुंदर शेयर करने योग्य कार्ड बनाएं",
       "applicationCategory": "ParentingApplication",
-      "operatingSystem": "Web"
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      }
     }
     </script>
     
     <style>
         :root {
-            --primary: #FF7AA2;
-            --secondary: #6AC5F8;
+            --primary: #5D9CEC;
+            --primary-light: #E7F1FD;
+            --primary-dark: #3A7BD5;
+            --secondary: #FF7FAA;
+            --secondary-light: #FFF0F5;
             --accent: #FFD166;
-            --text: #333333;
-            --light: #FFF9FB;
+            --accent-light: #FFF9E6;
+            --text: #2D3436;
+            --text-light: #636E72;
+            --light: #FFFFFF;
+            --light-gray: #F5F6FA;
+            --gray: #DFE6E9;
             --dark: #2D3047;
-            --success: #4CAF50;
-            --warning: #FF9800;
-            --danger: #F44336;
+            --success: #00B894;
+            --warning: #FDCB6E;
+            --danger: #D63031;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 20px rgba(0,0,0,0.1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --radius-xl: 24px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #FFF0F5, #E6F7FF);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray);
             color: var(--text);
             line-height: 1.6;
-            position: relative;
-        }
-
-        .home-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255,122,162,0.3);
-            z-index: 1000;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
         }
 
-        .home-btn:hover {
-            background: #FF6B8B;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,122,162,0.4);
-        }
-
-        .container {
-            max-width: 850px;
-            width: 100%;
-        }
-
-        .form-card {
-            background: white;
-            border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .form-card::before {
+        .header::before {
             content: "";
             position: absolute;
             top: -50px;
             right: -50px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,122,162,0.1) 0%, rgba(255,122,162,0) 70%);
-            z-index: 0;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
         }
 
-        h1 {
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 32px;
-            font-family: 'Baloo 2', cursive;
+        .header h1 {
+            font-family: 'Baloo Bhai 2', cursive;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
-        h1 i {
-            margin-right: 12px;
-            font-size: 36px;
+        .header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Container */
+        .container {
+            flex: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            background-color: var(--light);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .form-section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-title {
+            font-family: 'Baloo Bhai 2', cursive;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-title i {
+            font-size: 1.8rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
         }
 
         .form-group {
-            margin-bottom: 22px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 1.25rem;
         }
 
-        label {
+        .form-label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 15px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.95rem;
         }
 
-        input, select {
+        .form-label i {
+            margin-right: 0.5rem;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+
+        .form-input, .form-select {
             width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            background: #f9f9f9;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
             font-family: 'Poppins', sans-serif;
         }
 
-        input:focus, select:focus {
+        .form-input:focus, .form-select:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 4px rgba(255,122,162,0.2);
-            background: white;
+            box-shadow: 0 0 0 3px var(--primary-light);
         }
 
-        .input-row {
-            display: flex;
-            gap: 20px;
+        .form-input::placeholder {
+            color: var(--text-light);
+            opacity: 0.7;
         }
 
-        .input-col {
-            flex: 1;
-        }
-
-        button {
-            background: linear-gradient(135deg, var(--primary), #FF9E7D);
+        .form-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 16px 30px;
-            border-radius: 12px;
-            font-size: 18px;
+            padding: 0.875rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: var(--transition);
             width: 100%;
-            margin-top: 15px;
+            margin-top: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(255,122,162,0.3);
-            font-family: 'Baloo 2', cursive;
-            letter-spacing: 0.5px;
-            position: relative;
+            gap: 0.75rem;
+            box-shadow: var(--shadow-sm);
+            font-family: 'Baloo Bhai 2', cursive;
+        }
+
+        .form-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Result Card */
+        .result-card {
+            background-color: var(--light);
+            border-radius: var(--radius-xl);
             overflow: hidden;
-        }
-
-        button::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
-            transform: rotate(30deg);
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, #FF6B8B, #FF8A65);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255,122,162,0.4);
-        }
-
-        button:hover::after {
-            left: 100%;
-        }
-
-        .baby-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
-            position: relative;
+            box-shadow: var(--shadow-md);
             display: none;
-            margin-top: 30px;
-            border: 1px solid rgba(255,255,255,0.4);
-            transform: scale(0.98);
-            transition: transform 0.3s;
+            margin-top: 1rem;
+            transition: var(--transition);
+            position: relative;
         }
 
-        .baby-card:hover {
-            transform: scale(1);
+        .result-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 30px;
+            padding: 1.5rem;
             color: white;
             text-align: center;
             position: relative;
-            overflow: hidden;
-        }
-
-        .card-header::before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 100px;
-            height: 100px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-        }
-
-        .card-header::after {
-            content: "";
-            position: absolute;
-            bottom: -25px;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: white;
-            border-radius: 50% 50% 0 0;
-            z-index: 2;
         }
 
         .baby-name {
-            font-size: 32px;
+            font-family: 'Baloo Bhai 2', cursive;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
-            font-family: 'Baloo 2', cursive;
-            letter-spacing: 0.5px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 0.25rem;
         }
 
         .baby-age {
-            font-size: 18px;
+            font-size: 1.1rem;
             opacity: 0.95;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
         }
 
         .card-body {
-            padding: 35px;
+            padding: 1.5rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background-color: var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
             text-align: center;
-            position: relative;
+            transition: var(--transition);
+            border: 1px solid var(--gray);
         }
 
-        .growth-metrics {
-            display: flex;
-            justify-content: space-around;
-            margin: 30px 0;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .metric {
-            background: var(--light);
-            border-radius: 18px;
-            padding: 18px 20px;
-            min-width: 120px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(255,255,255,0.5);
-            transition: transform 0.3s;
-        }
-
-        .metric:hover {
+        .metric-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
         }
 
         .metric-value {
-            font-size: 28px;
+            font-family: 'Baloo Bhai 2', cursive;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary);
-            margin: 8px 0;
-            font-family: 'Baloo 2', cursive;
+            margin: 0.5rem 0;
         }
 
         .metric-label {
-            font-size: 15px;
-            color: #666;
+            font-size: 0.9rem;
+            color: var(--text-light);
             font-weight: 500;
         }
 
         .metric-percentile {
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
-            margin-top: 5px;
+            margin-top: 0.5rem;
         }
 
         .progress-container {
             width: 100%;
-            height: 18px;
-            background: #f0f0f0;
-            border-radius: 12px;
-            margin: 30px 0;
+            height: 12px;
+            background-color: var(--gray);
+            border-radius: 6px;
+            margin: 1.5rem 0;
             overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 12px;
-            transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            border-radius: 6px;
+            transition: width 0.8s ease-out;
             position: relative;
-            overflow: hidden;
         }
 
-        .progress-bar::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                          rgba(255,255,255,0.3) 0%, 
-                          rgba(255,255,255,0) 50%, 
-                          rgba(255,255,255,0.3) 100%);
-            animation: shine 2s infinite;
+        .growth-status {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            display: inline-block;
         }
 
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
+        .status-excellent { background-color: rgba(0, 184, 148, 0.15); color: var(--success); }
+        .status-good { background-color: rgba(93, 156, 236, 0.15); color: var(--primary); }
+        .status-normal { background-color: rgba(253, 203, 110, 0.15); color: var(--warning); }
+        .status-need-improvement { background-color: rgba(214, 48, 49, 0.15); color: var(--danger); }
 
-        .rating {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 20px 0;
-        }
-
-        .star {
-            color: var(--accent);
-            font-size: 28px;
-            text-shadow: 0 2px 5px rgba(255,209,102,0.3);
-            transition: transform 0.3s;
-        }
-
-        .star:hover {
-            transform: scale(1.2);
-        }
-
-        .advice {
-            background: var(--light);
-            border-radius: 18px;
-            padding: 20px;
-            margin: 25px 0;
-            border-left: 5px solid var(--secondary);
-            text-align: left;
+        .advice-card {
+            background-color: var(--light-gray);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
             position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        .advice i {
-            color: var(--secondary);
-            font-size: 24px;
-            margin-right: 10px;
+        .advice-card i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
             vertical-align: middle;
         }
 
-        #adviceText {
+        .advice-text {
             display: inline-block;
             width: calc(100% - 40px);
             vertical-align: middle;
-            font-size: 15px;
+            font-size: 0.95rem;
+        }
+
+        .share-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .share-title {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
         }
 
         .share-buttons {
             display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
         }
 
         .share-btn {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 22px;
+            font-size: 1.25rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .share-btn::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
-            transform: rotate(30deg);
-            transition: all 0.3s;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
         .share-btn:hover {
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
         }
 
-        .share-btn:hover::after {
-            left: 100%;
+        .whatsapp { background-color: #25D366; }
+        .facebook { background-color: #3B5998; }
+        .instagram { background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D); }
+        .download { background-color: var(--primary); }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.9rem;
         }
 
-        .whatsapp { background: #25D366; }
-        .facebook { background: #3B5998; }
-        .instagram { background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D); }
-        .download { background: var(--primary); }
-
-        .decoration {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(255,209,102,0.1);
-            z-index: 0;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
-        .dec-1 { top: -40px; right: -40px; }
-        .dec-2 { bottom: -30px; left: -30px; width: 100px; height: 100px; }
-
-        .growth-status {
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 10px;
-            padding: 5px 10px;
-            border-radius: 8px;
-            display: inline-block;
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
         }
 
-        .status-excellent { background-color: rgba(76, 175, 80, 0.2); color: var(--success); }
-        .status-good { background-color: rgba(106, 197, 248, 0.2); color: var(--secondary); }
-        .status-normal { background-color: rgba(255, 152, 0, 0.2); color: var(--warning); }
-        .status-need-improvement { background-color: rgba(244, 67, 54, 0.2); color: var(--danger); }
-
-        .baby-icon {
-            position: absolute;
-            font-size: 24px;
-            opacity: 0.1;
-            z-index: 0;
+        .footer-link:hover {
+            color: var(--secondary);
         }
 
-        .icon-1 { top: 20px; left: 20px; }
-        .icon-2 { bottom: 20px; right: 20px; transform: rotate(30deg); }
-
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
             .container {
-                padding: 15px;
+                padding: 1rem;
             }
             
-            .home-btn {
-                top: 10px;
-                right: 10px;
-                padding: 8px 15px;
-                font-size: 14px;
+            .form-title {
+                font-size: 1.3rem;
             }
             
-            .form-card, .baby-card {
-                padding: 25px;
-                border-radius: 20px;
+            .baby-name {
+                font-size: 1.5rem;
             }
             
-            h1 {
-                font-size: 26px;
+            .metric-value {
+                font-size: 1.5rem;
             }
             
-            .input-row {
-                flex-direction: column;
-                gap: 15px;
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.3rem;
             }
             
-            .growth-metrics {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
+            .header p {
+                font-size: 0.8rem;
             }
             
-            .metric {
-                width: 100%;
-                max-width: 220px;
+            .form-title {
+                font-size: 1.2rem;
             }
             
-            .share-buttons {
-                gap: 15px;
+            .form-btn {
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
             }
             
             .share-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
             }
         }
 
-        /* Animation classes */
-        .animate-pop {
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Animation for elements */
+        .pulse {
+            animation: pulse 2s infinite;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
-        .animate-fade {
-            animation: fadeIn 0.8s ease-out;
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--text);
+            color: white;
+            text-align: center;
+            border-radius: var(--radius-sm);
+            padding: 0.5rem;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid var(--primary-light);
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(93, 156, 236, 0.1);
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .menu-item.active {
+            background: rgba(93, 156, 236, 0.1);
+            color: var(--primary);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Menu Button */
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            padding: 7px;
+        }
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
+        }
+        
+        /* User Profile Section in Sidebar */
+        .user-profile-section {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+            background: var(--light-gray);
+        }
+        
+        .user-info {
+            margin-bottom: 15px;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .user-email {
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .user-menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .user-menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: var(--primary);
+        }
+        
+        .user-menu-item:hover {
+            background: rgba(93, 156, 236, 0.1);
+            color: var(--primary);
+        }
+        
+        .user-menu-item.logout {
+            color: #F44336;
+        }
+        
+        .user-menu-item.logout i {
+            color: #F44336;
+        }
+        
+        .user-menu-item.logout:hover {
+            background: #ffebee;
         }
     </style>
 </head>
 <body>
-    <!-- Home Button -->
-    <button class="home-btn" onclick="window.location.href='https://yourwebsite.com'">
-        <i class="fas fa-home"></i> होम
-    </button>
-
-    <div class="container">
-        <div class="form-card">
-            <h1><i class="fas fa-baby-carriage"></i> बेबी ग्रोथ कार्ड जनरेटर</h1>
-            
-            <div class="form-group">
-                <label for="babyName"><i class="fas fa-signature"></i> बच्चे का नाम</label>
-                <input type="text" id="babyName" placeholder="अपने बच्चे का प्यारा नाम दर्ज करें" required>
-            </div>
-            
-            <div class="input-row">
-                <div class="input-col">
-                    <div class="form-group">
-                        <label for="babyGender"><i class="fas fa-venus-mars"></i> लिंग</label>
-                        <select id="babyGender">
-                            <option value="male">लड़का 👶</option>
-                            <option value="female">लड़की 👧</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="input-col">
-                    <div class="form-group">
-                        <label for="babyAge"><i class="fas fa-calendar-alt"></i> उम्र (महीने)</label>
-                        <input type="number" id="babyAge" min="0" max="36" placeholder="महीने में उम्र" required>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="input-row">
-                <div class="input-col">
-                    <div class="form-group">
-                        <label for="babyWeight"><i class="fas fa-weight"></i> वजन (किलो)</label>
-                        <input type="number" step="0.1" id="babyWeight" min="1" max="25" placeholder="वर्तमान वजन" required>
-                    </div>
-                </div>
-                <div class="input-col">
-                    <div class="form-group">
-                        <label for="babyHeight"><i class="fas fa-ruler-vertical"></i> लंबाई (सेमी)</label>
-                        <input type="number" step="0.1" id="babyHeight" min="40" max="120" placeholder="वर्तमान लंबाई" required>
-                    </div>
-                </div>
-            </div>
-            
-            <button id="generateBtn"><i class="fas fa-magic"></i> कार्ड जनरेट करें</button>
-            
-            <i class="fas fa-baby baby-icon icon-1"></i>
-            <i class="fas fa-child baby-icon icon-2"></i>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">बेबी केयर मेनू</div>
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
         
-        <div class="baby-card" id="babyCard">
-            <div class="decoration dec-1"></div>
-            <div class="decoration dec-2"></div>
+        <div class="sidebar-menu">
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span>प्रेगनेंसी ट्रैकर</span>
+            </a>
+
+            <a href="boy-or-girl.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span>लड़का या लड़की?</span>
+            </a>
+
+            <div class="menu-section">शिशु देखभाल</div>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span>दैनिक देखभाल योजना</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span>क्राइंग एनालाइज़र</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span>आहार व्यंजन</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item">
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                <span>खेल गतिविधियाँ</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item active">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span>विकास चार्ट</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span>टीकाकरण</span>
+            </a>
+            <div class="menu-section">संसाधन</div>
             
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span>प्रश्नोत्तर</span>
+            </a>
+
+            <a href="about.html" class="menu-item">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span>मेरा प्रोफाइल</span>
+            </a>
+            
+            <!-- User Profile Section in Sidebar -->
+            <div class="user-profile-section">
+                <div class="user-info" id="userInfo">
+                    <div class="user-name" id="userName">Guest User</div>
+                    <div class="user-email" id="userEmail">Not logged in</div>
+                </div>
+                
+                <a href="Login.html" class="user-menu-item" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>लॉगिन करें</span>
+                </a>
+                
+                <div class="user-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>लॉगआउट</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <i class="fas fa-baby"></i>
+    </button>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1><i class="fas fa-baby"></i> बेबी ग्रोथ ट्रैकर</h1>
+        <p>WHO मानकों के अनुसार अपने शिशु के विकास का विश्लेषण करें</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2 class="form-title"><i class="fas fa-clipboard-list"></i> शिशु की जानकारी दर्ज करें</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="babyName" class="form-label"><i class="fas fa-signature"></i>बच्चे का नाम</label>
+                    <input type="text" id="babyName" class="form-input" placeholder="जैसे: आरव, आद्या" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="babyGender" class="form-label"><i class="fas fa-venus-mars"></i>लिंग</label>
+                    <select id="babyGender" class="form-select">
+                        <option value="male">लड़का 👶</option>
+                        <option value="female">लड़की 👧</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="babyAge" class="form-label"><i class="fas fa-calendar-alt"></i>उम्र (महीने)</label>
+                    <input type="number" id="babyAge" class="form-input" min="0" max="36" placeholder="0-36 महीने" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="babyWeight" class="form-label"><i class="fas fa-weight"></i>वजन (किलो)</label>
+                    <input type="number" step="0.1" id="babyWeight" class="form-input" min="1" max="25" placeholder="जैसे: 7.5" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="babyHeight" class="form-label"><i class="fas fa-ruler-vertical"></i>लंबाई (सेमी)</label>
+                    <input type="number" step="0.1" id="babyHeight" class="form-input" min="40" max="120" placeholder="जैसे: 68.5" required>
+                </div>
+            </div>
+            
+            <button id="generateBtn" class="form-btn pulse">
+                <i class="fas fa-chart-line"></i> ग्रोथ चार्ट बनाएं
+            </button>
+        </section>
+
+        <!-- Result Card -->
+        <section class="result-card" id="resultCard">
             <div class="card-header">
-                <div class="baby-name" id="displayName">बेबी का नाम</div>
+                <div class="baby-name" id="displayName">बच्चे का नाम</div>
                 <div class="baby-age" id="displayAge">0 महीने</div>
             </div>
             
             <div class="card-body">
-                <div class="growth-metrics">
-                    <div class="metric">
+                <div class="metrics-grid">
+                    <div class="metric-card">
                         <div class="metric-label">वजन</div>
                         <div class="metric-value" id="displayWeight">0 किलो</div>
                         <div class="metric-percentile" id="weightPercentile">0%</div>
                     </div>
                     
-                    <div class="metric">
+                    <div class="metric-card">
                         <div class="metric-label">लंबाई</div>
                         <div class="metric-value" id="displayHeight">0 सेमी</div>
                         <div class="metric-percentile" id="heightPercentile">0%</div>
                     </div>
                     
-                    <div class="metric">
+                    <div class="metric-card">
                         <div class="metric-label">ग्रोथ स्कोर</div>
                         <div class="metric-value" id="growthScore">0%</div>
                         <div class="growth-status" id="growthStatus">-</div>
@@ -664,37 +939,45 @@
                     <div class="progress-bar" id="progressBar" style="width: 0%"></div>
                 </div>
                 
-                <div class="rating" id="starRating">
-                    <i class="fas fa-star star"></i>
-                    <i class="fas fa-star star"></i>
-                    <i class="fas fa-star star"></i>
-                    <i class="fas fa-star star"></i>
-                    <i class="fas fa-star star"></i>
+                <div class="advice-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <span class="advice-text" id="adviceText">कृपया अपने बच्चे के डेटा को दर्ज करें और कार्ड जनरेट करें</span>
                 </div>
                 
-                <div class="advice">
-                    <i class="fas fa-lightbulb"></i> 
-                    <span id="adviceText">कृपया अपने बच्चे के डेटा को दर्ज करें और कार्ड जनरेट करें</span>
-                </div>
-                
-                <div class="share-buttons">
-                    <div class="share-btn whatsapp" onclick="shareCard('whatsapp')" title="WhatsApp पर शेयर करें">
-                        <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <div class="share-btn facebook" onclick="shareCard('facebook')" title="Facebook पर शेयर करें">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <div class="share-btn instagram" onclick="shareCard('instagram')" title="Instagram पर शेयर करें">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <div class="share-btn download" onclick="downloadCard()" title="डाउनलोड करें">
-                        <i class="fas fa-download"></i>
+                <div class="share-section">
+                    <div class="share-title">इस रिजल्ट को शेयर करें:</div>
+                    <div class="share-buttons">
+                        <div class="share-btn whatsapp" onclick="shareCard('whatsapp')" title="WhatsApp पर शेयर करें">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="share-btn facebook" onclick="shareCard('facebook')" title="Facebook पर शेयर करें">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="share-btn instagram" onclick="shareCard('instagram')" title="Instagram पर शेयर करें">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="share-btn download" onclick="downloadCard()" title="डाउनलोड करें">
+                            <i class="fas fa-download"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">हमारे बारे में</a>
+            <a href="#" class="footer-link">गोपनीयता नीति</a>
+            <a href="#" class="footer-link">संपर्क करें</a>
+            <a href="#" class="footer-link">सहायता</a>
+        </div>
+        <p>© 2023 बेबी ग्रोथ ट्रैकर. सर्वाधिकार सुरक्षित.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         // WHO ग्रोथ स्टैंडर्ड डेटा
         const growthStandards = {
@@ -728,22 +1011,6 @@
             return Math.round((weightPercentile + heightPercentile) / 2);
         }
 
-        // स्टार रेटिंग अपडेट
-        function updateStarRating(score) {
-            const stars = document.querySelectorAll('.star');
-            const filledStars = Math.min(5, Math.max(1, Math.floor(score / 20)));
-            
-            stars.forEach((star, index) => {
-                if (index < filledStars) {
-                    star.classList.add('fas');
-                    star.classList.remove('far');
-                } else {
-                    star.classList.add('far');
-                    star.classList.remove('fas');
-                }
-            });
-        }
-
         // सुझाव जनरेट करें
         function generateAdvice(score) {
             if (score >= 80) {
@@ -759,22 +1026,18 @@
 
         // ग्रोथ स्टेटस टेक्स्ट और स्टाइल
         function getGrowthStatus(score) {
-            const statusElement = document.getElementById('growthStatus');
-            
-            if (score >= 80) {
-                statusElement.className = "growth-status status-excellent";
-                return "उत्कृष्ट ⭐";
-            }
-            if (score >= 60) {
-                statusElement.className = "growth-status status-good";
-                return "अच्छा 👍";
-            }
-            if (score >= 40) {
-                statusElement.className = "growth-status status-normal";
-                return "सामान्य ✔️";
-            }
-            statusElement.className = "growth-status status-need-improvement";
+            if (score >= 80) return "उत्कृष्ट ⭐";
+            if (score >= 60) return "अच्छा 👍";
+            if (score >= 40) return "सामान्य ✔️";
             return "सुधार आवश्यक ❗";
+        }
+
+        // ग्रोथ स्टेटस क्लास
+        function getGrowthStatusClass(score) {
+            if (score >= 80) return "status-excellent";
+            if (score >= 60) return "status-good";
+            if (score >= 40) return "status-normal";
+            return "status-need-improvement";
         }
 
         // कार्ड जनरेट करें
@@ -820,25 +1083,19 @@
             document.getElementById('weightPercentile').textContent = `${Math.round(weightPercentile)}%`;
             document.getElementById('heightPercentile').textContent = `${Math.round(heightPercentile)}%`;
             document.getElementById('growthScore').textContent = `${growthScore}%`;
-            document.getElementById('growthStatus').textContent = getGrowthStatus(growthScore);
+            
+            const statusElement = document.getElementById('growthStatus');
+            statusElement.textContent = getGrowthStatus(growthScore);
+            statusElement.className = `growth-status ${getGrowthStatusClass(growthScore)}`;
+            
             document.getElementById('progressBar').style.width = `${growthScore}%`;
             document.getElementById('adviceText').textContent = generateAdvice(growthScore);
             
-            // स्टार रेटिंग अपडेट करें
-            updateStarRating(growthScore);
-            
-            // कार्ड दिखाएं और एनिमेट करें
-            const card = document.getElementById('babyCard');
-            card.style.display = 'block';
-            card.classList.add('animate-pop');
-            
-            // एनीमेशन के बाद क्लास हटाएं
-            setTimeout(() => {
-                card.classList.remove('animate-pop');
-            }, 500);
+            // रिजल्ट कार्ड दिखाएं
+            document.getElementById('resultCard').classList.add('active');
             
             // कार्ड पर स्क्रॉल करें
-            card.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
             
             // Google Analytics Event Tracking (if you have GA)
             if (typeof gtag !== 'undefined') {
@@ -851,20 +1108,19 @@
 
         // कार्ड डाउनलोड करें
         function downloadCard() {
-            const card = document.getElementById('babyCard');
+            const card = document.getElementById('resultCard');
+            const downloadBtn = document.querySelector('.download');
             
             // डाउनलोड बटन को डिसेबल करें
-            const downloadBtn = document.querySelector('.download');
-            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            downloadBtn.innerHTML = '<span class="spinner"></span>';
             downloadBtn.style.pointerEvents = 'none';
             
             html2canvas(card, {
                 backgroundColor: null,
-                scale: 3, // हाई रेजोल्यूशन इमेज
+                scale: 2,
                 logging: false,
                 allowTaint: true,
-                useCORS: true,
-                letterRendering: true
+                useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = `baby-growth-${document.getElementById('babyName').value || 'card'}.png`;
@@ -882,11 +1138,6 @@
                         'event_label': 'Baby Growth Card Downloaded'
                     });
                 }
-                
-                // डाउनलोड कन्फर्मेशन
-                setTimeout(() => {
-                    alert("कार्ड सफलतापूर्वक डाउनलोड हो गया है!");
-                }, 500);
             }).catch(err => {
                 console.error("Error generating card:", err);
                 alert("कार्ड डाउनलोड करने में समस्या आई। कृपया पुनः प्रयास करें।");
@@ -927,22 +1178,17 @@
             }
         }
 
-        // इनपुट फील्ड्स में प्लेसहोल्डर हिंट्स
-        document.getElementById('babyName').addEventListener('focus', function() {
-            this.placeholder = "जैसे: आरव, आद्या, इशान";
-        });
-        
-        document.getElementById('babyName').addEventListener('blur', function() {
-            this.placeholder = "अपने बच्चे का प्यारा नाम दर्ज करें";
-        });
-        
-        document.getElementById('babyWeight').addEventListener('focus', function() {
-            this.placeholder = "जैसे: 7.5, 8.2";
-        });
-        
-        document.getElementById('babyHeight').addEventListener('focus', function() {
-            this.placeholder = "जैसे: 68.5, 72.3";
-        });
+        // Toggle sidebar function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // Close sidebar when clicking on overlay
+        document.getElementById('overlay').addEventListener('click', toggleSidebar);
     </script>
 </body>
 </html>
