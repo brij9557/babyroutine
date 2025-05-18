@@ -46,15 +46,17 @@
             color: var(--text);
             line-height: 1.6;
             font-size: 16px;
+            overflow-x: hidden;
         }
         
-        /* Sidebar Styles */
+        /* Sidebar Styles - Mobile First */
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
             height: 100vh;
             width: 280px;
+            max-width: 90%;
             background: white;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
             transform: translateX(-100%);
@@ -89,10 +91,13 @@
             font-size: 1.5rem;
             color: var(--text);
             cursor: pointer;
+            padding: 5px;
         }
         
         .sidebar-menu {
             padding: 0;
+            height: calc(100% - 60px);
+            overflow-y: auto;
         }
         
         .menu-section {
@@ -116,6 +121,7 @@
             text-decoration: none;
             transition: all 0.3s;
             border-left: 3px solid transparent;
+            font-size: 0.95rem;
         }
         
         .menu-item i {
@@ -156,25 +162,21 @@
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
             transition: margin-left 0.3s ease;
+            width: 100%;
         }
         
-        .container.sidebar-open {
-            margin-left: 280px;
-        }
-        
-        /* Menu Button */
+        /* Menu Button - Mobile Optimized */
         .menu-btn {
             position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            left: 15px;
+            bottom: 20px;
             background: var(--primary);
             color: white;
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -230,6 +232,7 @@
             color: var(--text);
             text-decoration: none;
             transition: all 0.3s;
+            font-size: 0.9rem;
         }
         
         .user-menu-item i {
@@ -259,16 +262,18 @@
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 25px 0;
+            padding: 20px 0;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             position: relative;
         }
         
         .language-switcher {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
         }
         
         .lang-btn {
@@ -292,49 +297,51 @@
         }
         
         h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 10px;
             font-weight: 700;
+            padding: 0 15px;
         }
         
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
-            margin: 25px 0 15px;
+            margin: 20px 0 12px;
             border-bottom: 2px solid var(--highlight);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
         
         h3 {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--secondary);
-            margin: 20px 0 10px;
+            margin: 15px 0 8px;
         }
         
         .info-card {
             background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
             border: 1px solid rgba(255, 126, 185, 0.2);
         }
         
         .intro-text {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.7;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
         
         .vaccine-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
+            margin: 12px 0;
+            font-size: 0.85rem;
         }
         
         .vaccine-table th, .vaccine-table td {
             border: 1px solid #ddd;
-            padding: 12px;
+            padding: 8px;
             text-align: left;
         }
         
@@ -342,6 +349,7 @@
             background-color: var(--light);
             color: var(--secondary);
             font-weight: 600;
+            font-size: 0.8rem;
         }
         
         .vaccine-table tr:nth-child(even) {
@@ -355,10 +363,12 @@
         .age-group {
             font-weight: 600;
             color: var(--secondary);
+            font-size: 0.85rem;
         }
         
         .vaccine-name {
             font-weight: 500;
+            font-size: 0.85rem;
         }
         
         .important {
@@ -368,22 +378,24 @@
         
         .tips-box {
             background: var(--light);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
             border-left: 4px solid var(--primary);
+            font-size: 0.9rem;
         }
         
         .tips-box h4 {
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--secondary);
             display: flex;
             align-items: center;
+            font-size: 1rem;
         }
         
         .tips-box h4 i {
-            margin-right: 8px;
+            margin-right: 6px;
         }
         
         .btn {
@@ -391,14 +403,14 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
-            margin-top: 10px;
+            margin-top: 8px;
         }
         
         .btn:hover {
@@ -407,33 +419,33 @@
         }
         
         .btn i {
-            margin-right: 8px;
+            margin-right: 6px;
         }
         
         footer {
             background: var(--dark);
             color: white;
-            padding: 30px 0;
-            margin-top: 40px;
+            padding: 20px 0;
+            margin-top: 30px;
             text-align: center;
         }
         
         .footer-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #ddd;
         }
         
         .search-box {
-            margin: 20px 0;
+            margin: 15px 0;
             position: relative;
         }
         
         .search-input {
             width: 100%;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border: 2px solid var(--highlight);
-            border-radius: 30px;
-            font-size: 16px;
+            border-radius: 25px;
+            font-size: 15px;
             outline: none;
             transition: all 0.3s;
         }
@@ -445,7 +457,7 @@
         
         .search-icon {
             position: absolute;
-            right: 20px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary);
@@ -454,17 +466,17 @@
         /* Vaccine Calculator Styles */
         .calculator-card {
             background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            margin-bottom: 25px;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
             border: 1px solid rgba(255, 126, 185, 0.2);
         }
         
         .calculator-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
         
         .form-group {
@@ -474,36 +486,36 @@
         
         .form-row {
             display: flex;
-            gap: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
+            flex-direction: column;
+            gap: 12px;
         }
         
         label {
             margin-bottom: 5px;
             font-weight: 500;
             color: var(--secondary);
+            font-size: 0.9rem;
         }
         
         input, select {
-            padding: 10px 15px;
+            padding: 10px 12px;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 15px;
+            width: 100%;
         }
         
         .calculate-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            margin-top: 5px;
         }
         
         .calculate-btn:hover {
@@ -511,50 +523,67 @@
         }
         
         .results-container {
-            margin-top: 20px;
+            margin-top: 15px;
             display: none;
         }
         
         .upcoming-vaccines {
-            margin-top: 15px;
+            margin-top: 12px;
         }
         
         .vaccine-item {
             background: var(--light);
-            padding: 12px 15px;
+            padding: 10px 12px;
             border-radius: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 0.9rem;
         }
         
         .vaccine-item .vaccine-info {
             flex: 1;
+            margin-right: 10px;
         }
         
         .vaccine-item .vaccine-age {
             font-weight: 600;
             color: var(--secondary);
+            white-space: nowrap;
         }
         
         .no-vaccines {
             text-align: center;
-            padding: 15px;
+            padding: 12px;
             color: #666;
         }
         
-        @media (min-width: 768px) {
+        /* Responsive Table for Mobile */
+        @media screen and (max-width: 768px) {
+            .vaccine-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .vaccine-table th, .vaccine-table td {
+                min-width: 120px;
+            }
+        }
+        
+        /* Tablet and Desktop Styles */
+        @media screen and (min-width: 768px) {
             .container {
                 padding: 20px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .info-card {
-                padding: 25px;
+                padding: 20px;
             }
             
             .calculator-form {
@@ -562,43 +591,40 @@
                 align-items: flex-end;
             }
             
+            .form-row {
+                flex-direction: row;
+            }
+            
             .form-group {
                 flex: 1;
             }
-        }
-        
-        @media (max-width: 768px) {
-            .container.sidebar-open {
-                margin-left: 0;
+            
+            .vaccine-table {
+                font-size: 0.9rem;
             }
             
-            .sidebar {
-                width: 250px;
-            }
-            
-            .menu-btn {
-                left: 10px;
-                top: 60%;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
+            .vaccine-table th, .vaccine-table td {
+                padding: 10px;
             }
         }
         
-        @media (max-width: 480px) {
+        /* Large Desktop Styles */
+        @media screen and (min-width: 992px) {
             .menu-btn {
-                top: auto;
-                bottom: 20px;
-                transform: none;
+                left: 20px;
+                top: 50%;
+                bottom: auto;
+                transform: translateY(-50%);
+                width: 60px;
+                height: 60px;
             }
             
-            .menu-btn:hover {
-                transform: scale(1.1);
+            .container {
+                padding: 25px;
             }
             
             h1 {
-                font-size: 1.5rem;
-                padding: 0 20px;
+                font-size: 2rem;
             }
         }
     </style>
@@ -974,13 +1000,13 @@
                 <p class="lang-en" style="display:none">Vaccination can be done during mild cold-cough, but consult doctor in case of high fever or serious illness.</p>
             </div>
             
-            <div class="lang-hi" style="text-align: center; margin: 30px 0;">
+            <div class="lang-hi" style="text-align: center; margin: 25px 0;">
                 <a href="index.html" class="btn"><i class="fas fa-baby"></i> बेबी केयर प्लानर टूल आज़माएं</a>
-                <p style="margin-top: 15px;">अपने बच्चे की उम्र के हिसाब से <strong>पर्सनलाइज्ड टीकाकरण शेड्यूल</strong> जनरेट करें!</p>
+                <p style="margin-top: 12px; font-size: 0.9rem;">अपने बच्चे की उम्र के हिसाब से <strong>पर्सनलाइज्ड टीकाकरण शेड्यूल</strong> जनरेट करें!</p>
             </div>
-            <div class="lang-en" style="text-align: center; margin: 30px 0; display: none;">
+            <div class="lang-en" style="text-align: center; margin: 25px 0; display: none;">
                 <a href="index.html" class="btn"><i class="fas fa-baby"></i> Try Baby Care Planner Tool</a>
-                <p style="margin-top: 15px;">Generate a <strong>personalized vaccination schedule</strong> based on your child's age!</p>
+                <p style="margin-top: 12px; font-size: 0.9rem;">Generate a <strong>personalized vaccination schedule</strong> based on your child's age!</p>
             </div>
         </div>
         
@@ -996,11 +1022,9 @@
             function toggleSidebar() {
                 const sidebar = document.getElementById('sidebar');
                 const overlay = document.getElementById('overlay');
-                const container = document.getElementById('mainContainer');
                 
                 sidebar.classList.toggle('open');
                 overlay.classList.toggle('active');
-                container.classList.toggle('sidebar-open');
             }
 
             // Language switching function
