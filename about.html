@@ -66,6 +66,156 @@
             font-size: 16px;
         }
         
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 280px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        
+        .sidebar.open {
+            transform: translateX(0);
+        }
+        
+        .sidebar-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+        }
+        
+        .menu-section {
+            padding: 12px 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FF7EB9;
+            font-weight: 600;
+            margin-top: 15px;
+            border-top: 1px solid #FFD1DC;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border-radius: 0;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .menu-item:hover {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .menu-item.active {
+            background: rgba(255, 101, 163, 0.1);
+            color: var(--secondary);
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container.sidebar-open {
+            margin-left: 280px;
+        }
+        
+        /* Menu Button */
+        .menu-btn {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s;
+            padding: 7px;
+        }
+
+        .menu-btn img.menu-icon {
+            width: 100%;
+            height: 100%;
+            border-radius: 30%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn .fa-baby {
+            display: none;
+        }
+        
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -81,57 +231,31 @@
             position: relative;
         }
         
-        .nav-buttons {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-        
         .language-switcher {
             position: absolute;
             top: 20px;
             left: 20px;
-        }
-        
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 5px 10px;
+            background-color: rgba(255,255,255,0.2);
             border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .language-btn {
+            padding: 5px 10px;
+            border-radius: 15px;
+            border: none;
+            background: none;
             cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            color: white;
         }
         
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .lang-btn.active {
-            background: white;
-            color: var(--secondary);
+        .language-btn.active {
+            background-color: white;
+            color: var(--primary);
         }
         
         h1, h2, h3 {
@@ -318,6 +442,12 @@
             .team-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            
+            .menu-btn {
+                top: auto;
+                bottom: 20px;
+                transform: none;
+            }
         }
         
         @media (max-width: 480px) {
@@ -329,39 +459,136 @@
                 grid-template-columns: 1fr;
             }
             
-            .nav-buttons, .language-switcher {
+            .language-switcher {
                 position: static;
                 justify-content: center;
                 margin: 15px 0;
+            }
+            
+            .menu-btn {
+                width: 50px;
+                height: 50px;
+                left: 10px;
+                bottom: 10px;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="language-switcher">
-            <button class="lang-btn active" onclick="switchLanguage('hi')">हिंदी</button>
-            <button class="lang-btn" onclick="switchLanguage('en')">English</button>
-        </div>
-        
-        <div class="nav-buttons">
-            <a href="index.html" class="nav-btn" title="Home">
-                <i class="fas fa-home"></i>
-            </a>
-            <a href="contact.html" class="nav-btn" title="Contact">
-                <i class="fas fa-envelope"></i>
-            </a>
-        </div>
-        
-        <div class="container">
-            <h1><i class="fas fa-baby"></i> <span class="lang-hi">बेबी केयर प्लानर के बारे में</span><span class="lang-en" style="display:none">About Baby Care Planner</span></h1>
-            <p class="subtitle lang-hi">AI-आधारित बच्चों की देखभाल के लिए स्मार्ट समाधान</p>
-            <p class="subtitle lang-en" style="display:none">AI-powered smart solutions for child care</p>
-        </div>
-    </header>
+    <!-- Sidebar Menu -->
+    <div class="overlay" id="overlay"></div>
     
-    <div class="container">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title lang-hi">बेबी केयर मेनू</div>
+            <div class="sidebar-title lang-en" style="display:none">Baby Care Menu</div>
+            <button class="close-sidebar" onclick="toggleSidebar()" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="pregnancy-tracker.html" class="menu-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <span class="lang-hi">प्रेगनेंसी ट्रैकर</span>
+                <span class="lang-en" style="display:none">Pregnancy Tracker</span>
+            </a>
+
+            <a href="boy-or-girl.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">लड़का या लड़की?</span>
+                <span class="lang-en" style="display:none">Boy or Girl?</span>
+            </a>
+
+            <div class="menu-section lang-hi">शिशु देखभाल</div>
+            <div class="menu-section lang-en" style="display:none">Baby Care</div>
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <span class="lang-hi">दैनिक देखभाल योजना</span>
+                <span class="lang-en" style="display:none">Daily Care Plan</span>
+            </a>
+            <a href="baby-crying-ai-tool.html" class="menu-item">
+                <i class="fas fa-comment-medical" aria-hidden="true"></i>
+                <span class="lang-hi">क्राइंग एनालाइज़र</span>
+                <span class="lang-en" style="display:none">Crying Analyzer</span>
+            </a>
+            <a href="baby-food-recipes.html" class="menu-item">
+                <i class="fas fa-utensils" aria-hidden="true"></i>
+                <span class="lang-hi">आहार व्यंजन</span>
+                <span class="lang-en" style="display:none">Food Recipes</span>
+            </a>
+            <a href="baby-play-activities.html" class="menu-item">
+                <i class="fas fa-gamepad" aria-hidden="true"></i>
+                <span class="lang-hi">खेल गतिविधियाँ</span>
+                <span class="lang-en" style="display:none">Play Activities</span>
+            </a>
+            <a href="baby-growth-card.html" class="menu-item">
+                <i class="fas fa-baby" aria-hidden="true"></i>
+                <span class="lang-hi">विकास चार्ट</span>
+                <span class="lang-en" style="display:none">Growth Chart</span>
+            </a>
+            <a href="baby-tikakarn.html" class="menu-item">
+                <i class="fas fa-syringe" aria-hidden="true"></i>
+                <span class="lang-hi">टीकाकरण</span>
+                <span class="lang-en" style="display:none">Vaccination</span>
+            </a>
+            <div class="menu-section lang-hi">संसाधन</div>
+            <div class="menu-section lang-en" style="display:none">Resources</div>
+            
+            <a href="baby-qa-blog.html" class="menu-item">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <span class="lang-hi">प्रश्नोत्तर</span>
+                <span class="lang-en" style="display:none">Q&A</span>
+            </a>
+
+            <a href="about.html" class="menu-item active">
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                <span class="lang-hi">हमारे बारे में</span>
+                <span class="lang-en" style="display:none">About Us</span>
+            </a>
+            
+            <!-- User Profile Section in Sidebar -->
+            <div class="user-profile-section">
+                <div class="user-info" id="userInfo">
+                    <div class="user-name" id="userName">Guest User</div>
+                    <div class="user-email" id="userEmail">Not logged in</div>
+                </div>
+                
+                <a href="Login.html" class="user-menu-item" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span class="lang-hi">लॉगिन करें</span>
+                    <span class="lang-en" style="display:none">Login</span>
+                </a>
+                
+                <div class="user-menu-item logout" id="logoutBtn" onclick="handleAuth()" style="display:none;">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span class="lang-hi">लॉगआउट</span>
+                    <span class="lang-en" style="display:none">Logout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Menu Button (now on left middle side) -->
+    <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <img src="images/baby-icon.jpeg" alt="Baby Icon" class="menu-icon">
+    </button>
+
+    <div class="container" id="mainContainer">
+        <header>
+            <div class="language-switcher">
+                <button class="language-btn active" onclick="switchLanguage('hi')">हिंदी</button>
+                <button class="language-btn" onclick="switchLanguage('en')">English</button>
+            </div>
+            
+            <div class="container">
+                <h1><i class="fas fa-baby"></i> <span class="lang-hi">बेबी केयर प्लानर के बारे में</span><span class="lang-en" style="display:none">About Baby Care Planner</span></h1>
+                <p class="subtitle lang-hi">AI-आधारित बच्चों की देखभाल के लिए स्मार्ट समाधान</p>
+                <p class="subtitle lang-en" style="display:none">AI-powered smart solutions for child care</p>
+            </div>
+        </header>
+        
         <div class="content-card">
             <div class="lang-hi">
                 <h2>हमारी कहानी</h2>
@@ -505,6 +732,17 @@
     </div>
 
     <script>
+        // Toggle sidebar function
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const container = document.getElementById('mainContainer');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            container.classList.toggle('sidebar-open');
+        }
+
         function switchLanguage(lang) {
             if (lang === 'hi') {
                 // Show Hindi elements
@@ -512,7 +750,7 @@
                 document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
                 
                 // Update language buttons
-                document.querySelectorAll('.lang-btn').forEach(btn => {
+                document.querySelectorAll('.language-btn').forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.textContent === 'हिंदी') btn.classList.add('active');
                 });
@@ -522,7 +760,7 @@
                 document.querySelectorAll('.lang-en').forEach(el => el.style.display = '');
                 
                 // Update language buttons
-                document.querySelectorAll('.lang-btn').forEach(btn => {
+                document.querySelectorAll('.language-btn').forEach(btn => {
                     btn.classList.remove('active');
                     if (btn.textContent === 'English') btn.classList.add('active');
                 });
@@ -531,6 +769,11 @@
         
         // Initialize with Hindi language
         switchLanguage('hi');
+        
+        // Handle authentication (logout only, login is handled via Login.html)
+        function handleAuth() {
+            alert('लॉगआउट सफलतापूर्वक हो गया');
+        }
     </script>
 </body>
 </html>
